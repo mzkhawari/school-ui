@@ -1,0 +1,35 @@
+<ng-container >
+  <div class="w-full mx-8">        
+    <div style="width: 100%;"  class="max-h-fit" >
+      
+      <!-- <app-page-header [title]="titlelist" 
+        [isSaveButton]="false"
+        [isCloseButton]="false"
+        [returnUrl]="'/index-info'"
+        [txtCustomButton]="'افزودن'"
+        (OnSaveCustom)="onAdd()">
+      </app-page-header> -->
+
+      <!-- <app-grid-paging 
+        [title]="titlelist" 
+        [data]="dataList"         
+        [columns]="columns"
+        [actionList]="actionList"
+        [dataCount]="dataListCount"
+        (OnPageItem)="gotoNextPage($event)"
+        (OnActionItem)="onActionResult($event)">        
+      </app-grid-paging> -->
+
+      
+      <app-grid
+          [useBackground]="'true'"
+          [datasource]="datasource"
+          [columns]="columns"     
+          [actions]="actions"  
+          (OnDeleteItem)="onDeleteConfirm($event)"
+          (OnEditItem)="onUpdate($event)" >
+        </app-grid>      
+    </div>
+  </div>
+</ng-container>
+

@@ -1,0 +1,42 @@
+<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm" class="w-full">
+    <div class=" mx-1 md:mx-8" >
+      <app-page-header title="لیست دانش آموزان در کلاس"
+                       [isSaveButton]="false"
+                       [isCloseButton]="true"  (OnClose)="dialogRef.close()">
+       </app-page-header>
+      <div class=" bg-white">
+        <div class="grid grid-cols-6 ">           
+          <div class="col-span-1 ">            
+            <mat-form-field appearance="outline" class="md:w-11/12 w-full">
+              <mat-label  > کد دانش آموز </mat-label>
+              <input type="text" matInput name="code" [(ngModel)]="code"  > 
+            </mat-form-field>
+          </div>   
+          <div class="col-span-1">
+            <button class="mr-4" type="button" mat-flat-button [color]="'primary'" (click)="onSearch()" >
+              <mat-icon [svgIcon]="'heroicons_outline:search'"></mat-icon>
+              <span class="ml-2 mr-1"> جستجو </span>
+            </button>              
+          </div>
+          <div class="col-span-4 flex flex-row"  *ngIf="modelStudent.id !=undefined" >
+              <div>     <img [src]="modelStudent.picAvatarThumb" style="width: 80px;" />
+              </div>
+              <div>  {{modelStudent.fullName}}
+              </div>
+              <div>
+                    <button class="mr-4" mat-flat-button [color]="'primary'" (click)="onAdd()" >
+                      <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                      <span class="ml-2 mr-1"> افزودن به کلاس</span>
+                    </button>              
+              </div>
+          </div>
+          <div class="col-span-6"  style="height: 400px; overflow-y: scroll; overflow-x: hidden;" >
+            <app-class-student-list  [classInfoId]="classInfoId" [(isRefresh)]="isRefresh"  >              
+            </app-class-student-list>
+          </div>          
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>

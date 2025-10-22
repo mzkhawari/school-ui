@@ -1,0 +1,12 @@
+<mat-card>    
+    <dx-tree-view
+        id="simple-treeview"
+        [items]="datasource"
+        dataStructure="plain"
+        parentIdExpr="parentId"
+        rtlEnabled="true"
+        keyExpr="id"
+        displayExpr="fullTitle"
+        [width]="800"
+    ></dx-tree-view>    
+</mat-card>

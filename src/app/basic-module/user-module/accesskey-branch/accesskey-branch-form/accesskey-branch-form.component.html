@@ -1,0 +1,56 @@
+<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm">
+    <app-page-header class="w-full" [title]='model.id>0 ? editstring : addstring' isSaveButton="true"
+      isCloseButton="true" (OnClose)="dialogRef.close()">
+    </app-page-header>
+
+    <div class="grid grid-cols-6 md:grid-cols-12 lg:grid-cols-12 w-full w-3/4">
+      <div class="md:col-span-3 col-span-6 md:w-11/12 w-12/12">
+        <app-select-search [dataSource]="branches" [(selectedId)]="model.branchId" titleField="{{'branch-selection'|translate}}"
+          [fieldId]="'id'" [fieldTitle]="'title'">
+        </app-select-search>
+      </div>
+
+      <div class="md:col-span-3 col-span-6 p-2 self-center">
+        <mat-radio-group aria-label="براساس" name="onRoleAccess" (change)="onTypeAccessChange($event)">
+          <mat-radio-button value="0" [checked]="onRoleAccess==0">{{ 'role2' | translate }}
+          </mat-radio-button>
+          <mat-radio-button value="1" [checked]="onRoleAccess==1">{{ 'user3' | translate }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+
+
+      <div class="md:col-span-3 col-span-6" *ngIf="onRoleAccess==0 ">
+        <app-select-search [dataSource]="roles" [(selectedId)]="model.userRoleId"
+          titleField="{{ 'select-default-role' | translate }}" [fieldId]="'id'" [fieldTitle]="'title'">
+        </app-select-search>
+        <!-- <mat-form-field>
+          <mat-label>{{ 'select-default-role' | translate }}</mat-label>
+          <mat-select name="userRoleId" [(ngModel)]="model.userRoleId" [disabled]="model.id > 0">
+            <ng-container *ngFor="let type of roles">
+              <mat-option [value]="type.id">
+                {{type.title}}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field> -->
+      </div>
+
+      <div class="md:col-span-3 col-span-6" *ngIf="onRoleAccess==1 ">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>{{ 'user3' | translate }}</mat-label>
+          <mat-select name="userId" [(ngModel)]="model.userId" [disabled]="model.id > 0">
+            <ng-container *ngFor="let type of users">
+              <mat-option [value]="type.id">
+                {{type.fullName}}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
+  </form>
+</ng-container>

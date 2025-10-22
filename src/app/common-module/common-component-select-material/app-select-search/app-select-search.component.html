@@ -1,0 +1,33 @@
+<mat-form-field appearance="outline" class="w-11/12" *ngIf="validateInput===undefined">
+  <mat-label>{{ titleField }} </mat-label>
+  <mat-select name="selectedId" [(ngModel)]="selectedId" (selectionChange)="setSelect($event)"
+    [formControl]="validateInput" #singleSelect [disabled]="isDisabled">
+    <mat-option>
+      <ngx-mat-select-search [formControl]="selectFilterCtrl" placeholderLabel="{{'search-for-the-item-you-want'|translate}}"
+        noEntriesFoundLabel="{{'no-items-found'|translate}}"></ngx-mat-select-search>
+    </mat-option>
+    <mat-option *ngIf="isAll" value="0">{{'all-cases'|translate}}</mat-option>
+    <mat-option *ngIf="isNone" value="0">{{'unknown'|translate}}</mat-option>
+    <mat-option *ngFor="let item of filteredValues | async" [value]="item.id">
+      {{item[fieldTitle]}}
+    </mat-option>
+  </mat-select>
+  <mat-error *ngIf="validateInput.hasError('required')">{{'this-field-is-required'|translate}}</mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="outline" class="w-11/12" *ngIf="validateInput!==undefined">
+  <mat-label>{{ titleField }} </mat-label>
+  <mat-select name="selectedId" [(ngModel)]="selectedId" (selectionChange)="setSelect($event)"
+    [formControl]="validateInput" #singleSelect [disabled]="isDisabled" required>
+    <mat-option>
+      <ngx-mat-select-search [formControl]="selectFilterCtrl" placeholderLabel="{{'search-for-the-item-you-want'|translate}}"
+        noEntriesFoundLabel="{{'no-items-found'|translate}}"></ngx-mat-select-search>
+    </mat-option>
+    <mat-option *ngIf="isAll" value="0">{{'all-cases'|translate}}</mat-option>
+    <mat-option *ngIf="isNone" value="0">{{'unknown'|translate}}</mat-option>
+    <mat-option *ngFor="let item of filteredValues | async" [value]="item.id">
+      {{item[fieldTitle]}}
+    </mat-option>
+  </mat-select>
+  <mat-error *ngIf="validateInput.hasError('required')">{{'this-field-is-required'|translate}}</mat-error>
+</mat-form-field>

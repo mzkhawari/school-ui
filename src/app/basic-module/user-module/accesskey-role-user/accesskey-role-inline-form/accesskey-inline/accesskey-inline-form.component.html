@@ -1,0 +1,29 @@
+<ng-container *ngIf="model.accessKey !== null">
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm">
+    <div class="grid grid-cols-6 md:grid-cols-12 lg:grid-cols-12 w-full w-3/4 border-b border-solid border-gray-300">
+      <div class="p-2 md:col-span-4 col-span-12 self-center ">
+        <p>{{model.accessKey.title}}</p>
+      </div>
+
+      <div class="p-2 md:col-span-2 col-span-6 self-center">
+        <mat-checkbox name="IsShow" [(ngModel)]="model.isShow" (change)="setChangeCheckBox($event)" color="primary">
+          {{'show'|translate}}</mat-checkbox>
+      </div>
+
+      <div class="p-2 md:col-span-2 col-span-6 self-center">
+        <mat-checkbox name="IsAdd" [(ngModel)]="model.isAdd" (change)="setChangeCheckBox($event)" color="primary">{{'add'|translate}}
+        </mat-checkbox>
+      </div>
+
+      <div class="p-2 md:col-span-2 col-span-6 self-center">
+        <mat-checkbox name="IsEdit" [(ngModel)]="model.isEdit" (change)="setChangeCheckBox($event)"
+          color="primary">{{'edit'|translate}}</mat-checkbox>
+      </div>
+
+      <div class="p-2 md:col-span-2 col-span-6 self-center">
+        <mat-checkbox name="IsDelete" [(ngModel)]="model.isDelete" (change)="setChangeCheckBox($event)" color="primary">
+          {{'delete2'|translate}}</mat-checkbox>
+      </div>
+    </div>
+  </form>
+</ng-container>

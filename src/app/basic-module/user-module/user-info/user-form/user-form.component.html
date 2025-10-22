@@ -1,0 +1,103 @@
+﻿<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm" class="md:mx-8 mx-0">
+
+    <app-page-header [title]='model.id>0 ? editstring : addstring' [isSaveButton]="!isViewForm && isSaveButton"
+      [isCloseButton]="!ishomepage" [returnUrl]="returnUrlAddress" (OnClose)="dialogRef.close()">
+    </app-page-header>
+    
+    <mat-card>
+      <div class="max-h-fit">
+        <div class="grid grid-cols-12 md:h-full h-100 overflow-y-auto  overflow-x-hidden ">
+          <div class="md:col-span-4 col-span-6">
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'name' | translate }} </mat-label>
+              <input type="text" matInput name="FirstName" [(ngModel)]="model.firstName"
+                [formControl]="firstNameFormControl" required [attr.disabled]="isViewForm">
+              <mat-error *ngIf="firstNameFormControl.hasError('required')">{{'this-field-is-required'|translate}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'last-name' | translate }} </mat-label>
+              <input type="text" matInput name="LastName" [(ngModel)]="model.lastName"
+                [formControl]="lastNameFormControl" required [attr.disabled]="isViewForm">
+              <mat-error *ngIf="lastNameFormControl.hasError('required')">{{'this-field-is-required'|translate}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'role-selection' | translate }}</mat-label>
+              <mat-select name="UserRoleId" [(ngModel)]="model.userRoleId" [formControl]="roleFormControl" required
+                [disabled]="isViewForm">
+                <ng-container *ngFor="let type of roles">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+              <mat-error *ngIf="roleFormControl.hasError('required')">{{'this-field-is-required'|translate}}</mat-error>
+            </mat-form-field>
+
+            <div class="p-2 self-center">
+              <mat-checkbox name="IsActive" [(ngModel)]="model.isActive" color="primary" [disabled]="isViewForm">{{
+                'user-is-active/inactive' | translate }}</mat-checkbox>
+            </div>
+          </div>
+
+          <div class="md:col-span-4 col-span-6">
+            <!-- <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{'financial-code'|translate}}</mat-label>
+              <input type="text" matInput name="accCodeId" [(ngModel)]="model.accCodeId" >
+            </mat-form-field> -->
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'username3' | translate }} </mat-label>
+              <input type="text" matInput name="UserName" [(ngModel)]="model.userName"
+                [formControl]="userNameFormControl" required [attr.readonly]="isViewForm">
+              <mat-error *ngIf="userNameFormControl.hasError('required')">{{'this-field-is-required'|translate}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12" >
+              <mat-label> {{ 'email' | translate }} </mat-label>
+              <input matInput name="email" [(ngModel)]="model.email" >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12" *ngIf="model.id==0">
+              <mat-label>{{ 'password' | translate }} </mat-label>
+              <input matInput name="Password" [(ngModel)]="model.password" [formControl]="passwordFormControl" required>
+              <mat-error *ngIf="passwordFormControl.hasError('required')">{{'this-field-is-required'|translate}}</mat-error>
+            </mat-form-field>
+
+            <!-- <mat-form-field appearance="outline" class="w-11/12" *ngIf="model.userRoleId===3">
+              <mat-label>{{ 'select-active/inactive-user-branch' | translate }}</mat-label>
+              <mat-select name="branchId" [(ngModel)]="model.branchId">
+                <ng-container *ngFor="let type of branches">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field> -->
+          </div>
+
+          <div class="md:col-span-3 col-span-12">
+            <div class="image-upload w-full">
+              <label for="file-input">
+                <img class="img-avatar w-full" [src]="imageURL" style="width: 100%; height:auto;" />
+                <img class="w-10 h-10 static  img-click " src="../../../../../assets/images/Akramzada/photo-image.png" >
+              </label>
+              <input id="file-input" accept="image/*" (change)="setImage($event)" type="file" [disabled]="isViewForm" />
+            </div>
+          </div>
+
+          <div class="md:col-span-8 col-span-12">
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'description' | translate }} </mat-label>
+              <input matInput name="Description" [(ngModel)]="model.description">
+            </mat-form-field>
+          </div>
+
+
+        </div>
+      </div>
+    </mat-card>
+  </form>
+</ng-container>

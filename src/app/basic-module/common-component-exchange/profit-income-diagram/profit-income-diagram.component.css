@@ -1,0 +1,11 @@
+.addButton{
+    max-width: 200px;
+    width: 300px;
+    position: relative;
+    float: left;
+}
+
+.line-info {
+    font-size: 14px;
+    word-break: break-all;
+}

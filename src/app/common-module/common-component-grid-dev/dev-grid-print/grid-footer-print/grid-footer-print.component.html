@@ -1,0 +1,24 @@
+<div class="flex-container">
+    <div class="flex-container2" >
+        <div>*{{'modified-by-user'|translate}}</div>
+        <div>○{{'modified-by-software'|translate}}</div>
+    </div>
+    <div class="flex-container2" >
+        <div >{{'remaining-leave-until-the-end-of-the-year'|translate}}: {{dataSource?.LeaveRemain }}</div>
+        <div >{{'number-of-days-absent'|translate}}: {{dataSource?.DeductionDailyCount }}</div>
+    </div>
+    <div class="flex-container2">
+        <div >{{'number-of-working-days'|translate}}: {{dataSource?.WorkDayCount}}</div>
+        <div >{{'number-of-net-working-days'|translate}}: {{dataSource?.WorkDayUnitCount}}</div>
+        
+    </div>
+    <div class="flex-container2">
+        <div>{{'paid-leave'|translate}}: {{dataSource?.LeaveCount}}</div>
+        <div>{{'sick-leave'|translate}}:{{dataSource?.LeaveSickCount}}</div>
+    </div>
+    <div class="flex-container2">
+        <div>{{'unpaid-leave'|translate}}: {{dataSource?.LeaveNonPaymentCount}}</div>
+        <div>{{'daily-mission'|translate}}:{{dataSource?.MissionDailyCount }}</div>
+    </div>
+</div>
+

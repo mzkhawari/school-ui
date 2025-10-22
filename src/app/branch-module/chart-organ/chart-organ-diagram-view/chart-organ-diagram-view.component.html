@@ -1,0 +1,13 @@
+<ng-container  class="mx-8" >
+  <div class="w-full">        
+    <div style="width: 100%;"  class="max-h-fit" >
+        <app-page-header title="{{'display-organizational-chart'|translate}}"
+            [isCloseButton]="true"
+            (OnClose)="dialogRef.close()">        
+        </app-page-header>
+
+        <div id="tree"></div>
+    </div>
+  </div>
+</ng-container>
+

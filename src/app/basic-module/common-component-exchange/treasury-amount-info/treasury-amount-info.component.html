@@ -1,0 +1,28 @@
+<div class="grid grid-cols-2 my-4" >
+    <div class="col-span-2">
+        <!-- Header -->        
+        <mat-card>     
+            <div class="relative row-auto h-25  flex justify-center flex-col sm:flex-row flex-0 sm:items-center  border-b-4">
+                <div class="text-2xl font-extrabold tracking-tight text-center">                    
+                    <!-- <h2 *ngIf="!isShowCom" >{{titleCom}}</h2> -->
+                    <mat-label>{{titleCom}}</mat-label>
+                    <mat-form-field appearance="outline" class="w-11/12" *ngIf="isShowCom"  >                        
+                        <mat-select name="branchId" [(ngModel)]="branchId" (selectionChange)="onSelectItem($event)" >
+                        <ng-container *ngFor="let type of branches">
+                            <mat-option [value]="type.id">
+                            {{type.title}}
+                            </mat-option>
+                        </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>                 
+            </div>       
+            <div class="relative row-auto flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between pt-1">
+                <div class="text-1xl font-extrabold tracking-tight w-full">
+                    <app-grid [datasource]="dataSource" [columns]="columns">
+                    </app-grid>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

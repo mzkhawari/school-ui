@@ -1,0 +1,63 @@
+<ng-container>
+  <div class="grid">    
+    <div class="grid-section  mt-5 rounded-lg" style="border-radius:100px; overflow:hidden">
+      <dx-data-grid id="gridContainer" 
+        [dataSource]="datasource" 
+        [rowAlternationEnabled]="rowAlternation" 
+        [showColumnLines]="true"
+        [showRowLines]="true" 
+        [allowColumnResizing]="true" 
+        [columnAutoWidth]="true" 
+        [rtlEnabled]="true"
+        [allowColumnReordering]="true" 
+        keyExpr="id" 
+        (onContentReady)="OnContentReady($event)"
+        (onRowPrepared)="OnRowPrepared($event)"
+        (onCellPrepared)="OnCellPrepared($event)" 
+        [(columns)]="columns"        
+        [summary]="summary"
+        [showBorders]="true">
+        <dxo-scrolling mode="both"></dxo-scrolling>
+        <dxo-grouping #expand [autoExpandAll]="true" 
+            [contextMenuEnabled]="true"> 
+        </dxo-grouping>
+        <dxo-summary  [groupItem]="summary" >  
+          <!-- <dxi-group-item
+            column="userFullName"
+            summaryType="count"
+            displayFormat="{0} تعداد"
+          >
+          </dxi-group-item>
+          <dxi-group-item
+            column="amountNeg"
+            summaryType="sum"
+            valueFormat="currency"
+            [showInGroupFooter]="false"
+            [alignByColumn]="true"
+          >
+          </dxi-group-item>
+          <dxi-group-item
+            column="amountPos"
+            summaryType="sum"
+            valueFormat="currency"
+            [showInGroupFooter]="false"
+            [alignByColumn]="true"
+          > </dxi-group-item> -->
+        </dxo-summary>
+          
+        <!-- <dxo-summary  [items]="summary"  >
+        </dxo-summary> -->
+        <dxo-group-panel 
+            [visible]="true"> <!-- or "auto" -->
+        </dxo-group-panel>
+            <dxo-filter-row [visible]="false"></dxo-filter-row>
+            <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+
+      </dx-data-grid>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #noData>
+  <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">{{'there-is-no-data'|translate}}</div>
+</ng-template>

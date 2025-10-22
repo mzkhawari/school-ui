@@ -1,0 +1,16 @@
+<div class="grid grid-cols-2 my-4" *ngIf="isShowCom" >
+    <div class="col-span-2">
+        <!-- Header -->        
+        <mat-card>     
+            <div class="relative row-auto h-25  flex justify-center flex-col sm:flex-row flex-0 sm:items-center py-2 border-b-4">
+                <div class="text-2xl font-extrabold tracking-tight text-center">{{titleCom}} </div>
+            </div>       
+            <div class="relative row-auto flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between pt-1">
+                <div class="text-1xl font-extrabold tracking-tight w-full">
+                    <app-grid [datasource]="dataSource" [columns]="columns" pageSize="25">
+                    </app-grid>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

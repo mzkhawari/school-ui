@@ -1,0 +1,93 @@
+<!-- Notifications toggle -->
+<button
+    mat-icon-button    
+    id="nofiyTransactionSuspicious"
+    matTooltip="{{'suspicious-transactions'|translate}}"
+    (click)="openPanel()"
+    #notificationsOrigin>
+    <ng-container *ngIf="unreadCount > 0">
+        <span class="absolute top-0 right-0 left-0 flex items-center justify-center h-3">
+            <span class="flex items-center justify-center flex-shrink-0 min-w-4 h-4 px-1 ml-4 mt-2.5 rounded-full bg-teal-600 text-indigo-50 text-xs font-medium">
+                {{unreadCount}}
+            </span>
+        </span>
+    </ng-container>
+    <mat-icon [svgIcon]="'heroicons_outline:eye'"></mat-icon>
+</button>
+
+<!-- Notifications panel -->
+<ng-template #notificationsPanel>
+
+    <div class="fixed inset-0 sm:static sm:inset-auto flex flex-col sm:min-w-90 sm:w-90 sm:rounded-2xl overflow-hidden shadow-lg">
+        <!-- Header -->
+        <div class="grid grid-cols-12 items-center py-1 pr-4 pl-3 bg-primary text-on-primary">
+            <div class="col-span-12 sm:hidden -ml-1 mr-3">
+                <button
+                    mat-icon-button
+                    (click)="closePanel()">
+                    <mat-icon
+                        class="icon-size-5 text-current"
+                        [svgIcon]="'heroicons_solid:x'"></mat-icon>
+                </button>
+            </div>
+            <div class="col-span-8 text-lg font-medium leading-10">{{'suspicious-transactions'|translate}}</div>
+            <div class="col-span-2 ml-auto">
+                <button
+                    mat-icon-button
+                    [matTooltip]="'Mark all as read'"
+                    [disabled]="unreadCount === 0"
+                    (click)="markAllAsRead()">
+                    <mat-icon
+                        class="icon-size-5 text-current"
+                        [svgIcon]="'heroicons_solid:mail-open'"></mat-icon>
+                </button>
+            </div>
+            <div class="col-span-2 items-center pr-3 mt-3 bg-primary text-on-primary">
+                <a class="text-lg font-medium leading-10" routerLink="report/report-customer-account-check" >
+                    <mat-icon [svgIcon]="'heroicons_outline:newspaper'" class="text-center w-full h-8 text-white"></mat-icon>
+                </a>
+            </div>
+        </div>
+        <!-- Content -->
+        <div class="relative flex flex-col flex-auto sm:max-h-120 h-full divide-y overflow-y-auto bg-card">
+            <!-- Notifications -->
+            <ng-container *ngFor="let trn of dataValue; trackBy: trackByFn">
+                <!-- Title, description & time -->
+                <div class="flex flex-col flex-auto"  >
+                    <ng-container >
+                        <div class="grid grid-cols-1 border-solid border-t border-b border-gray-300">
+                            <a class="cursor grid grid-cols-6 p-2 " routerLink="exchange/transfer-cash-suspicious/{{trn.id}}"  
+                                [ngClass]="{'acc-pending': !trn.isSeen,
+                                            'acc-confirm': trn.isSeen}" >
+                                <p class="font-semibold line-clamp-1 pt-2 pr-2 col-span-6 text-base" > {{trn.description}} </p>
+                                <p class="font-semibold pb-2 pt-2 pr-2 col-span-6 whitespace-pre-line col-span-6 whitespace-pre-line text-base" > ({{trn.account.fullAccount}}) {{'history'|translate}}: {{trn.dateFromFa }} </p>
+                            </a>
+                        </div>
+                    </ng-container>                    
+                </div>
+            </ng-container>
+
+            <!-- No notifications -->
+            <ng-container *ngIf="!dataValue || !dataValue.length">
+                <div class="flex flex-col flex-auto items-center justify-center sm:justify-start py-12 px-8">
+                    <div *ngIf="isLoading">
+                        <img src="../../../assets/images/Akramzada/gif2.gif" alt="Loading..." width="100">  <!-- جایگزین با آدرس تصویر loading خودتان -->
+                    </div>
+                    <!-- <div class="flex flex-0 items-center justify-center w-14 h-14 rounded-full bg-primary-100">
+                        <mat-icon
+                            class="text-primary-500-700"
+                            [svgIcon]="'heroicons_outline:bell'"></mat-icon>
+                    </div> -->
+                    <div class="mt-5 text-2xl font-semibold tracking-tight" *ngIf="isLoading2">{{'no-suspicious-transaction-has-occurred'|translate}}</div>
+                    <div class="w-full max-w-60 mt-1 text-md text-center text-secondary" *ngIf="isLoading2"> {{'it-will-be-displayed-to-you-if-there-is-a-suspicious-transaction'|translate}}</div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="flex flex-shrink-0 items-center py-1 pr-4 pl-4 bg-primary text-on-primary">
+            <div class="text-center w-10 mt-0 mb-0 mr-auto ml-auto">
+                <mat-icon [svgIcon]="'heroicons_outline:chevron-double-down'" class="text-center w-full h-8 text-yellow-100 cursor-pointer" *ngIf="show"></mat-icon>
+                <mat-icon [svgIcon]="'heroicons_outline:chevron-double-up'" class="text-center w-full h-8 text-yellow-100 cursor-pointer" *ngIf="!show"></mat-icon>
+            </div>
+        </div>
+    </div>
+</ng-template>

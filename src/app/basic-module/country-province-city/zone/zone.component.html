@@ -1,0 +1,18 @@
+<ng-container >
+  <div class="w-full">        
+    <div style="width: 100%;"  class="max-h-fit" >
+        <app-grid   
+          [title]="titlelist"
+          isHeader="true"
+          [isAdding]="isSaveButton"
+          [datasource]="datasource"
+          [columns]="columns"        
+          (OnAddItem)="OnAdd()"
+          (OnDeleteItem)="onDeleteConfirm($event)"
+          (OnEditItem)="OnUpdate($event)" >
+        </app-grid>
+    </div>
+  </div>
+</ng-container>
+
+

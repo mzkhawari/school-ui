@@ -1,0 +1,195 @@
+
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+
+// custome css links
+@import '../assets/plugins/bootstrap/css/bootstrap.css';
+// @import "../assets/css/style.css";
+// @import "../assets/css/animated.css";
+// @import "../assets/css/icons.css";
+
+
+
+
+//@import url("../assets/vitrin-theme/css/bootstrap.min.css");
+//@import url("../assets/vitrin-theme/css/font-awesome.css");
+//@import url("../assets/vitrin-theme/css/templatemo-hexashop.css");
+//@import url("../assets/vitrin-theme/css/owl-carousel.css");
+//@import url("../assets/vitrin-theme/css/lightbox.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.disabled
+{
+  pointer-events: none;
+  opacity: 0.5;
+  background: #CCC;
+  pointer-events: none;
+}
+
+.cdk-global-overlay-wrapper .cdk-overlay-pane{
+  width: 80vw !important;
+}
+
+.mat-focus-indicator .mat-button-focus-overlay{
+  opacity: 0 !important;
+  display: none;;
+}
+
+app-dress-detail{
+  width: 100%;
+}
+
+vitrin-layout{
+  width: 100%;
+}
+
+
+
+// upload image
+.image-upload label {
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.image-upload .img-click{
+    border: 1px solid #ddd;
+    right: 50px;
+    position: relative;
+    margin: 5px;
+}
+
+.image-upload .img-avatar{
+  border: 1px solid #ddd;  
+}
+
+.image-upload > input{
+  display: none;
+}
+
+//***********************upload image
+
+
+// div{
+//   text-align: right !important;
+// }
+
+.trn-pending{
+  background-color: #fff3cd;
+}
+
+.trn-confirm{
+  background-color: #d1ecf1;
+}
+
+.trn-complete{
+  background-color: #d4edda;
+}
+
+.trn-reject{
+  background-color: #f8d7da;
+}
+
+.trn-none{
+  background-color: #fefefe;
+}
+
+
+.btn-edit{
+  color: blue;
+}
+
+.btn-delete{
+  color: red;
+}
+
+.btn-detail{
+  color: orange;
+}
+
+.btn-detail2{
+  color: green;
+}
+
+.btn-detail3{
+  color: burlywood;
+}
+
+
+fieldset {
+  border:1px solid #ddd;
+  border-radius: 20px;
+  padding: auto 2px 2px 1px;
+}
+
+
+.acc-pending{
+  background-color: #fff3cd;
+}
+
+.acc-confirm{
+  background-color: #d1ecf1;
+}
+
+.acc-reject{
+  background-color: #f8d7da;
+}
+// .mat-form-field{
+//   text-align: right !important;
+// }
+
+// [dir=rtl] div{
+//   text-align: right !important;
+// }
+
+// [dir=ltr] div{
+//   text-align: right !important;
+// }
+
+
+// [dir=rtl] .mat-form-field {
+//   text-align: right !important;  
+// }
+
+// [dir=ltr] .mat-form-field {
+//   text-align: left !important;  
+// }
+
+// [dir=rtl] body{
+//   text-align: right;
+// }
+// [dir=ltr] body{
+//   text-align: left;
+// }
+
+
+
+
+
+// For AkramZada
+fuse-vertical-navigation .fuse-vertical-navigation-aside-wrapper{
+  background-color: #0d47a1 !important;
+}
+fuse-vertical-navigation .fuse-vertical-navigation-wrapper .fuse-vertical-navigation-content{
+  background-color: #0d47a1 !important;
+}
+
+
+
+// For Bank Markazi
+// fuse-vertical-navigation .fuse-vertical-navigation-aside-wrapper{
+//   background-color: #716038 !important;
+// }
+// fuse-vertical-navigation .fuse-vertical-navigation-wrapper .fuse-vertical-navigation-content{
+//   background-color: #716038 !important;
+// }
+
+// .dx-treeview-item-content{
+//   padding: 5px;
+//   border: 1px solid #ddd;
+// }

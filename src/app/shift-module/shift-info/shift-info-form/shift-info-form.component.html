@@ -1,0 +1,27 @@
+<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm" class="w-full">
+    <div class=" mx-8">
+      <app-page-header title="{{'display-shift-information'|translate}}"
+                       [isSaveButton]="true"                       [isSaveButtonDisabled]="splashScreenService.isShowing"
+                       [isCloseButton]="false" 
+                       [returnUrl]="returnUrlAddress" (OnClose)="dialogRef.close()">
+       </app-page-header>
+      <div class=" bg-white p-4">
+        <div class="grid grid-cols-12">
+          <div class="col-span-8">
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label  >{{'description'|translate}}</mat-label>
+              <textarea matInput name="description" [(ngModel)]="model.description"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-span-4">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>{{'start-of-shift'|translate}}</mat-label>
+              <input type="text" matInput name="openShift" [(ngModel)]="model.openShift" readonly>
+          </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>

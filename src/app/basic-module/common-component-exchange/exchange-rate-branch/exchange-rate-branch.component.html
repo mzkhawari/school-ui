@@ -1,0 +1,16 @@
+<div class="grid grid-cols-2 p-4">
+  <div class="col-span-2">
+      <div  class="relative row-auto h-25  flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-2 border-b-4">
+          <div #titleReport   class="text-2xl font-extrabold tracking-tight" style="margin-top: -22px;">{{title}} </div>
+      </div>
+  </div>
+  <div class="col-span-2 overflow-y-hidden overflow-x-auto w-110 md:w-200">
+    <app-chart-dashboard
+      chartType="fullstackedbar"
+      [title]="titleChart"
+      [dataChart]="dataSource"
+      [argumentFiled]="ArgumentField"
+      [series]="Series" >
+    </app-chart-dashboard>
+  </div>
+</div>

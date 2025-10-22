@@ -1,0 +1,136 @@
+<!-- Header -->
+<div *ngIf="isShowPrintButton===true"
+    class="relative row-auto h-25  flex flex-col sm:flex-row flex-0 sm:items-center justify-end py-2   border-b-4 border-green-800 overflow-hidden ">
+    <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+        <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+    </div>
+    <div class="text-2xl font-extrabold tracking-tight">{{title}}</div>
+    <div class="flex flex-shrink-0 mt-6 sm:mt-0 sm:ml-4">
+        <button class="ignorePrint px-2 text-4xl" (click)="Print(4)">
+            <img class="w-8" src="../../../../assets/images/Akramzada/preview.png">
+        </button>        
+        <button class="ignorePrint px-2 text-4xl" (click)="Print(1)">
+            <img class="w-8" src="../../../../assets/images/Akramzada/print.png">
+        </button>
+        <button class="ignorePrint px-2 text-4xl" *ngIf="isExporting"  (click)="exportSelectedData()">
+            <img class="w-8" src="../../../../assets/images/Akramzada/excel.png">
+        </button>
+    </div>
+</div>
+
+<mat-card class="border-1 rounded bg-white	">
+    <div class="overflow-y-auto overflow-x-auto bg-white" [ngStyle]="!isUseGroup && {'height':'calc(100vh - 300px)'}">
+        <table  class="table w-full" id="table-data"
+            style="width:100%;" dir="rtl">
+            <thead>
+                <tr>
+                    <th class="ignoreCss" colspan="45">
+                        <grid-header-print #topHeader [dataSource]="dataHeaderReport">
+                        </grid-header-print>
+                    </th>
+                </tr>
+                <tr *ngIf="isShowCustomer" >
+                    <th  colspan="45">
+                        <grid-header-person-print  [model]="personModel">
+                        </grid-header-person-print>
+                    </th>
+                </tr>
+                <tr>
+                    <th style="font-weight: bolder;"><b>{{'row'|translate}}</b></th>
+                    <th *ngFor="let head of columns" style="width: calc(100vw / 45)px;" data-field="{{head.caption}}">
+                        {{head.caption}}</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="_dataSource !== undefined && _dataSource.length > 0">
+                <tr *ngFor="let data of dataSource; let i = index"
+                    [ngClass]="[i%2 ===0 ? 'row-alterNative' : '' , (data.TimeCount % 2)===1 ? 'row-dark' : ' '] ">
+                    <td>{{i+1}}</td>
+                    <td *ngFor="let head of columns">
+                        <p style="margin:0 !important; padding:0 !important;white-space:nowrap; "
+                            *ngIf="head.dataField!=='amount' && head.dataField!=='amountAfg'&& head.dataField!=='commession' && head.dataField!=='paidable' && head.dataField!=='amountDebit' && head.dataField!=='amountCredit' && !head.dataField.startsWith('is')">
+                            {{ data[head.dataField] }} </p>
+                        <p style="margin:0 !important; padding:0 !important;white-space:nowrap; "
+                            *ngIf="head.dataField!=='amount' && head.dataField!=='amountAfg' && head.dataField!=='commession' && head.dataField!=='paidable' &&  head.dataField!=='amountDebit' && head.dataField!=='amountCredit' && head.dataField.startsWith('is')">
+                            {{ data[head.dataField] == true ? 'Yes' : 'No' }} </p>
+                        <p style="margin:0 !important; padding:0 !important;white-space:nowrap; "
+                            *ngIf="head.dataField==='amount' || head.dataField ==='amountAfg'|| head.dataField==='commession' ||head.dataField==='paidable' || head.dataField==='amountDebit' || head.dataField==='amountCredit' && !head.dataField.startsWith('is')">
+                            {{ data[head.dataField] | currencyNumber }} </p>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr *ngIf="dataFooterReport !== undefined">
+                    <td style="font-size: 15px !important; text-align: center !important; height: 40px; "
+                        *ngFor="let footCol of dataFooterReport; let i = index" [colSpan]="footCol.colSpan">
+                        {{ footCol.title }}</td>
+                </tr>
+                <tr *ngIf="dataSourceFooter!==undefined && dataSourceFooter!==null">
+                    <td></td>
+                    <td *ngFor="let head of columns; let i = index">
+                        {{ dataSourceFooter[head.dataField] }}</td>
+                </tr>
+                <tr *ngIf="dataFooterReport2!== undefined && dataFooterReport2!== null">
+                    <td class="ignoreCss" colspan="45">
+                        <grid-footer-print [dataSource]="dataFooterReport2">
+                        </grid-footer-print>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+
+        <table *ngIf="dataSourceSub !== undefined && dataSourceSub.length > 0" class="table w-200 mt-10" id="table-data"
+            style="width:100%;" dir="rtl">
+            <thead>
+                <tr>
+                    <th style="font-weight: bolder;"><b>{{'row'|translate}}</b></th>                
+                    <th style="font-weight: bolder;"><b>{{'title'|translate}}</b></th>                
+                    <th style="font-weight: bolder;"><b>{{'number'|translate}}</b></th>                
+                    <th style="font-weight: bolder;"><b>{{'afghani'|translate}}</b></th>                
+                    <th style="font-weight: bolder;"><b>{{'dollar'|translate}}</b></th>                
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of dataSourceSub; let i = index" >
+                    <td>{{i+1}}</td>
+                    <td >
+                        {{data.title}}                        
+                    </td>
+                    <td >
+                        {{data.count}}                        
+                    </td>
+                    <td >
+                        {{data.afghani}}                        
+                    </td>
+                    <td >
+                        {{data.dollar}}                        
+                    </td>
+                </tr>
+            </tbody>            
+        </table>
+
+    
+        <div id="exportExcel" class="ignorePrint h-10" style="opacity:0.0001;" *ngIf="isExporting">
+            <dx-data-grid
+                id="gridExport"
+                [dataSource]="dataSource"
+                [showColumnLines]="true"
+                [rtlEnabled]="true"
+                [(columns)]="columns"
+                (onRowPrepared)="OnRowPrepared($event)"  >
+                <dxo-export [enabled]="true"></dxo-export>
+                <!-- <dxo-toolbar>
+                    <dxi-item location="before" template="topHeader" ></dxi-item>
+                </dxo-toolbar> -->
+            </dx-data-grid>
+
+            <!-- <ng-template #topHeader >
+                <grid-header-print  [dataSource]="dataHeaderReport">
+                </grid-header-print>
+            </ng-template> -->
+            
+            <!-- <app-dev-export [datasource]="dataSource" [columns]="columns" [exportExcel]="exportExcel">
+            </app-dev-export> -->
+        </div>
+    </div>
+</mat-card>

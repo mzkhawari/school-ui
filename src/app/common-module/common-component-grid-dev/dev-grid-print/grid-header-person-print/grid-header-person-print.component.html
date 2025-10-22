@@ -1,0 +1,42 @@
+<div class="flex-container">
+    <div class="flex-container2"  >
+        <img [src]="model?.picUrlAvatar"  style="width:100px; height: 100px;margin-right: 50px; margin-top: 40px;  "  />
+    </div>
+    <div class="flex-container2"  >
+        <div class="flex-title">{{'account-number'|translate}}: {{model?.accountNo}} </div>        
+        <div class="flex-title">{{'name'|translate}}:{{model?.firstName}} </div>        
+        <div class="flex-title">{{'last-name'|translate}}:{{model?.lastName}} </div>        
+        <div class="flex-title">{{'father-name'|translate}}:{{model?.fatherName}} </div>        
+        <div class="flex-title">{{'suspicious-transactions'|translate}}:{{model?.trnSuspiciousCount}} </div>
+        <div class="flex-title">{{'registration-branch'|translate}}:{{model?.branchTitle}} </div>        
+    </div>
+    <div class="flex-container2">
+        <div class="flex-title">{{'gender'|translate}}:{{model?.genderTitle}} </div>        
+        <div class="flex-title">{{'job'|translate}}:{{model?.jobTitle}} </div>        
+        <div class="flex-title">{{'source-of-income'|translate}}:{{model?.sourceIncome}} </div>        
+        <div class="flex-title">{{'main-province'|translate}}:{{model?.provinceTitle}} </div>        
+        <div class="flex-title">{{'big-deals'|translate}}:{{model?.trnBigCount}} </div>    
+        <div class="flex-title">{{'registration-date'|translate}}:{{model?.createDateFa}} </div>            
+    </div>
+    <div class="flex-container2">
+        <div class="flex-title">{{'mobile'|translate}}:{{model?.mobileNo | persianToEnglishNumber}} </div>        
+        <div class="flex-title">{{'email'|translate}}:{{model?.email}} </div>        
+        <div class="flex-title">{{'monthly-income'|translate}}:{{model?.mountlyIncome | currencyNumber}} </div>        
+        <div class="flex-title">{{'main-county'|translate}}:{{model?.cityTitle}} </div>        
+        <div class="flex-title">{{'customer-type'|translate}}:{{model?.typeAccount}} </div>            
+        <div class="flex-title">{{'registered-user'|translate}}:{{model?.userFullName}} </div>        
+                      
+    </div>
+    <div class="flex-container2">
+        <div class="flex-title">{{'id-card'|translate}}:{{model?.identityNo | persianToEnglishNumber }} </div>        
+        <div class="flex-title">{{'address'|translate}}:{{model?.address}} </div>        
+        <div class="flex-title">{{'check-the-list-of-sanctions'|translate}}: {{model?.isCheckPunishment ? "بلی":"نخیر"}} </div>                
+        <div class="flex-title">{{'danger-level'|translate}}: {{model?.dangerLevelTitle}} </div>      
+        <div class="flex-title"></div>        
+        <div class="flex-title"></div>        
+        
+    </div>
+    <div class="flex-container2">        
+    </div>
+</div>
+

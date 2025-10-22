@@ -1,0 +1,39 @@
+<ng-container >
+  <div class="w-full mx-8">        
+    <div style="width: 100%;"  class="max-h-fit" >
+      
+      <app-page-header [title]="titlelist" 
+        [isSaveButton]="false"
+        [txtCustomButton]="'ثبت حضور'"
+        [isCloseButton]="false"
+        (OnSaveCustom)="onShowStudent()">
+      </app-page-header>
+
+      <app-grid-paging 
+        [title]="titlelist" 
+        [data]="dataList"         
+        [columns]="columns"
+        [dataCount]="dataListCount"
+        (OnPageItem)="gotoNextPage($event)"
+        (OnActionItem)="onActionResult($event)">        
+      </app-grid-paging>
+
+      
+      <!-- <app-grid
+          [title]="titlelist"
+          [isHeader]="true"
+          [isAdding]="true"
+          [useBackground]="'true'"
+          [datasource]="datasource"
+          [columns]="columns"     
+          [actions]="actions"  
+          (OnPrintItem)="onPrint($event)" 
+          (OnDetailItem)="onDetail($event)" 
+          (OnAddItem)="openDialogForm()"
+          (OnDeleteItem)="onDeleteConfirm($event)"
+          (OnEditItem)="OnUpdate($event)" >
+        </app-grid>       -->
+    </div>
+  </div>
+</ng-container>
+

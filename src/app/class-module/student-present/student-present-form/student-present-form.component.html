@@ -1,0 +1,75 @@
+<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm" class="w-full">
+    <div class=" mx-1 md:mx-8" >
+      <app-page-header title="ثبت حضور"
+                       [isSaveButton]="false"                       [isSaveButtonDisabled]="splashScreenService.isShowing"
+                       [isCloseButton]="true" 
+                       [returnUrl]="returnUrlAddress" (OnClose)="dialogRef.close()">
+       </app-page-header>
+      <div class=" bg-white">
+        <div class="grid grid-cols-4 md:grid-cols-12">
+          <div class="col-span-4">
+            <mat-form-field appearance="outline" class="md:w-11/12 w-full">
+                <mat-label  > کد آموزشیار</mat-label>
+               <input type="number" inputmode="numeric" pattern="[0-9]*" matInput name="ApplicantCode" [(ngModel)]="model.applicantCode"> 
+            </mat-form-field>
+          </div>
+          <div class="col-span-4">
+            <button type="button" (click)="getItem()" class="md:px-4 px-1 border-gray-500 md:col-span-3 col-span-4 border-b-4 border  border-transparent focus:outline-none bg-white text-gray-800 py-2 rounded hover:bg-gray-100 transition">جستجو </button>
+            <button type="button" (click)="resetForm()" class="md:px-4 px-1 border-red-500 md:col-span-3 col-span-4   border-b-4 border  border-transparent focus:outline-none bg-white text-gray-800 py-2 rounded hover:bg-gray-100 transition">جستجوی مجدد</button>
+            <button type="button" (click)="setEntranceInOut()" class="md:px-4 px-1 border-red-500 md:col-span-3 col-span-4  border-b-4 border  border-transparent focus:outline-none bg-white text-gray-800 py-2 rounded hover:bg-gray-100 transition">ثبت حضور </button>
+          </div>        
+          <div class="col-span-4">
+              <app-select-search [dataSource]="byStudents" [(selectedId)]="byPersonId" titleField="همراهی" class="md:w-11/12 w-full"
+                [fieldId]="'id'" [fieldTitle]="'title'">
+              </app-select-search>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-6 md:grid-cols-12" *ngIf="model.id>0" >
+          <div class="md:col-span-4 col-span-4">
+            <mat-form-field appearance="outline" class="w-11/12">
+                <mat-label  > نام آموزشیار</mat-label>
+               <input type="text" disabled="true" matInput name="description" [(ngModel)]="model.fullName"> 
+            </mat-form-field>
+          </div>
+
+          <div class="md:col-span-4 col-span-2">
+            <mat-form-field appearance="outline" class="w-11/12">
+                <mat-label  >نام پدر</mat-label>
+               <input type="text" disabled="true" matInput name="fatherName" [(ngModel)]="model.fatherName"> 
+            </mat-form-field>
+          </div>
+
+          <div class="md:col-span-4 col-span-4">
+            <mat-form-field appearance="outline" class="w-11/12">
+                <mat-label  > شماره تلفن </mat-label>
+               <input type="text" disabled="true" matInput name="cellPhone" [(ngModel)]="model.cellPhone"> 
+            </mat-form-field>
+          </div>
+
+          <div class="md:col-span-4 col-span-2">
+            <mat-form-field appearance="outline" class="w-11/12">
+                <mat-label  > شماره همراه ایتا </mat-label>
+              <input type="text" disabled="true" matInput name="cellPhoneEitaa" [(ngModel)]="model.cellPhoneEitaa">
+            </mat-form-field>
+          </div>          
+
+          <div class="md:col-span-4 col-span-4">
+            <mat-form-field appearance="outline" class="w-11/12">
+                <mat-label  > آدرس </mat-label>
+               <input type="text" disabled="true" matInput name="address" [(ngModel)]="model.address"> 
+            </mat-form-field>
+          </div>
+          
+          <div class="md:col-span-4 col-span-2">
+            <mat-form-field appearance="outline" class="w-11/12">
+                <mat-label  > تاریخ تولد </mat-label>
+               <input type="text" disabled="true" matInput name="brithDate" [(ngModel)]="model.brithDate"> 
+            </mat-form-field>            
+          </div>          
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>

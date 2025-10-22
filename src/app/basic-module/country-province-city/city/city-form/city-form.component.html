@@ -1,0 +1,74 @@
+<div class="w-full">
+  <!-- Card form -->
+  <form (ngSubmit)="OnSubmit(f)" class="md:mx-8 mx-0"  #f="ngForm">
+
+    <app-page-header [title]='model.id>0 ? editstring : addstring' 
+        isSaveButton="true" 
+        isCloseButton="true" (OnClose)="dialogRef.close()" >
+    </app-page-header>  
+
+    <!-- Header -->
+    <!-- <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+      <div class="text-lg font-medium"> {{((model.id==0 || model.id==undefined) ? 'افزودن شهر' :'ویرایش شهر') }} </div>
+      <button mat-icon-button (click)="dialogRef.close()" type="button"  [tabIndex]="-1">
+        <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+      </button>
+    </div> -->
+
+    <div class="grid grid-cols-12 gap-4 pt-5">
+      <div class=" md:col-span-4 col-span-6">
+          <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label for="Title">{{ 'title' | translate }} </mat-label>
+              <input matInput required name="title" [(ngModel)]="model.title" [formControl]="titleFormControl" required>
+              <mat-error *ngIf="titleFormControl.hasError('required')"> {{ 'this-field-is-required' | translate }}</mat-error>
+          </mat-form-field>
+      </div>
+
+      <div class=" md:col-span-4 col-span-6">
+          <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'priority' | translate }} </mat-label>
+              <input matInput number required [(ngModel)]="model.priority" name="Priority" [formControl]="priorirtyFormControl" required>
+              <mat-error *ngIf="priorirtyFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+          </mat-form-field>
+      </div>
+
+      <div class="md:col-span-4 col-span-12">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'province' | translate }} </mat-label>
+            <mat-select name="parentId" [(ngModel)]="model.parentId" [formControl]="provinceFormControl" required>
+                <ng-container *ngFor="let country of countryProvinceCitis">
+                    <mat-option [value]="country.id">
+                        {{country.title}}
+                    </mat-option>
+                </ng-container>
+            </mat-select>
+            <mat-error *ngIf="provinceFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div class="grid grid-cols-12 gap-4">
+      <div class="md:col-span-8 col-span-12 ">
+        <mat-form-field appearance="outline" class="w-full" >
+            <mat-label>{{ 'description' | translate }} </mat-label>
+          <textarea matInput name="Description" [(ngModel)]="model.description"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class=" pt-5 md:col-span-4 col-span-6">
+        <mat-slide-toggle [(ngModel)]="model.isActive" name="IsActive" [color]="'primary'">
+          {{ model.isActive === true ? 'فعال' : 'غیرفعال'}}
+        </mat-slide-toggle>
+      </div>
+
+    </div>
+
+    <!-- <mat-divider></mat-divider>
+    <div class="grid grid-cols-6 pl-3 pb-3 content-center ">
+      <button mat-raised-button class="col-start-5 mr-1 " (click)="closeModal()">شروع مجدد</button>
+      <button mat-raised-button class="col-start-6 mr-1" color="primary" type="submit" >ثبت </button>
+    </div> -->
+  </form>
+</div>
+

@@ -1,0 +1,118 @@
+<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm" class="w-full">
+    <div class=" mx-8">
+      <app-page-header [title]='model.id>0 ? "ویرایش شعبه" : "افزودن شعبه"' 
+                       [isSaveButton]="isSaveButton"                       [isSaveButtonDisabled]="splashScreenService.isShowing"
+                       [isCloseButton]="false" 
+                       [returnUrl]="returnUrlAddress" (OnClose)="dialogRef.close()">
+      </app-page-header>
+      <div class=" bg-white p-4">
+        <div class="grid grid-cols-12">
+          <div class="col-span-12 grid grid-cols-12">
+            <mat-form-field appearance="outline" class="w-11/12 md:col-span-3 col-span-6">
+              <mat-label>{{ 'title' | translate }} </mat-label>
+              <input type="text" matInput name="title" [(ngModel)]="model.title" [formControl]="titleFormControl" required>
+              <mat-error *ngIf="titleFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="w-11/12 md:col-span-3 col-span-6">
+              <mat-label>{{ 'email' | translate }} </mat-label>
+              <input type="email" matInput name="email" [(ngModel)]="model.email" [formControl]="emailFormControl" required >
+              <mat-error *ngIf="emailFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('email')">{{ 'must-be-entered-in-the-correct-format' | translate }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12 md:col-span-3 col-span-6">
+              <mat-label>{{ 'choosing-a-branch-manager' | translate }} </mat-label>
+              <mat-select name="userId" [(ngModel)]="model.userId" [formControl]="userFormControl" required  >
+                <ng-container *ngFor="let type of users">
+                  <mat-option [value]="type.id">
+                    {{type.firstName}} - {{type.lastName}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+              <mat-error *ngIf="userFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+            </mat-form-field>
+
+            <mat-checkbox class="w-11/12  md:col-span-3 col-span-6" name="isActive" [(ngModel)]="model.isActive" color="primary">{{ 'active/inactive-branch' | translate }}</mat-checkbox>
+
+            <mat-form-field appearance="outline" class="w-11/12 md:col-span-3 col-span-6">
+              <mat-label>{{ 'cash-accounts' | translate }}</mat-label>
+              <input type="number" matInput name="financeCashId" [(ngModel)]="model.financeCashId"  >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12 md:col-span-3 col-span-6">
+              <mat-label>{{ 'bank-accounts2' | translate }}</mat-label>
+              <input type="number" matInput name="financeBankId" [(ngModel)]="model.financeBankId" >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12 md:col-span-3 col-span-6">
+              <mat-label>{{ 'daily-transaction-limit2' | translate }}</mat-label>
+              <input type="text" matInput name="ceilingAmountTrn" [(ngModel)]="model.ceilingAmountTrn" >              
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12 md:col-span-3 col-span-6">
+              <mat-label> {{ 'transaction-min' | translate }} </mat-label>
+              <input type="text" matInput name="minAmountTreasury" [(ngModel)]="model.minAmountTreasury" >              
+            </mat-form-field>
+          </div>       
+          <div class="col-span-12 grid grid-cols-12">
+
+            <mat-form-field appearance="outline" class="w-11/12 md:col-span-3 col-span-6">
+              <mat-label> {{ 'province-selection' | translate }} </mat-label>
+              <mat-select name="provinceId" [(ngModel)]="model.provinceId" (selectionChange)="selectCity($event)" [formControl]="provinceFormControl" required  >
+                <ng-container *ngFor="let type of provinces">
+                  <mat-option [value]="type.id">
+                    {{type.title}} 
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+              <mat-error *ngIf="provinceFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12 md:col-span-3 col-span-6">
+              <mat-label>{{ 'select-county' | translate }} </mat-label>
+              <mat-select name="cityId" [(ngModel)]="model.cityId" [formControl]="cityFormControl" required  >
+                <ng-container *ngFor="let type of cityOnProvince">
+                  <mat-option [value]="type.id">
+                    {{type.title}} 
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+              <mat-error *ngIf="cityFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12 md:col-span-3 col-span-6">
+              <mat-label>{{ 'contact-number' | translate }} </mat-label>
+              <input type="text" matInput name="phone" [(ngModel)]="model.phone" [formControl]="phoneFormControl" required  >
+              <mat-error *ngIf="phoneFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="w-11/12  md:col-span-3 col-span-6">
+              <mat-label>{{ 'danger-level' | translate }}</mat-label>
+              <mat-select name="dangerLevel" [(ngModel)]="model.dangerLevel">
+                <ng-container *ngFor="let type of dangerLevels">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12 md:col-span-6 col-span-12">
+              <mat-label>{{ 'address' | translate }} </mat-label>
+            <input type="text" matInput name="address" [(ngModel)]="model.address" [formControl]="addressFormControl" required >
+            <mat-error *ngIf="addressFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12 md:col-span-6 col-span-12">
+            <mat-label>{{ 'description' | translate }} </mat-label>
+            <input matInput name="Description" [(ngModel)]="model.description">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</ng-container>

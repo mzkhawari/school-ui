@@ -1,0 +1,152 @@
+<ng-container>
+  <div class="grid">
+    <grid-header *ngIf="isHeader" 
+      [title]="title" 
+      [isAddButton]="isAdding" 
+      [isExportButton]="isExporting" 
+      [isSearchBox]="isSearching" 
+      [isCloseButton]="isCloseButton"
+      [isBackButton]="isBackButton"
+      [isImportButton]="isImporting"
+      [returnUrlAddress]="returnUrlAddress"
+      (OnAddItem)="OnAdd()" 
+      (OnExportItem)="OnExport()" 
+      (OnImportItem)="OnImport($event)" 
+      (OnTextFilter)="applyFilter($event)">
+    </grid-header>
+
+    <div class="grid-section  mt-5 rounded-lg" style="border-radius:100px; overflow:hidden">
+      <dx-data-grid id="gridContainer" 
+        [dataSource]="datasource" 
+        [rowAlternationEnabled]="rowAlternation" 
+        [showColumnLines]="true"
+        [showRowLines]="true" 
+        [allowColumnResizing]="true" 
+        [columnAutoWidth]="true" 
+        [rtlEnabled]="true"
+        [allowColumnReordering]="true" 
+        keyExpr="id" (onContentReady)="OnContentReady($event)"
+        (onRowPrepared)="OnRowPrepared($event)"
+        (onCellPrepared)="OnCellPrepared($event)" [(columns)]="columns"
+        [showBorders]="true">
+        <dxo-paging [pageSize]="pageSize"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50, 100, 200, 500, 1000]"
+          [showInfo]="true"> </dxo-pager>
+        <dxo-scrolling mode="both"></dxo-scrolling>
+        <dxo-selection [selectAllMode]="allPages" [showCheckBoxesMode]="checkBoxesMode" mode="multiple"></dxo-selection>
+        <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+
+
+        <!-- {  
+          caption: '#',  
+          cellTemplate: function(cellElement, cellInfo) {  
+              cellElement.text(cellInfo.row.rowIndex)  
+          }   -->
+        <div *dxTemplate="let d of 'rowNumberTemplate'">
+          {{d.cellInfo.row.rowIndex}}
+        </div>
+
+        <div *dxTemplate="let d of 'editCellTemplate'">
+          <a class="px-2 text-2xl primary" (click)="OnDelete(d)" title="Delete">
+            <i class="feather-trash btn-delete "></i>
+          </a>
+          <a class="px-2 text-2xl primary" (click)="OnEdit(d)" title="Edite">
+            <i class="feather-edit btn-edit "></i>
+          </a>
+        </div>
+
+        <div *dxTemplate="let data of 'photoCellTemplate'">
+          <img [src]="data.value"  style="width: 50px ;"  />
+        </div>
+
+        <div *dxTemplate="let d of 'actionCellTemplate'">
+          <a class="px-2 text-2xl primary" (click)="OnPrint(d)" title="{{actions.isPrint?.title}}" *ngIf="actions.isPrint?.isShow" >
+            <i class="{{actions.isPrint?.icon == undefined ? 'feather-printer' : actions.isPrint?.icon }}"></i>
+          </a>
+          <a class="px-2 text-2xl primary" (click)="OnDetail3(d)" title="{{actions.isDetail3?.title}}" *ngIf="actions.isDetail3?.isShow" >
+            <i class="{{actions.isDetail3?.icon == undefined ? 'feather-file' : actions.isDetail3?.icon }}"></i>
+          </a>
+          <a class="px-2 text-2xl primary" (click)="OnDetail2(d)" title="{{actions.isDetail2?.title}}" *ngIf="actions.isDetail2?.isShow" >
+            <i class="{{actions.isDetail2?.icon == undefined ? 'feather-user' : actions.isDetail2?.icon }}"></i>
+          </a>
+          <a class="px-2 text-2xl primary" (click)="OnDetail(d)" title="{{actions.isDetail?.title}}"  *ngIf="actions.isDetail?.isShow" >
+            <i class="{{actions.isDetail?.icon == undefined ? 'feather-sliders' : actions.isDetail?.icon }}"></i>
+          </a>
+          <a class="px-2 text-2xl primary" (click)="OnEdit(d)" title="{{actions.isEdit?.title}}" *ngIf="actions.isEdit?.isShow"  >
+            <i class="{{actions.isEdit?.icon == undefined ? 'feather-edit btn-edit' : actions.isEdit?.icon }}"></i>
+          </a>
+          <a class="px-2 text-2xl primary" (click)="OnDelete(d)" title="{{actions.isDelete?.title}}" *ngIf="actions.isDelete?.isShow" >
+            <i class="{{actions.isDelete?.icon == undefined ? 'feather-trash btn-delete' : actions.isDelete?.icon }}"></i>
+          </a>          
+          <a class="px-2 text-2xl primary" (click)="OnAdd2(d)" title="{{actions.isAdd?.title}}" *ngIf="actions.isAdd?.isShow" >
+            <i class="{{actions.isAdd?.icon == undefined ? 'feather-plus' : actions.isAdd?.icon }}"></i>
+          </a>
+
+        </div>
+
+      </dx-data-grid>
+    </div>
+  </div>
+</ng-container>
+
+<!-- <ng-container >
+  <div class="grid">
+    <grid-header *ngIf="isHeader" title="{{title}}" isAddButton="{{isAdding}}" isSearchBox="{{isSearching}}" (OnAddItem)="OnAdd()" (OnTextFilter)="applyFilter($event)">
+    </grid-header>
+
+
+    <table class="table-auto" mat-table [dataSource]="dataSource" #tableSort="matSort" matSort>
+      <ng-container *ngFor="let item of columns;let rowId = Index;" [matColumnDef]="item.dataField">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{item.caption}} </th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="item.dataField != 'actions' && item.dataField1 == undefined && item.isBool == undefined">
+            {{element[item.dataField] }}
+          </span>
+          <span *ngIf="item.dataField != 'actions' && item.dataField1 != undefined && item.isBool == undefined ">
+            {{ getChildValue(element[item.dataField] ,item.dataField1) }}
+          </span>
+          <span *ngIf="item.isBool">
+            <ng-container *ngIf="element[item.dataField]">
+              <mat-icon class="text-green-400 icon-size-5" [svgIcon]="'heroicons_solid:check'"></mat-icon>
+            </ng-container>
+            <ng-container *ngIf="!element[item.dataField]">
+              <mat-icon class="text-gray-400 icon-size-5" [svgIcon]="'heroicons_solid:x'"></mat-icon>
+            </ng-container>
+          </span>
+
+          <span *ngIf="item.dataField == 'actions' ">
+            <button mat-icon-button color="primary" (click)="OnEdit(element)" title="ویرایش رکورد">
+              <mat-icon [ngClass]="'icon-size-32'" svgIcon="feather:edit-2"></mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="OnDelete(element)" title="نمایش رکورد">
+              <mat-icon [ngClass]="'icon-size-32'" svgIcon="feather:trash-2"></mat-icon>
+            </button>
+          </span>
+          <span *ngIf="item.dataField == 'actions1' ">
+            <button mat-icon-button color="primary" (click)="OnDetail(element)" title="جرئبات">
+              <mat-icon [ngClass]="'icon-size-32'" svgIcon="feather:more-horizontal"></mat-icon>
+            </button>
+          </span>
+
+          <span *ngIf="item.dataField == 'actions2' ">
+            <button mat-icon-button color="primary" (click)="OnDetail2(element)" title="پارامترها">
+              <mat-icon [ngClass]="'icon-size-32'" svgIcon="feather:sliders"></mat-icon>
+            </button>
+          </span>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 150, 200]" pageSize="10" showFirstLastButtons
+      aria-label="Select page ">
+    </mat-paginator>
+  </div>
+</ng-container> -->
+
+<ng-template #noData>
+  <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">{{'there-is-no-data'|translate}}</div>
+</ng-template>

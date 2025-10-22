@@ -1,0 +1,19 @@
+
+
+<div class="grid grid-cols-12 w-full box-main"  *ngIf="datasource.length > 0; else noData"   >
+  <div class="col-span-3 w-11/12 box-img" *ngFor="let img of datasource">
+    <img src="{{img.picUrl}}" class="w-full" [alt]="img.keyWords" />
+    
+    <div class="remove-img">
+      <h2><mat-icon  [color]="'warn'" [svgIcon]="'heroicons_solid:trash'" (click)="OnDelete(img)"   ></mat-icon> </h2>
+    </div>
+    <div class="text-img">      
+      <h2> <mat-icon  [color]="'primary'" [svgIcon]="'heroicons_solid:pencil'" (click)="OnEdit(img)"  ></mat-icon> <span> {{img.code}}</span> </h2>
+      <h3>{{img.description}}</h3>
+    </div>
+  </div>
+</div>
+
+<ng-template class=""  #noData>
+  <h3>{{'there-is-no-picture'|translate}} </h3>
+</ng-template>

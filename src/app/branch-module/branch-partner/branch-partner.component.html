@@ -1,0 +1,19 @@
+<ng-container >
+  <div class="w-full mx-8">        
+    <div style="width: 100%;"  class="max-h-fit" >
+        <app-grid   
+          [title]="listTitle"
+          [isHeader]="true"
+          [isAdding]="true"
+          [datasource]="datasource"
+          [actions]="actions"
+          [columns]="columns"        
+          (OnAddItem)="openDialogForm()"
+          (OnDetailItem)="onDetail($event)"
+          (OnDeleteItem)="onDeleteConfirm($event)"
+          (OnEditItem)="OnUpdate($event)" >
+        </app-grid>
+    </div>
+  </div>
+</ng-container>
+

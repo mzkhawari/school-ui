@@ -1,0 +1,53 @@
+<!-- <mat-form-field class="w-full" appearance="outline">
+        <mat-label>{{titleFiled}}</mat-label>
+        <mat-select *ngIf="isMultiple==1" [(ngModel)]="selectedId" (selectionChange)="onValueChanged($event)" multiple>
+                <mat-option *ngFor="let data of dataSource" [value]="data.Id">{{data.DiaplayValue}}</mat-option>
+        </mat-select>
+        <mat-select *ngIf="isMultiple==0" [(ngModel)]="selectedId" (selectionChange)="onValueChanged($event)">
+                <mat-option *ngFor="let data of dataSource" [value]="data.Id">{{data.DiaplayValue}}</mat-option>
+        </mat-select>
+</mat-form-field>
+-->
+
+
+
+
+<!-- <mat-form-field class="w-full" appearance="outline">
+        <mat-label>انتخاب شخص</mat-label>
+</mat-form-field> -->
+
+
+<div class="grid grid-cols-7 grid-flow-col"     >
+        <div [ngClass]="isArrowSelect==true ? 'col-span-5' : 'col-span-7' " >
+                <dx-drop-down-box name="SelectPerson" [(value)]="gridSelectedRowKeys" valueExpr="Id"
+                        [displayExpr]="gridBox_displayExpr" [rtlEnabled]="true" [deferRendering]="false"
+                        placeholder="{{'person-choice'|translate}}" [showClearButton]="true" [dataSource]="dataSource">
+                        <div class="devDropdownGrid-width" *dxTemplate="let data of 'content'">
+                                <dx-data-grid [dataSource]="dataSource" [(columns)]="columns" keyExpr="Id"                                        
+                                        [selection]="multipleDopdownGrid" [hoverStateEnabled]="true"
+                                        [filterRow]="{ visible: true }" [scrolling]="{ mode: 'infinite' }"
+                                        [(selectedRowKeys)]="gridSelectedRowKeys" >
+
+                                </dx-data-grid>
+                        </div>
+                </dx-drop-down-box>
+        </div>
+
+        <div class="col-span-2 content-center justify-self-start self-center"  *ngIf="isArrowSelect==true"  >
+                <mat-button-toggle-group class="mt-1.5 border-0 space-x-1">
+                        <mat-button-toggle class="p-2" >
+                                <button mat-icon-button title="{{'previous'|translate}}" type="button"  >
+                                        <mat-icon class="icon-size-7" [svgIcon]="'feather:arrow-right-circle'"
+                                                (click)="setPerviousItem()">{{'previous'|translate}}</mat-icon>
+                                </button>
+
+                        </mat-button-toggle>
+                        <mat-button-toggle  class="p-2">
+                                <button mat-icon-button title="{{'next'|translate}}" type="button" >
+                                        <mat-icon class="icon-size-7" [svgIcon]="'feather:arrow-left-circle'"
+                                                (click)="setNextItem()">{{'next'|translate}} </mat-icon>
+                                </button>
+                        </mat-button-toggle>
+                </mat-button-toggle-group>
+        </div>
+</div>

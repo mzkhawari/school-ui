@@ -1,0 +1,140 @@
+<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm" class="w-full ">
+    <div class="">
+      <app-page-header [title]="title" 
+                       txtCustomButton="{{'search'|translate}}"
+                       (OnSaveCustom)="onSearch()"
+                       [returnUrl]="returnUrlAddress" >
+      </app-page-header>
+      <div class=" bg-white p-4 overflow-x-auto">
+        <div class="grid grid-cols-10" style="width: 1500px;">        
+
+          <div class="col-span-1" >
+            <date-persian-picker titleFiled="{{ 'from-history' | translate }}" [(date)]="dateFrom"   >
+            </date-persian-picker>
+
+            <date-persian-picker titleFiled="{{ 'to-date' | translate }}" [(date)]="dateTo"  >
+            </date-persian-picker>            
+          </div>
+
+          <div class="col-span-1"  >
+            <mat-form-field appearance="outline" class="w-11/12"  >
+              <mat-label>{{'account-number'|translate}}</mat-label>
+              <input type="text" matInput name="accountNo" [(ngModel)]="model.accountNo"  >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12"   >
+              <mat-label>{{'account-status'|translate}}</mat-label>
+              <mat-select name="accountStatus" [(ngModel)]="model.accountStatus" >
+                <ng-container *ngFor="let type of accountStatus">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-span-1"  >
+            <mat-form-field appearance="outline" class="w-11/12" >
+              <mat-label>{{'registrar-Branch'|translate}}</mat-label>
+              <mat-select name="genderId" [(ngModel)]="model.branchId" >
+                <ng-container *ngFor="let type of branches">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+            <mat-checkbox name="isTempAccount" [(ngModel)]="model.isTempAccount" color="primary">
+              <b >{{'temporary-account'|translate}}</b> 
+            </mat-checkbox>
+            <mat-checkbox name="isAllwaysAccount" [(ngModel)]="model.isAllwaysAccount" color="primary">
+              <b >{{'permanent-account'|translate}}</b>             
+            </mat-checkbox>
+          </div>
+
+          <div class="col-span-1"  >
+            <mat-form-field appearance="outline" class="w-11/12" >
+              <mat-label>{{'customer-gender'|translate}}</mat-label>
+              <mat-select name="genderId" [(ngModel)]="model.genderId" >
+                <ng-container *ngFor="let type of genders">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12"  >
+              <mat-label>{{'type-of-certificate'|translate}}</mat-label>
+              <mat-select name="identityTypeId" [(ngModel)]="model.identityTypeId"  >
+                <ng-container *ngFor="let type of identityTypes">
+                  <mat-option [value]="type.id">
+                    {{type.title}} 
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-span-2">
+            <mat-form-field appearance="outline" class="w-11/12"   >
+              <mat-label>{{'province'|translate}}</mat-label>  
+              <mat-select name="provinceId" [(ngModel)]="model.provinceId"  >
+               <ng-container *ngFor="let type of provinces">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12"  >
+                <mat-label>{{'city'|translate}}</mat-label>
+              <mat-select name="cityId" [(ngModel)]="model.cityId"  >
+                <mat-option value="0">{{'all-cases'|translate}}</mat-option>
+                <ng-container *ngFor="let type of cities">
+                  <mat-option [value]="type.id">
+                    {{type.title}} 
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-span-2">
+            <mat-form-field appearance="outline" class="w-11/12"   >
+              <mat-label>{{'risk-level'|translate}} </mat-label>  
+              <mat-select name="dangerLevel" [(ngModel)]="model.dangerLevel"  >
+               <ng-container *ngFor="let type of dangerLevels">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-checkbox class="w-8/12" name="isCheckPunishment" [(ngModel)]="model.isCheckPunishment" color="primary"><b>{{'check-the-list-of-sanctions'|translate}}</b></mat-checkbox>
+            <mat-checkbox class="w-4/12" name="isPEP" [(ngModel)]="model.isPEP" color="primary"><b>{{'includes-PEP'|translate}}</b> </mat-checkbox>
+          </div>
+
+          <div class=" col-span-2">
+            <mat-form-field appearance="outline" class="w-11/12"  >
+              <mat-label>{{'monthly-income-from'|translate}}</mat-label>
+              <input type="text" matInput name="incomeFrom" [(ngModel)]="model.incomeFrom"  >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12"  >
+              <mat-label>{{'monthly-income-up-to'|translate}}</mat-label>
+              <input type="text" matInput name="incomeTo" [(ngModel)]="model.incomeTo"  >
+            </mat-form-field>
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>

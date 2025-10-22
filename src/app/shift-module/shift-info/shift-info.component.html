@@ -1,0 +1,14 @@
+<ng-container class="w-full">
+  <div class="grid grid-cols-1  align-top mx-8">
+    <div>
+      <app-search-tool title="{{'search-user-shifts'|translate}}" (OnSearch)="get($event)" [isAccessToAll]="isAccessToAllShift">
+      </app-search-tool>
+      <div style="width: 100%;" class="max-h-fit">
+        <app-grid [title]="listTitle" [isHeader]="false" [isAdding]="false" [actions]="actions"
+          [datasource]="datasource" [columns]="columns" (OnPrintItem)="OnPrint($event)"
+          (OnDetailItem)="OnShiftReport($event)" (OnDetailItem2)="OnShiftConfirm($event)">
+        </app-grid>
+      </div>
+    </div>
+  </div>
+</ng-container>

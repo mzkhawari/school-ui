@@ -1,0 +1,40 @@
+<ng-container>
+  <div class="grid">
+
+    <div class="grid-section  mt-5 " style="overflow:hidden">
+      <dx-data-grid id="gridContainer" 
+                    [dataSource]="datasource" 
+                    [rowAlternationEnabled]="rowAlternation"
+                    [showColumnLines]="true" 
+                    [showRowLines]="true" 
+                    [allowColumnResizing]="true" 
+                    [columnAutoWidth]="true"
+                    [rtlEnabled]="true" 
+                    [allowColumnReordering]="true" 
+                    keyExpr="id" [(columns)]="columns"
+                    (onRowPrepared)="OnRowPrepared($event)" 
+                    [summary]="summeryCol" 
+                    [showBorders]="true">
+        <dxo-scrolling mode="vertical"></dxo-scrolling>
+
+        <div *dxTemplate="let d of 'editCellTemplate'">
+          <a class="px-2 text-2xl primary" (click)="OnDelete(d)" title="Delete">
+            <i class="feather-trash btn-delete "></i>
+          </a>
+          <a class="px-2 text-2xl primary" (click)="OnEdit(d)" title="Edite">
+            <i class="feather-edit btn-edit "></i>
+          </a>
+        </div>
+
+        <div *dxTemplate="let data of 'photoCellTemplate'">
+          <img [src]="data.value" style="width: 50px ;" />
+        </div>
+
+      </dx-data-grid>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #noData>
+  <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">{{'there-is-no-data'|translate}}</div>
+</ng-template>

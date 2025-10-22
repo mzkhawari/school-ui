@@ -1,0 +1,46 @@
+<!-- Header -->
+<div
+  class="relative row-auto  flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-2   border-b-4 border-green-800">
+  <!-- Loader -->
+  <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+    <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+  </div>
+  <!-- Title -->
+  <div class="text-2xl font-extrabold tracking-tight">{{title}}</div>
+  <!-- Actions -->
+  <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+    <!-- Search -->
+    <!-- <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded min-w-64" *ngIf="isSearchBox">
+      <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:search'"></mat-icon>
+      <input [autocomplete]="'off'" [placeholder]="'جستجوی '" matInput (keyup)="applyFilter($event)">
+    </mat-form-field> -->
+    <!-- Add product button -->
+
+    <button class="mr-4" mat-flat-button [color]="'primary'" (click)="OnExport()" *ngIf="isExportButton">
+      <mat-icon [svgIcon]="'heroicons_outline:check'"></mat-icon>
+      <span class="ml-2 mr-1">{{'excel-output'|translate}}</span>
+    </button>
+
+    <button class="mr-4" mat-flat-button [color]="'primary'" (click)="OnAdd()" *ngIf="isAddButton">
+      <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+      <span class="ml-2 mr-1"> {{ 'add2' | translate }} </span>
+    </button>
+
+
+      <button class="ml-4" mat-flat-button type="button"  (click)="OnBack()" *ngIf="isBackButton" >
+        <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+        <span class="ml-2 mr-1"> {{ 'return' | translate }} </span>
+      </button>
+
+    <a *ngIf="isCloseButton">
+      <button class="ml-4" mat-flat-button type="button" (click)="dialogRef.closeAll()">
+        <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
+        <span class="ml-2 mr-1"> {{ 'close' | translate }} </span>
+      </button>
+    </a>
+  </div>
+</div>
+
+<div class="relative row-auto h-5  flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between pb-0 pt-1 ">
+  <!-- <div class="text-1xl font-extrabold tracking-tight">{{subTitle}}</div> -->
+</div>

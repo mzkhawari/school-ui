@@ -1,0 +1,55 @@
+<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm" class="w-full">
+    <app-page-header [title]="title" txtCustomButton="{{'search'|translate}}" (OnSaveCustom)="onSearch()"
+      [returnUrl]="returnUrlAddress">
+    </app-page-header>
+    <div class=" bg-white p-4">
+      <div class="grid md:grid-cols-8 grid-cols-12">
+        <div class="md:col-span-1 col-span-4">
+          <date-persian-picker titleFiled="{{ 'from-history' | translate }}" [(date)]="dateFrom">
+          </date-persian-picker>
+        </div>
+
+        <div class="md:col-span-1 col-span-4" *ngIf="isAccessToAll">
+          <date-persian-picker titleFiled="{{ 'to-date' | translate }}" [(date)]="dateTo">
+          </date-persian-picker>
+        </div>
+        <div class="md:col-span-1 col-span-4" *ngIf="isAccessToAll">
+          <mat-form-field appearance="outline" class="w-11/12">
+            <mat-label>{{ 'user2' | translate }}</mat-label>
+            <mat-select name="userId" [(ngModel)]="model.userId">
+              <ng-container *ngFor="let type of users">
+                <mat-option [value]="type.id">
+                  {{type.fullName}}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="md:col-span-1 col-span-4" *ngIf="isAccessToAll">
+          <mat-form-field appearance="outline" class="w-11/12">
+            <mat-label>{{ 'branch2' | translate }}</mat-label>
+            <mat-select name="branchId" [(ngModel)]="model.branchId">
+              <ng-container *ngFor="let type of branches">
+                <mat-option [value]="type.id">
+                  {{type.title}}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="md:col-span-1 col-span-4">
+          <mat-radio-group [(ngModel)]="model.shiftTypeId" [ngModelOptions]="{standalone: true}"
+            aria-label="{{ 'shift-status' | translate }}">
+            <mat-radio-button value="0">{{ 'all' | translate }}</mat-radio-button>
+            <mat-radio-button value="1">{{ 'open-shifts' | translate }}</mat-radio-button>
+            <mat-radio-button value="2">{{ 'closed-shifts' | translate }}</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</ng-container>

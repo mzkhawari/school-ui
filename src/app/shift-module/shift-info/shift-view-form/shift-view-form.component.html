@@ -1,0 +1,47 @@
+<ng-container>
+  <form #f="ngForm" class="w-full">
+    <div class=" mx-8">
+      <app-page-header title="{{'user-shift-report'|translate}}"
+        txtCustomButton="{{'closing-the-shift'|translate}}" (OnSaveCustom)="closeShiftTreasury()" [isSaveButton]="false" [isCloseButton]="false"
+        [returnUrl]="returnUrlAddress"
+        (OnClose)="dialogRef.close()">
+      </app-page-header>
+      <div class=" bg-white p-4">
+        <div class="grid grid-cols-1">
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>{{'description'|translate}}</mat-label>
+            <textarea matInput name="datainfo" [(ngModel)]="datainfo"></textarea>
+          </mat-form-field>
+
+          <div style="width: 100%;" class="max-h-fit">
+            <div class="">{{'daily-receipt/withdrawal-from-the-treasury'|translate}}</div>
+            <!-- <app-treasury-amount-shift
+              modelId="0" >
+            </app-treasury-amount-shift> -->
+          </div>
+
+          <div style="width: 100%;" class="max-h-fit">
+            <div class="">{{'payment-transactions-to-the-treasury'|translate}}</div>
+            <app-grid [datasource]="datasourceSave" [columns]="columns">
+            </app-grid>
+          </div>
+
+          <div style="width: 100%;" class="max-h-fit">
+            <div class="">{{'treasury-withdrawal-transactions'|translate}}</div>
+            <app-grid [datasource]="datasourceWiththrow" [columns]="columns">
+            </app-grid>
+          </div>
+
+        </div>
+        <div class="grid grid-cols-12">
+          <div class="col-span-12 w-11/12">
+            <!-- <app-treasury-amount [modelId]="model.id">
+            </app-treasury-amount> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</ng-container>

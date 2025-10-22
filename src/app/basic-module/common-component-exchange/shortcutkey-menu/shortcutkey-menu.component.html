@@ -1,0 +1,77 @@
+<div class="grid grid-cols-2">
+  <div class="col-span-2">
+    <div
+      class="relative row-auto h-25  flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-2 border-b-4">
+        <div class="text-2xl font-extrabold tracking-tight">
+            {{ 'quick-access' | translate }}
+        </div>
+    </div>
+  </div>
+  <div class="col-span-2">
+    <ul class="grid grid-cols-7">
+      <li class="flex flex-col flex-auto  bg-card shadow rounded-2xl overflow-hidden m-2 ">
+        <a href="/branch/branch/add" class="py-15 cursor-pointer">
+          <div class="flex flex-col items-center">
+              <div class="text-1xl sm:text-1xl font-bold tracking-tight leading-none">
+                  {{ 'add-a-branch' | translate }}
+              </div>
+          </div>
+        </a>
+      </li>
+      <li class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden m-2 ">
+        <a class="py-15 cursor-pointer" href="/basic/user">
+          <div class="flex flex-col items-center">
+              <div class="text-1xl sm:text-1xl font-bold tracking-tight leading-none">
+                  {{ 'add-user' | translate }}
+              </div>
+          </div>
+        </a>
+      </li>
+      <li class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden m-2 ">
+        <a class="py-15 cursor-pointer" href="/account/account/add">
+          <div class="flex flex-col items-center">
+              <div class="text-1xl sm:text-1xl font-bold tracking-tight leading-none">
+                  {{ 'adding-a-customer' | translate }}
+              </div>
+          </div>
+        </a>
+      </li>
+      <li class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden m-2 ">
+        <a class="py-15 cursor-pointer" href="/exchange/transfer-cash/add">
+          <div class="flex flex-col items-center">
+              <div class="text-1xl sm:text-1xl font-bold tracking-tight leading-none">
+                  {{ 'transaction-registration2' | translate }}
+              </div>
+          </div>
+        </a>
+      </li>
+      <li class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden m-2 ">
+        <a class="py-15 cursor-pointer" href="/exchange/transactions">
+          <div class="flex flex-col items-center">
+              <div class="text-1xl sm:text-1xl font-bold tracking-tight leading-none">
+                  {{ 'transaction-list' | translate }}
+              </div>
+          </div>
+        </a>
+      </li>
+      <li class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden m-2 ">
+        <a class="py-15 cursor-pointer" href="/exchange/transfer-cashs/reject">
+          <div class="flex flex-col items-center">
+              <div class="text-1xl sm:text-1xl font-bold tracking-tight leading-none">
+                  {{ 'rejected-transactions' | translate }}
+              </div>
+          </div>
+        </a>
+      </li>
+      <li class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden m-2 ">
+        <a class="py-15 cursor-pointer" href="/exchange/transfer-cashs/complete">
+          <div class="flex flex-col items-center">
+              <div class="text-1xl sm:text-1xl font-bold tracking-tight leading-none">
+                  {{ 'completed-transactions2' | translate }}
+              </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

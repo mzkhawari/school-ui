@@ -1,0 +1,29 @@
+<ng-container >
+  <div class="w-full mx-8">        
+    <div style="width: 100%;"  class="max-h-fit" >
+        <app-grid   
+          title="{{'list-of-countries'|translate}}"
+          isHeader="true"
+          isAdding="true"
+          [datasource]="datasource"
+          [columns]="columns"        
+          (OnAddItem)="OnAdd()"
+          (OnDeleteItem)="onDeleteConfirm($event)"
+          (OnEditItem)="OnUpdate($event)" >
+        </app-grid>
+    </div>
+  </div>
+</ng-container>
+
+
+
+
+<!-- <app-grid-header 
+    [datasource]="datasource"
+    [columns]="columns"        
+    titleGrid="لیست کشورها"      
+    (OnAddItem)="OnAdd()"
+    (OnDeleteItem)="onDeleteConfirm($event)"
+    (OnEditItem)="OnUpdate($event)" >
+  </app-grid-header>      
+ -->

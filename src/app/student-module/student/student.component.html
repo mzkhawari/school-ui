@@ -1,0 +1,45 @@
+<ng-container >
+  <div class="w-full mx-8">        
+    <div style="width: 100%;"  class="max-h-fit" >
+      
+      <app-page-header [title]="titlelist" 
+        [isSaveButton]="false"
+        [isCloseButton]="false" 
+        [txtCustomButton]="'افزودن دانش آموز'"
+        (OnSaveCustom)="onAdd()"
+        [returnUrl]="'/index-info'" >
+      </app-page-header>
+
+      <app-grid-paging 
+        [title]="titlelist" 
+        [data]="dataList" 
+        [actionList]="actionList" 
+        [columns]="columns"
+        [dataCount]="dataListCount"
+        (OnPageItem)="gotoNextPage($event)"
+        (OnActionItem)="onActionResult($event)">
+        <div class="grid grid-cols-12 pl-3 pb-3 content-center md:col-span-9 col-span-12">
+          <button (click)="statusButton(0)" [ngClass]="isBorderButton==0  ? 'border-red-500' : 'border-gray-300'" class="md:col-span-3 col-span-6 mr-3 ml-3  border-b-4 border  border-transparent focus:outline-none bg-white text-gray-800 py-2 rounded hover:bg-gray-100 transition">همه ی دانش آموز ها</button>
+          <button (click)="statusButton(1)" [ngClass]="isBorderButton==1  ? 'border-red-500' : 'border-yellow-500'" class="md:col-span-3 col-span-6 mt-3 md:mt-0 mr-3 ml-3  border-b-4 border  border-transparent focus:outline-none bg-yellow-100 text-yellow-800 py-2 rounded hover:bg-yellow-200 transition"> غایبین</button>
+          <button (click)="statusButton(2)" [ngClass]="isBorderButton==2  ? 'border-red-500' : 'border-blue-300'" class="md:col-span-3 col-span-6 mt-3 md:mt-0 mr-3 ml-3  border-b-4 border  border-transparent focus:outline-none  bg-blue-100 text-blue-800 py-2 rounded hover:bg-blue-200 transition">حاضرین</button>
+        </div>
+      </app-grid-paging>
+
+      <!-- <app-grid
+          [title]="titlelist"
+          [isHeader]="true"
+          [isAdding]="true"
+          [useBackground]="'true'"
+          [datasource]="datasource"
+          [columns]="columns"     
+          [actions]="actions"  
+          (OnPrintItem)="onPrint($event)" 
+          (OnDetailItem)="onDetail($event)" 
+          (OnAddItem)="openDialogForm()"
+          (OnDeleteItem)="onDeleteConfirm($event)"
+          (OnEditItem)="OnUpdate($event)" >
+        </app-grid>       -->
+    </div>
+  </div>
+</ng-container>
+

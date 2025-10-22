@@ -1,0 +1,103 @@
+<ng-container>
+  <div class=" mx-8">
+    <app-page-header *ngIf="isIgnore" title="{{'shift-balance-report'|translate}}" [isSaveButton]="false" [isCloseButton]="false"
+      txtCustomButton="{{'print'|translate}}" (OnSaveCustom)="printReport()" [returnUrl]="'/exchange/shiftinfo-list'">
+    </app-page-header>
+    <div class="w-full" id="print-section" style="border:1px solid #000">
+      <div class="flex-container">
+        <div class="flex-container2">
+          <div class="flex-title pr-10 ">{{'branch-daily-report'|translate}}</div>
+        </div>
+        <div class="flex-container2">
+        </div>
+        <div class="flex-container2">
+          <img src="../../../../assets/images/Akramzada/newlogo/120120.png" style="width:100px; height: 100px;" />
+        </div>
+        <div class="flex-container2">
+          <div>{{'start-of-shift'|translate}}: {{timeStart}} </div>
+          <div>{{'end-of-shift2'|translate}}: {{timeEnd}} </div>
+        </div>
+        <div class="flex-container2">
+          <div>{{'history'|translate}}: {{openShift}} </div>
+          <div>{{'branch'|translate}}: {{model.branch}} </div>
+        </div>
+      </div>
+
+      <div class=" bg-white p-4">
+        <div class="grid grid-cols-1">
+          <div style="width: 100%;" class="max-h-fit">
+            <div class="">{{'branch-opening-balance'|translate}}</div>
+            <hr />
+            <table class="w-full table">
+              <thead>
+                <tr>
+                  <th *ngFor="let row of datasourcePerv"> {{row.currencyTitle}} : {{row.amount |currencyNumber}} </th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div style="width: 100%;" class="max-h-fit mt-10">
+            <div class="">{{'daily-transactions'|translate}}</div>
+            <hr />
+            <app-grid-simple [datasource]="datasource" [columns]="columns">
+            </app-grid-simple>
+          </div>
+          <div style="width: 100%;" class="max-h-fit">
+            <div class="">{{'branch-closing-balance'|translate}}</div>
+            <hr />
+            <table class="w-full table">
+              <thead>
+                <tr>
+                  <th *ngFor="let row of datasourceCurrent"> {{row.currencyTitle}} : {{row.amount | currencyNumber}}
+                  </th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="w-full p-4 flex">
+            <table style="border:1px solid #000; width:50%">
+              <tr style="border:1px solid #000">
+                <td colspan="2">
+                  {{'preparted-by'|translate}}
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  {{'name'|translate}}: {{model.fullName}}
+                </td>
+              </tr>
+              <tr>
+                <td>{{'branch'|translate}}:{{model.branch}}</td>
+                <td>{{'signature'|translate}}: </td>
+              </tr>
+              <tr>
+                <td>{{'position'|translate}}:{{model.position}}</td>
+                <td>{{'history'|translate}}:{{model.date}}</td>
+              </tr>
+            </table>
+            <table style="border:1px solid #000; width:50%; margin-right: 10px;">
+              <tr style="border:1px solid #000">
+                <td colspan="2">
+                  {{'approved-by'|translate}}
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  {{'name'|translate}}: {{model.fullNameConfirm}}
+                </td>
+              </tr>
+              <tr>
+                <td>{{'branch'|translate}}:{{model.branchConfirm}}</td>
+                <td>{{'signature'|translate}}: </td>
+              </tr>
+              <tr>
+                <td>{{'position'|translate}}:{{model.positionConfirm}}</td>
+                <td>{{'history'|translate}}:{{model.dateConfirm}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,17 @@
+<ng-container >
+  <div class="w-full mx-8">        
+    <div style="width: 100%;"  class="max-h-fit" >      
+      <app-report-search-account [title]="titlelist" (OnSearch)="onSearchReport($event)" >        
+      </app-report-search-account>
+      
+      <div id="print-section">        
+        <dev-grid-print   
+          [dataSource]="datasource"
+          [dataHeaderReport]="dataHeader" 
+          [columns]="columns" >
+        </dev-grid-print>
+      </div>
+    </div>
+  </div>
+</ng-container>
+

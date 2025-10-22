@@ -1,0 +1,14 @@
+<ng-container>
+     <div class="w-full mx-2 md:mx-8 " >
+      <app-grid 
+          [datasource]="datasource" 
+          [columns]="columns" 
+          [title]="titlelistFull"
+          isAdding="true"
+          isHeader="true"
+          (OnAddItem)="OnAdd()"
+          (OnEditItem)="OnUpdate($event)"
+          (OnDeleteItem2)="onDeleteConfirm($event)">
+      </app-grid>
+    </div>
+</ng-container>

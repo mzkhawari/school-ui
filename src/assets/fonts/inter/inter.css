@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Inter var';
+    font-weight: 100 900;
+    font-display: swap;
+    font-style: normal;
+    font-named-instance: 'Regular';
+    src: url('/assets/webfont/IranSans/iran-sans-fd-wol.ttf') format('ttf'),
+        url('/assets/webfont/IranSans/iran-sans-fd-wol.eot') format('eot'), 
+        url('/assets/webfont/IranSans/iran-sans-fd-wol.woff') format('woff'),
+        url('/assets/webfont/IranSans/iran-sans-fd-wol.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter var';
+    font-weight: 100 900;
+    font-display: swap;
+    font-style: italic;
+    font-named-instance: 'Italic';
+    src: url('/assets/webfont/IranSans/iran-sans-fd-wol.ttf') format('ttf'),
+        url('/assets/webfont/IranSans/iran-sans-fd-wol.eot') format('eot'), 
+        url('/assets/webfont/IranSans/iran-sans-fd-wol.woff') format('woff'),
+        url('/assets/webfont/IranSans/iran-sans-fd-wol.woff2') format('woff2');
+}

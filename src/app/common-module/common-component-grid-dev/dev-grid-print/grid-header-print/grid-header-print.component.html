@@ -1,0 +1,23 @@
+<div class="flex-container">
+    <div class="flex-container2"  >
+    </div>
+    <div class="flex-container2"  >
+        <img src="../../../../../assets/images/Akramzada/newlogo/120120.png"  style="width:100px; height: 100px;"  />
+
+    </div>
+    <div class="flex-container2"  >
+        <div class="flex-title">{{dataSource?.reportTitle}} </div>        
+    </div>
+    <div class="flex-container2">
+        <div >{{'date-of-reporting'|translate}}: {{dataSource?.currentDate}}  </div>
+        <div >{{'reporting-time'|translate}}: {{dataSource?.currentTime}}  </div>
+        <div >{{'average-report'|translate}}: {{dataSource?.reporterName}}  </div>
+    </div>
+    <div class="flex-container2">
+        
+        <div >{{'from-history'|translate}}:  {{dataSource?.dateFrom}}  </div>
+        <div >{{'to-date'|translate}}:{{dataSource?.dateTo}}  </div>
+        <div >{{'report-branch'|translate}}: {{dataSource?.branchName}}  </div>
+    </div>
+</div>
+

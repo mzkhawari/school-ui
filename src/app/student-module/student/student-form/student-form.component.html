@@ -1,0 +1,112 @@
+﻿<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm" class="md:mx-8 mx-0">
+    <app-page-header 
+      [title]='model.id>0 ? editstring : addstring' 
+      [isSaveButton]="!isViewForm && isSaveButton"
+      [isCloseButton]="!ishomepage" 
+      [returnUrl]="returnUrlAddress" 
+      (OnClose)="dialogRef.close()">
+    </app-page-header>
+
+    <mat-card>
+      <div class="max-h-fit">
+        <div class="grid grid-cols-12 md:h-full h-100 overflow-y-auto overflow-x-hidden">
+
+          <!-- ستون ۱ -->
+          <div class="md:col-span-4 col-span-6">
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>کد داوطلب</mat-label>
+              <input matInput name="applicantCode" [(ngModel)]="model.applicantCode" 
+                     [formControl]="applicantCodeCtrl" required [attr.disabled]="isViewForm">
+              <mat-error *ngIf="applicantCodeCtrl.hasError('required')">این فیلد الزامی است</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>نام</mat-label>
+              <input matInput name="firstName" [(ngModel)]="model.firstName" 
+                     [formControl]="firstNameCtrl" required [attr.disabled]="isViewForm">
+              <mat-error *ngIf="firstNameCtrl.hasError('required')">این فیلد الزامی است</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>نام خانوادگی</mat-label>
+              <input matInput name="lastName" [(ngModel)]="model.lastName" 
+                     [formControl]="lastNameCtrl" required [attr.disabled]="isViewForm">
+              <mat-error *ngIf="lastNameCtrl.hasError('required')">این فیلد الزامی است</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>نام پدر</mat-label>
+              <input matInput name="fatherName" [(ngModel)]="model.fatherName" 
+                     [formControl]="fatherNameCtrl" required [attr.disabled]="isViewForm">
+              <mat-error *ngIf="fatherNameCtrl.hasError('required')">این فیلد الزامی است</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- ستون ۲ -->
+          <div class="md:col-span-4 col-span-6">
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>نام کامل</mat-label>
+              <input matInput name="fullName" [(ngModel)]="model.fullName" 
+                     [formControl]="fullNameCtrl" required [attr.disabled]="isViewForm">
+              <mat-error *ngIf="fullNameCtrl.hasError('required')">این فیلد الزامی است</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>شماره موبایل</mat-label>
+              <input matInput name="cellPhone" [(ngModel)]="model.cellPhone" 
+                     [formControl]="cellPhoneCtrl" required [attr.disabled]="isViewForm">
+              <mat-error *ngIf="cellPhoneCtrl.hasError('required')">این فیلد الزامی است</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>شماره ایتا</mat-label>
+              <input matInput name="cellPhoneEitaa" [(ngModel)]="model.cellPhoneEitaa" 
+                     [attr.disabled]="isViewForm">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>تاریخ تولد</mat-label>
+              <input matInput name="brithDate" [(ngModel)]="model.brithDate" 
+                     [formControl]="birthDateCtrl" required [attr.disabled]="isViewForm">
+              <mat-error *ngIf="birthDateCtrl.hasError('required')">این فیلد الزامی است</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- ستون ۳ (آپلود تصویر) -->
+          <div class="md:col-span-3 col-span-12">
+            <div class="image-upload w-full">
+              <label for="file-input">
+                <img class="img-avatar w-full" [src]="imageURL" style="width: 100%; height:auto;" />
+                <img class="w-10 h-10 static img-click" src="../../../../../assets/images/Akramzada/photo-image.png">
+              </label>
+              <input id="file-input" accept="image/*" (change)="setImage($event)" type="file" [disabled]="isViewForm" />
+            </div>
+          </div>
+
+          <!-- ستون ۴ -->
+          <div class="md:col-span-8 col-span-6 grid grid-cols-2 ">
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>ملیت</mat-label>
+              <input matInput name="nationality" [(ngModel)]="model.nationality" 
+                      [attr.disabled]="isViewForm">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>کد ملی</mat-label>
+              <input matInput name="nationalCode" [(ngModel)]="model.nationalCode" 
+                     [attr.disabled]="isViewForm">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>آدرس</mat-label>
+              <input matInput name="address" [(ngModel)]="model.address" 
+                     [attr.disabled]="isViewForm">
+            </mat-form-field>
+          </div>
+
+        </div>
+      </div>
+    </mat-card>
+  </form>
+</ng-container>

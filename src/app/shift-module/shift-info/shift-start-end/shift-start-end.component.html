@@ -1,0 +1,171 @@
+<ng-container>
+  <form #f="ngForm" class="w-full">
+    <div class=" mx-8">
+      <app-page-header  title="{{'current-shift-details'|translate}}" [txtCustomButton]="isOpenShift == 0 ? 'شروع شیفت' : 'پایان شیفت' " (OnSaveCustom)="changeShift()">
+      </app-page-header>
+      <div class=" bg-white p-4 page text-right " id="print-section">
+        <!-- <table style="text-align:center ; width: 100%; margin: 0 auto; font-size: 20px; font-weight: bolder; ">
+          <tr>
+            <td style="text-align: center !important ; "><img src="../../../../assets/images/Akramzada/LogoForWeb.png"
+                style="width:100px; height:100px; text-align: center ; margin: 0 auto;"> </td>
+          </tr>          
+          <tr>
+            <td> راپور بیلانس روزانه
+            </td>
+          </tr>
+        </table> -->
+        <!-- <table style="width: 100%; margin: 0 auto; text-align: right;" class="table table-bordered">
+          <tbody>            
+            <tr>
+              <td style="width: 50%; border: 1px solid #000 !important; font-weight: bolder; padding: 4px 4px !important; font-size: 14px;">
+                شعبه (نمایندگی) </td>
+              <td style="width: 50%; border: 1px solid #000 !important; font-weight: bolder; padding: 4px 4px !important; font-size: 14px;">
+                {{branchTitle}} </td>
+            </tr>
+
+            <tr>
+              <td style="width: 50%; border: 1px solid #000 !important; font-weight: bolder; padding: 4px 4px !important; font-size: 12px;">
+                تاریخ</td>
+              <td style="width: 50%; border: 1px solid #000 !important; font-weight: bolder; padding: 4px 4px !important; font-size: 12px;">
+                <span>&nbsp;&nbsp;{{dateFrom}}</span> 
+              </td>
+            </tr>
+
+          </tbody>
+        </table> -->
+
+        <table class="table table-bordered mt-8 " style="margin: 0 auto; width: 100%;text-align:right;">
+          <thead>
+            <tr>
+              <th colspan="9"
+                style="text-align: center; border: 1px solid #000 !important; font-weight: bolder; padding: 2px 4px !important; background: #8CB5E6 !important; color: #000 !important; font-size: 20px;;">
+                {{'daily-shift-of-the-agency-(head-office)'|translate}}({{branchTitle}})
+              </th>              
+            </tr>
+            
+
+            <tr>
+              <th rowspan="2"
+                style="width: 5%; border: 1px solid #000 !important; font-weight: bolder; padding: 2px 4px !important; background: #8CB5E6 !important; color: #000 !important; font-size: 12px;;">
+                {{'number2'|translate}}</th>
+              <th  rowspan="2"
+                style=" width: 55%; border: 1px solid #000 !important; font-weight: bolder; padding: 2px 4px !important; background: #8CB5E6 !important; color: #000 !important; font-size: 12px;">
+                {{'description'|translate}}</th>
+              <th colspan="3"
+                style=" width: 20%; text-align: center; border: 1px solid #000 !important; font-weight: bolder; padding: 2px 4px !important; background: #8CB5E6 !important; color: #000 !important; font-size: 12px;">
+                {{'afghani'|translate}} </th>
+                <th colspan="4"
+                style="width: 20%; text-align: center; border: 1px solid #000 !important; font-weight: bolder; padding: 2px 4px !important; background: #8CB5E6 !important; color: #000 !important; font-size: 12px;">
+                 {{'dollar'|translate}}- {{'shopping'|translate}}:{{buySellUsdInfo?.rateBuy}},{{'sale'|translate}}: {{buySellUsdInfo?.rateSell}}</th>
+            </tr>
+            <tr>              
+              <th 
+                style=" text-align: center; border: 1px solid #000 !important; font-weight: bolder; padding: 2px 4px !important; background: #8CB5E6 !important; color: #000 !important; font-size: 12px;">
+                {{'paid'|translate}}</th>
+                <th 
+                style=" text-align: center; border: 1px solid #000 !important; font-weight: bolder; padding: 2px 4px !important; background: #8CB5E6 !important; color: #000 !important; font-size: 12px;">
+                {{'received'|translate}}</th>
+                <th 
+                style=" text-align: center; border: 1px solid #000 !important; font-weight: bolder; padding: 2px 4px !important; background: #8CB5E6 !important; color: #000 !important; font-size: 12px;">
+                {{'balance'|translate}}</th>
+                <th 
+                style="  text-align: center; border: 1px solid #000 !important; font-weight: bolder; padding: 2px 4px !important; background: #8CB5E6 !important; color: #000 !important; font-size: 12px;">
+                {{'paid'|translate}}</th>
+                <th 
+                style=" text-align: center; border: 1px solid #000 !important; font-weight: bolder; padding: 2px 4px !important; background: #8CB5E6 !important; color: #000 !important; font-size: 12px;">
+                {{'received'|translate}}</th>
+                <th 
+                style=" text-align: center; border: 1px solid #000 !important; font-weight: bolder; padding: 2px 4px !important; background: #8CB5E6 !important; color: #000 !important; font-size: 12px;">
+                {{'balance'|translate}}</th>
+                <th 
+                style=" text-align: center; border: 1px solid #000 !important; font-weight: bolder; padding: 2px 4px !important; background: #8CB5E6 !important; color: #000 !important; font-size: 12px;">
+                {{'balance-in-afghani'|translate}}</th>
+            </tr>            
+          </thead>
+          <tbody  >
+            <tr >
+              <td colspan="9" 
+                style="border: 1px solid #000 !important; font-size: 20px;text-align: center !important; "   >  
+                {{'beginning-of-day-inventory'|translate}} 
+              </td>
+            </tr>
+            <tr *ngFor="let data of dataStart; let i= index">
+              <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;text-align: center !important; ">
+                   1:{{i+1}}</td>
+              <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px; "
+                [ngStyle]="{'padding-right.px': data.parentId>0 ? 35 : 10}">{{data.title}} : {{data.description}} </td>
+              <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;">{{data.amountCredit | currencyNumber}} </td>
+              <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;">{{data.amountDebit | currencyNumber}}</td>
+              <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 14px; font-weight: bold !important; "><b>{{data.amount | currencyNumber}}</b></td>
+              <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;">{{data.amountCreditUsd | currencyNumber}} </td>
+              <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;">{{data.amountDebitUsd | currencyNumber}}</td>
+              <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 14px;font-weight: bold !important; "><b>{{data.amountUsd | currencyNumber}}</b></td>
+              <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 14px;font-weight: bold !important; "><b>{{data.amountUsdToAfg | currencyNumber}}</b></td>
+            </tr>
+
+            <ng-container *ngIf="isOpenShift!=0"   >
+              <tr    >
+                <td colspan="9" 
+                  style="border: 1px solid #000 !important; font-size: 20px;text-align: center !important; "   >  
+                  {{'daily-deals'|translate}}
+                </td>
+              </tr>
+              <tr *ngFor="let data of cashes; let i= index"   >
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;text-align: center !important; ">
+                    1:{{i+1}}</td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px; "
+                  [ngStyle]="{'padding-right.px': data.parentId>0 ? 35 : 10}">{{data.title}} : {{data.description}} </td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;">{{data.amountCredit | currencyNumber}} </td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;">{{data.amountDebit | currencyNumber}}</td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;"></td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;">{{data.amountCreditUsd | currencyNumber}} </td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;">{{data.amountDebitUsd | currencyNumber}}</td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;"></td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;"></td>
+              </tr>
+           
+            <tr >
+              <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;text-align: center !important; ">
+                   #</td>
+              <td style="border: 1px solid #000 !important; color:#da4040 !important; padding: 4px 4px !important; font-size: 12px;" >{{'plural'|translate}}: </td>
+              <td style="border: 1px solid #000 !important; color:#da4040 !important; padding: 4px 4px !important; font-size: 12px;">{{calculateSum(cashes , 'amountCredit') | currencyNumber}} </td>
+              <td style="border: 1px solid #000 !important; color:#da4040 !important; padding: 4px 4px !important; font-size: 12px;">{{calculateSum(cashes , 'amountDebit') | currencyNumber}}</td>
+              <td style="border: 1px solid #000 !important; color:#da4040 !important; padding: 4px 4px !important; font-size: 12px;"></td>
+              <td style="border: 1px solid #000 !important; color:#da4040 !important; padding: 4px 4px !important; font-size: 12px;">{{calculateSum(cashes , 'amountCreditUsd') | currencyNumber}} </td>
+              <td style="border: 1px solid #000 !important; color:#da4040 !important; padding: 4px 4px !important; font-size: 12px;">{{calculateSum(cashes , 'amountDebitUsd') | currencyNumber}}</td>
+              <td style="border: 1px solid #000 !important; color:#da4040 !important; padding: 4px 4px !important; font-size: 12px;"></td>
+              <td style="border: 1px solid #000 !important; color:#da4040 !important; padding: 4px 4px !important; font-size: 12px;">{{ diffStartEnd  | currencyNumber}}</td>
+            </tr>
+          </ng-container>
+          <ng-container  *ngIf="isOpenShift!=0"   >
+
+          
+              <tr > 
+                <td colspan="9" 
+                  style="border: 1px solid #000 !important; font-size: 20px;text-align: center !important; "   >  
+                  {{'end-of-day-inventory'|translate}}
+                </td>
+              </tr>
+              <!-- حسابات نقده -->
+              <tr *ngFor="let data of dataEnd; let i= index">
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;text-align: center !important; ">
+                    1:{{i+1}}</td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px; "
+                  [ngStyle]="{'padding-right.px': data.parentId>0 ? 35 : 10}">{{data.title}} : {{data.description}} </td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;">{{data.amountCredit | currencyNumber}} </td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;">{{data.amountDebit | currencyNumber}}</td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 14px;font-weight: bold !important;"><b>{{data.amount | currencyNumber}}</b></td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;">{{data.amountCreditUsd | currencyNumber}} </td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 12px;">{{data.amountDebitUsd | currencyNumber}}</td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 14px;font-weight: bold !important;"><b>{{data.amountUsd | currencyNumber}}</b></td>
+                <td style="border: 1px solid #000 !important; padding: 4px 4px !important; font-size: 14px;font-weight: bold !important;"><b>{{data.amountUsdToAfg | currencyNumber}}</b></td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+  </form>
+</ng-container>

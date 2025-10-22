@@ -1,0 +1,25 @@
+<ng-container>
+  <form #f="ngForm" class="w-full">
+    <div class=" mx-8">
+      <app-page-header title="{{'transaction-report-in-user-shift'|translate}}"
+                       [isSaveButton]="false" 
+                       [isCloseButton]="false">
+      </app-page-header>
+      <div class=" bg-white p-4">
+        <div class="grid grid-cols-1">          
+          <div style="width: 100%;" class="max-h-fit">
+            <div class="">{{'payment-transactions-to-the-treasury2'|translate}}</div>
+            <app-grid [datasource]="datasourceSave" [columns]="columns">
+            </app-grid>
+          </div>
+
+          <div style="width: 100%;" class="max-h-fit">
+            <div class="">{{'treasury-withdrawal-transactions2'|translate}}</div>
+            <app-grid [datasource]="datasourceWiththrow" [columns]="columns">
+            </app-grid>
+          </div>
+        </div>        
+      </div>
+    </div>
+  </form>
+</ng-container>

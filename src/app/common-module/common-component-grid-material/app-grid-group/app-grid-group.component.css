@@ -1,0 +1,50 @@
+@import '../../../../assets/dev-grid/dx.common.css';
+@import '../../../../assets/dev-grid/dx.light.css';
+@import '../../../../assets/font-icon/feather/feather.css';
+
+.mat-grid-tile .mat-figure {
+  justify-content: flex-start !important ;
+  align-items: flex-start !important;
+}
+
+table{
+  border-radius: 10px;
+}
+
+table , table >td , table > th {
+  font-family: "iran-sans-serif", ui-iran-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",iran-sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  line-height: 1.5;
+}
+
+
+
+.dx-datagrid .dx-datagrid-header-panel .dx-toolbar .dx-toolbar-items-container , .dx-datagrid .dx-datagrid-headers {
+  font-family: "iran-sans-serif", ui-iran-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",iran-sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-weight: bold;
+}
+
+.dx-gridbase-container{
+  font-family: "iran-sans-serif", ui-iran-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",iran-sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+}
+
+.dx-datagrid-table, .dx-datagrid-table-fixed, .dx-header-row
+{
+  font-weight: bold !important;
+  color: black;
+}
+
+.dx-widget {
+  font-family: "iran-sans-serif", ui-iran-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",iran-sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+}
+.dx-datagrid-headers {
+  color: #000 !important;
+  font-weight: bold !important ;
+  font-family: "iran-sans-serif", ui-iran-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",iran-sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+}
+
+.dx-datagrid-text-content .dx-text-content-alignment-right{
+overflow: visible;
+}
+.dx-datagrid-nowrap .dx-header-row > td > .dx-datagrid-text-content{
+white-space: break-spaces!important;  
+}

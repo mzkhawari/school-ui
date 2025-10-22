@@ -1,0 +1,45 @@
+<ng-container>
+  <form #f="ngForm" class="w-full">
+    <div class=" mx-8">
+      <app-page-header title="{{'shift-balance-report'|translate}}" [isSaveButton]="false" [isCloseButton]="true"
+        txtCustomButton="{{'confirm-and-close-the-shift'|translate}}" (OnSaveCustom)="closeShiftTreasury()" (OnClose)="dialogRef.close()">
+      </app-page-header>
+      <div class=" bg-white p-4">
+        <div class="grid grid-cols-1">
+          <div style="width: 100%;" class="max-h-fit">
+            <div class="">{{'branch-opening-balance'|translate}}</div>
+            <hr />
+            <table class="w-full table">
+              <thead>
+                <tr>
+                  <th *ngFor="let row of datasourcePerv"> {{row.currencyTitle}} : {{row.amount}} </th>
+                </tr>
+              </thead>
+            </table>
+            <!-- <app-grid [datasource]="datasourcePerv" [columns]="columnsBalanceCurrent">
+            </app-grid> -->
+          </div>
+          <div style="width: 100%;" class="max-h-fit mt-10">
+            <div class="">{{'daily-transactions'|translate}}</div>
+            <hr />
+            <app-grid [datasource]="datasource" [columns]="columns">
+            </app-grid>
+          </div>
+          <div style="width: 100%;" class="max-h-fit">
+            <div class="">{{'branch-closing-balance'|translate}}</div>
+            <hr />
+            <table class="w-full table">
+              <thead>
+                <tr>
+                  <th *ngFor="let row of datasourceCurrent"> {{row.currencyTitle}} : {{row.amount}} </th>
+                </tr>
+              </thead>
+            </table>
+            <!-- <app-grid [datasource]="datasourceCurrent" [columns]="columnsBalanceCurrent">
+            </app-grid> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>

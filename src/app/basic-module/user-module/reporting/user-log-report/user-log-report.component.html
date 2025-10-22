@@ -1,0 +1,13 @@
+<att-loading [name]='Loading' #Loading  ></att-loading>
+<ng-container >
+  <div class="grid w-full mx-8">
+    <div style="width: 100%;">
+      <dev-grid-print
+        title=" "
+        [dataSource]="dataLogUsers"        
+        [dataHeaderReport]="dataHeaderReport"
+        [columns]="columnsUsers" >
+      </dev-grid-print>
+    </div>
+  </div>
+</ng-container>

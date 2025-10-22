@@ -1,0 +1,22 @@
+<dx-chart [id]="chartId" [title]="title" [(series)]="series" [rtlEnabled]="true" 
+    class="important:md:w-97 w-200" [dataSource]="dataChart">
+
+    <dxi-value-axis position="right">
+        <dxo-title [text]="title"></dxo-title>   
+    </dxi-value-axis>
+
+    <dxo-argument-axis position="left">
+        <dxo-label overlappingBehavior="rotate" [rotationAngle]="-45">
+        </dxo-label>
+    </dxo-argument-axis>
+
+    <dxo-common-series-settings [argumentField]="argumentFiled" type="{{chartType}}">
+        <!-- <dxo-label [visible]="true" overlappingBehavior="rotate" [rotationAngle]="-90" >
+            <dxo-format  type="fixedPoint" precision="2">                
+            </dxo-format>
+        </dxo-label> -->
+    </dxo-common-series-settings>
+
+    <dxo-legend verticalAlignment="top" horizontalAlignment="center">
+    </dxo-legend>
+</dx-chart>

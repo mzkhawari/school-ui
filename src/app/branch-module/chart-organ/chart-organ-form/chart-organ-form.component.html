@@ -1,0 +1,58 @@
+<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm" class="w-full">
+    <div class=" mx-8">
+      <app-page-header title="{{'organizational-chart'|translate}}"
+                       [isSaveButton]="true"                       [isSaveButtonDisabled]="splashScreenService.isShowing"
+                       [isCloseButton]="true" (OnClose)="dialogRef.close()">
+      </app-page-header>
+      <div class=" bg-white p-4">
+        <div class="grid grid-cols-12">
+          <div class="col-span-3">
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>سمت</mat-label>
+              <input type="text" matInput name="postTitle" [(ngModel)]="model.postTitle" [formControl]="codeFormControl" required   >
+              <mat-error *ngIf="codeFormControl.hasError('required')">{{'this-field-is-required'|translate}}</mat-error>
+            </mat-form-field>            
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{'first-and-last-name'|translate}}</mat-label>
+              <input type="text" matInput name="fullName" [(ngModel)]="model.fullName" [formControl]="titleFormControl" required >
+              <mat-error *ngIf="titleFormControl.hasError('required')">{{'this-field-is-required'|translate}}</mat-error>
+            </mat-form-field>            
+          </div>       
+
+          <div class="col-span-5">
+            <mat-form-field appearance="outline" class="w-11/12"    >
+            <mat-label>{{'choosing-a-higher-manager'|translate}}</mat-label>
+            <mat-select name="parentId" [(ngModel)]="model.parentId" [formControl]="parentFormControl" required >
+              <ng-container *ngFor="let type of chartOrgans">
+                <mat-option [value]="type.id">
+                  {{type.postTitle}}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="parentFormControl.hasError('required')">{{'this-field-is-required'|translate}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+                <mat-label>{{ 'description' | translate }} </mat-label>
+              <textarea matInput name="Description" [(ngModel)]="model.description"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-span-2">
+            <div class="image-upload w-full">
+              <label for="file-input" class="label-file-input">
+                <img class="img-avatar w-full" [src]="imageURL" style="width: 100%; height:auto;" />
+                <img class="w-10 img-click" src="../../../../assets/images/Akramzada/photo-image.png">
+              </label>
+              <input id="file-input" accept="image/*" (change)="setImage($event, 'customer')" type="file" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </form>
+</ng-container>

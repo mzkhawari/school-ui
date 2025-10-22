@@ -1,0 +1,23 @@
+<att-loading [name]='Loading' #Loading  ></att-loading>
+<ng-container >
+  <div class="grid w-full mx-8">    
+    <div style="width: 100%;">
+      <dev-grid-print
+        title="{{'list-users'|translate}}"
+        [dataSource]="dataUsers"
+        [dataHeaderReport]="dataHeaderReport"
+        [columns]="columnsUsers" >
+      </dev-grid-print>
+    </div>
+  </div>
+</ng-container>
+
+
+<!-- <div>
+  
+    کاربران سیستم
+   
+ <div class="w-full">     
+          
+  </div>  
+</div>  -->

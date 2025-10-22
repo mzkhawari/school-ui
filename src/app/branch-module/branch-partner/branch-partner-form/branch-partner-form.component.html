@@ -1,0 +1,100 @@
+<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm" class="w-full">
+    <div class=" mx-8">
+      <app-page-header [title]='model.id>0 ? "ویرایش شعبه همکار" : "افزودن شعبه همکار"' 
+                       [isSaveButton]="true"                       [isSaveButtonDisabled]="splashScreenService.isShowing"
+                       [isCloseButton]="false" 
+                       [returnUrl]="returnUrlAddress" (OnClose)="dialogRef.close()">
+      </app-page-header>
+      <div class=" bg-white p-4">
+        <div class="grid grid-cols-12">
+          <div class="col-span-6">
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'title' | translate }} </mat-label>
+              <input type="text" matInput name="title" [(ngModel)]="model.title" [formControl]="titleFormControl" required>
+              <mat-error *ngIf="titleFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'email' | translate }} </mat-label>
+              <input type="email" matInput name="email" [(ngModel)]="model.email" [formControl]="emailFormControl" required >
+              <mat-error *ngIf="emailFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('email')"> {{ 'must-be-entered-in-the-correct-format' | translate }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'branch-management' | translate }}</mat-label>
+              <input type="text" matInput name="branchManager" [(ngModel)]="model.branchManager" [formControl]="branchManagerFormControl" required  >
+              <mat-error *ngIf="branchManagerFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'contact-number' | translate }} </mat-label>
+              <input type="text" matInput name="phone" [(ngModel)]="model.phone" [formControl]="phoneFormControl" required  >
+              <mat-error *ngIf="phoneFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+            </mat-form-field>
+
+            <!-- <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'sarafi.branch.add-form.owner' | translate }} </mat-label>
+              <mat-select name="userId" [(ngModel)]="model.userId" [formControl]="userFormControl" required  >
+                <ng-container *ngFor="let type of users">
+                  <mat-option [value]="type.id">
+                    {{type.firstName}} - {{type.lastName}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+              <mat-error *ngIf="userFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+            </mat-form-field> -->
+
+            <mat-checkbox name="isActive" [(ngModel)]="model.isActive" color="primary">{{ 'active/inactive-branch' | translate }}</mat-checkbox>
+          </div>       
+          <div class="col-span-6">
+            <mat-form-field appearance="outline" class="w-11/12">
+                <mat-label>{{ 'description' | translate }} </mat-label>
+              <textarea matInput name="Description" [(ngModel)]="model.description"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'address' | translate }} </mat-label>
+              <input type="text" matInput name="address" [(ngModel)]="model.address" [formControl]="addressFormControl" required >
+              <mat-error *ngIf="addressFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'country' | translate }}</mat-label>
+              <mat-select name="countryId" [(ngModel)]="model.countryId" >
+                <ng-container *ngFor="let type of countries">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label> {{ 'province' | translate }} </mat-label>
+              <mat-select name="provinceId" [(ngModel)]="model.provinceId" (selectionChange)="selectCity($event)" >
+                <ng-container *ngFor="let type of provinces">
+                  <mat-option [value]="type.id">
+                    {{type.title}} 
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'county' | translate }} </mat-label>
+              <mat-select name="cityId" [(ngModel)]="model.cityId" >
+                <ng-container *ngFor="let type of cityOnProvince">
+                  <mat-option [value]="type.id">
+                    {{type.title}} 
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>

@@ -1,0 +1,91 @@
+<div class="md:mx-8 mx-0">
+  <form  (ngSubmit)="OnSubmit(f)" class="w-full" #f="ngForm" >   <!-- Header -->
+    <app-page-header [title]='model.id>0 ? editstring : addstring' 
+        [isSaveButton]="isSaveButton" 
+        isCloseButton="true" (OnClose)="dialogRef.close()" >
+    </app-page-header>  
+
+    <!-- <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+      <div class="text-lg font-medium"> {{((model.id==0 || model.id==undefined) ? 'افزودن ولایت' :'ویرایش ولایت') }} </div>
+      <button mat-icon-button (click)="dialogRef.close()" type="button"  [tabIndex]="-1">
+        <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+      </button>
+    </div> -->
+
+    <div class="grid grid-cols-12 gap-4 pt-5">
+      <div class="md:col-span-3 col-span-6">
+        <mat-form-field appearance="outline" class="w-11/12" >
+          <mat-label for="Title">{{ 'title' | translate }} </mat-label>
+          <input matInput required name="Title" [(ngModel)]="model.title" [formControl]="titleFormControl" required  >
+          <mat-error *ngIf="titleFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="md:col-span-3 col-span-6">
+        <mat-form-field appearance="outline" class="w-11/12" >
+          <mat-label>{{ 'priority' | translate }} </mat-label>
+          <input type="number" matInput required [(ngModel)]="model.priority" name="Priority" [formControl]="priorirtyFormControl" required  >
+          <mat-error *ngIf="priorirtyFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="md:col-span-3 col-span-6">
+        <mat-form-field appearance="outline" class="w-11/12">
+          <mat-label>{{ 'danger-level' | translate }}</mat-label>
+          <mat-select name="dangerLevel" [(ngModel)]="model.dangerLevel">
+            <ng-container *ngFor="let type of dangerLevels">
+              <mat-option [value]="type.id">
+                {{type.title}}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="md:col-span-3 col-span-6">
+        <mat-form-field appearance="outline" class="w-11/12"  >
+            <mat-label>{{ 'country' | translate }}</mat-label>
+          <mat-select name="parentId" [(ngModel)]="model.parentId" [formControl]="countryFormControl" required  >
+            <ng-container *ngFor="let country of countryProvinceCitis"   >
+              <mat-option [value]="country.id">
+                {{country.title}}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="countryFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-4">
+      <div class="md:col-span-8 col-span-9">
+        <mat-form-field appearance="outline" class="w-11/12" >
+            <mat-label>{{ 'description' | translate }} </mat-label>
+          <textarea matInput name="Description" [(ngModel)]="model.description"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="pr-3 pt-5 md:col-span-4 col-span-2">
+        <mat-slide-toggle [(ngModel)]="model.isActive" name="IsActive" [color]="'primary'">
+          {{ model.isActive === true ? 'فعال' : 'غیرفعال'}}
+        </mat-slide-toggle>
+      </div>
+
+      
+    </div>
+
+    <!-- <mat-divider></mat-divider>
+    <div class="grid grid-cols-6 pl-3 pb-3 content-center ">
+      <button mat-raised-button class="col-start-5 mr-1 " (click)="closeModal()">شروع مجدد</button>
+      <button mat-raised-button class="col-start-6 mr-1" color="primary" type="submit"
+       [disabled]="cardForm.disabled"  >
+        <span *ngIf="!cardForm.disabled" >
+          ثبت
+        </span>
+        <mat-progress-spinner
+            *ngIf="cardForm.disabled"
+            [diameter]="24"
+            [mode]="'indeterminate'"></mat-progress-spinner>
+      </button>
+    </div> -->
+  </form>
+</div>

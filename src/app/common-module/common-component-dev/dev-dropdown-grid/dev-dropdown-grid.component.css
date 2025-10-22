@@ -1,0 +1,39 @@
+@import '../../../../assets/webfont/IranSans/iransans-font.css';
+@import '../../../../assets/dev-grid/dx.common.css';
+@import '../../../../assets/dev-grid/dx.light.css';
+
+.dx-datagrid .dx-datagrid-header-panel .dx-toolbar .dx-toolbar-items-container , .dx-datagrid .dx-datagrid-headers {
+    font-family: 'iran-sans-serif' !important;
+    font-weight: bold;
+}
+
+.dx-gridbase-container{
+    font-family: 'iran-sans-serif' !important;
+}
+
+.dx-datagrid-table, .dx-datagrid-table-fixed, .dx-header-row
+{
+    font-weight: bold !important;
+    color: black;
+}
+
+.dx-widget {
+    font-family: 'iran-sans-serif' !important;
+  }
+  .dx-datagrid-headers {
+    color: #000 !important;
+    font-weight: bold !important ;
+    font-family: 'iran-sans-serif' !important;
+}
+
+  .devDropdownGrid-width{
+    width: 700px;
+    }
+
+  .dx-overlay-content{
+    width: 700px !important;
+    
+  }
+  .dx-popup-content{
+    max-height: 550px !important;
+  }

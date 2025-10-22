@@ -1,0 +1,102 @@
+<ng-container>
+  <!-- Row -->
+  <div class="row">
+    <div class="col-xl-12 col-md-12 col-lg-12">
+      <div class="card">       
+        <div class="card-body">
+          <div class="table-responsive">
+            <form>
+              <div class="grid grid-cols-12">
+                <div class="d-flex justify-content-between p-2 flex-wrap md:col-span-3 col-span-12" *ngIf="!isView">              
+                  <div class="form-group d-flex flex-column mb-1">
+                    <input placeholder="Search" class="form-control ml-2" type="text" name="searchTerm" autocomplete="off"
+                      [(ngModel)]="service.searchTerm" (keyup)="loadPageBySearch()" />
+                    <span class="ml-3" *ngIf="service.loading$ | async" style="position: absolute; left: 50%;" >{{'loading'|translate}}</span>
+                  </div>
+                </div>          
+                <ng-content></ng-content>
+              </div>
+          
+            
+              <table class="table table-vcenter text-nowrap table-bordered border-bottom">
+                <thead>
+                  <tr>
+                    <th scope="col" *ngIf="actionList.length >0" style="width: 100px;" >{{'operation'|translate}}</th>
+                    <th scope="col">#</th>
+                    <ng-container *ngFor="let col of columns; let i = index;" >
+                      <th *ngIf="col.visible == undefined || col.visible == true  " cope="col" [sortable]="col.dataField" (sort)="onSort($event)" >
+                        {{col.title}}
+                      </th>
+                    </ng-container>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of dataSource$ | async; let dataIndex = index;" 
+                      [ngStyle]="{'background-color':  data.isExpired  ? '#fff3cd':
+                                  (data.transferCashStatus == 1 ? '#fff3cd':
+                                  (data.transferCashStatus == 2 ? '#dda0f1': 
+                                  (data.transferCashStatus == 4 ? '#d4edda':
+                                  (data.transferCashStatus == 5 ? '#f8d7da':
+                                  (data.transferCashStatus == 0 ? '#fff':
+                                  (data.accountStatus == 1 ? '#fff3cd':
+                                  (data.accountStatus == 2 ? '#d1ecf1':
+                                  (data.financeAmountStatus == 1 ? '#fff3cd':
+                                  (data.financeAmountStatus == 2 ? '#d1ecf1':
+                                  (data.financeAmountStatus == 21 ? '#3498db':
+                                  (data.financeAmountStatus == 3 ? '#f8d7da':'')))))))))))}"  >                    
+                      <td *ngIf="actionList.length >0">
+                        <div >
+                          <a [ngModelOptions]="{standalone: true}" *ngFor="let act of actionList; let actindex =index"
+                            name="act.title" (click)="OnActionEmitter(data , actindex)"
+                            class="btn btn-icon btn-sm me-2 {{act.level}}" ngbTooltip="{{act.title}}"><i
+                              class="{{act.icon}}"></i></a>
+                        </div>
+                      </td>
+                      <td scope="row">{{ dataIndex +1 }}</td>
+                      <ng-container *ngFor="let col of columns; let i = index;" >
+                          <td *ngIf="col.visible == undefined || col.visible == true  " >
+                            <p *ngIf="col.useCurrency && !col.dataField.startsWith('is') && !col.dataField.startsWith('pic')"  > {{data[col.dataField] | currencyNumber }} </p>
+                            <ngb-highlight *ngIf="!col.useCurrency && !col.dataField.startsWith('is') && !col.dataField.startsWith('pic')"
+                              [result]="data[col.dataField]" [term]="service.searchTerm">
+                            </ngb-highlight>
+                            <ngb-highlight *ngIf="col.dataField.startsWith('is') && !col.dataField.startsWith('pic')"
+                              [result]="data[col.dataField]==true?'بلی':''" [term]="service.searchTerm">
+                            </ngb-highlight>
+                            <img *ngIf="col.dataField.startsWith('pic')" style="width: 50px !important; height: 60px !important;"
+                              src="{{data[col.dataField]}}" title=" {{'user-image'|translate}}" />
+                          </td>                  
+                        </ng-container>
+                  </tr>
+                </tbody>
+               
+              </table>
+              <div class="float-end">
+                <div style="display: flex;">
+                  <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="service.page"
+                      [pageSize]="service.pageSize"  (pageChange)="loadPage()" [maxSize]="5" [boundaryLinks]="true"   >
+                  </ngb-pagination>
+
+                  <label>{{'select-page-size'|translate}}</label>
+                  <select class="form-control mb-1 custom-select" style="width: auto; font-weight: bold;" name="pageSize"
+                    placeholder="choose option" [(ngModel)]="service.pageSize" (change)="loadPage()"  >
+                    <option [value]="5">5 </option>
+                    <option [value]="10">10 </option>
+                    <option [value]="25">25 </option>
+                    <option [value]="50">50 </option>
+                    <option [value]="100">100 </option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Row-->
+</ng-container>
+
+
+<ng-template #noData>
+  <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">{{'there-is-no-data'|translate}}</div>
+</ng-template>

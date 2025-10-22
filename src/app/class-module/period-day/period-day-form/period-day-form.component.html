@@ -1,0 +1,44 @@
+<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm" class="w-full">
+    <div class=" mx-1 md:mx-8" >
+      <app-page-header title="روزهای دوره"
+                       [isSaveButton]="true"
+                       [isCloseButton]="true"  (OnClose)="dialogRef.close()">
+       </app-page-header>
+      <div class=" bg-white">
+        <div class="grid grid-cols-4 md:grid-cols-12">           
+          <div class="col-span-4 grid grid-cols-2 ">
+            
+              <div class="col-span-2">
+                <mat-form-field appearance="outline" class="md:w-11/12 w-full">
+                    <mat-label  > عنوان </mat-label>
+                  <input type="text" matInput name="title" [(ngModel)]="model.title"  [formControl]="titleFormControl" required>
+                  <mat-error *ngIf="titleFormControl.hasError('required')"> این فیلد ضروری می باشد</mat-error> 
+                </mat-form-field>
+              </div>             
+              
+              <div class="col-span-2">
+                <date-persian-picker titleFiled="{{'from-history'|translate}}" [(date)]="dateFrom" >
+                </date-persian-picker>
+              </div>
+
+              <div class="col-span-1">
+                <time-picker [titleFiled]="'ساعت شروع'"  [(time)]="model.hourFrom" ></time-picker>
+              </div>
+              <div class="col-span-1">
+                <time-picker [titleFiled]="'ساعت پایان'" [(time)]="model.hourTo" ></time-picker>
+              </div>
+
+              <!-- <div class="col-span-4">
+                <mat-checkbox name="IsActive" [(ngModel)]="model.isActive" color="primary" >{{'active/inactive' | translate }}</mat-checkbox>
+              </div> -->
+          </div>
+          <div class="col-span-3 md:col-span-8">
+            <app-period-day-list  [periodId]="periodId" (OnEditModel)="setEditValue($event)" >              
+            </app-period-day-list>
+          </div>          
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>

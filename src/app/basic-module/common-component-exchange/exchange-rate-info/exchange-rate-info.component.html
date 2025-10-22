@@ -1,0 +1,17 @@
+<div class="grid grid-cols-2">
+    <div class="col-span-2">        
+        <mat-card>
+            <div class="relative row-auto flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between pt-1">
+                <div class="text-1xl font-extrabold tracking-tight">
+                    <a href="#"> کلاس های تشیکل شده </a>
+                </div>
+            </div>
+            <div class="relative row-auto flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between pt-1">
+                <div class="text-1xl font-extrabold tracking-tight w-full">
+                    <app-grid [datasource]="dataSource" [columns]="columns">
+                    </app-grid>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

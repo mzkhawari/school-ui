@@ -1,0 +1,60 @@
+<app-page-header [title]="'Image crop'"></app-page-header>
+<!-- Row -->
+<div class="card">
+    <div class="card-body">
+        <p>{{title}}</p>
+        <input type="file" (change)="fileChangeEvent($event)" />
+        
+        <div class="grid grid-cols-9 mt-4 mb-4" >       
+            <mat-icon class="col-span-1 bold border border-gray-300 rounded-md  cursor-pointer hover:border-blue-500 hover:bg-gray-100 hover:text-blue-500" style="font-size: 1.25rem ; height: 30px !important; width: 29px !important;" title="Rotate left" (click)="rotateRight()" >                          
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m16.49 12 3.75-3.751m0 0-3.75-3.75m3.75 3.75H3.74V19.5" />
+                </svg>              
+            </mat-icon>        
+            <mat-icon class="col-span-1 bold border border-gray-300 rounded-md  cursor-pointer hover:border-blue-500 hover:bg-gray-100 hover:text-blue-500" style="font-size: 1.25rem; height: 30px !important; width: 29px !important;" title="Rotate right" (click)="rotateLeft()" >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M7.49 12 3.74 8.248m0 0 3.75-3.75m-3.75 3.75h16.5V19.5" />
+                </svg>
+            </mat-icon>        
+            <mat-icon class="col-span-1 bold border border-gray-300 rounded-md  cursor-pointer hover:border-blue-500 hover:bg-gray-100 hover:text-blue-500" style="font-size: 1.25rem ; height: 30px !important; width: 29px !important;" title="Flip horizontal" (click)="flipHorizontal()" >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                </svg>            
+            </mat-icon>        
+            <mat-icon class="col-span-1 bold border border-gray-300 rounded-md  cursor-pointer hover:border-blue-500 hover:bg-gray-100 hover:text-blue-500" style="font-size: 1.25rem; height: 30px !important; width: 29px !important;" title="Flip vertical" (click)="flipVertical()" >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+                </svg>
+            </mat-icon>        
+            <mat-icon [svgIcon]="'heroicons_outline:plus'" title="Zoom +" (click)="zoomIn()" style="font-size: 1.25rem; height: 30px !important; width: 29px !important;" class="col-span-1 bold border border-gray-300 rounded-md  cursor-pointer hover:border-blue-500 hover:bg-gray-100 hover:text-blue-500"></mat-icon>        
+            <mat-icon [svgIcon]="'heroicons_outline:minus'" title="Zoom -" (click)="zoomOut()" style="font-size: 1.25rem;height: 30px !important; width: 29px !important;" class="col-span-1 bold border border-gray-300 rounded-md  cursor-pointer hover:border-blue-500 hover:bg-gray-100 hover:text-blue-500" ></mat-icon>        
+            <mat-icon [svgIcon]="'heroicons_outline:eye'" title="View Eye" (click)="viewImageUrl()" style="font-size: 1.25rem;height: 30px !important; width: 29px !important;" class="col-span-1 bold border border-gray-300 rounded-md  cursor-pointer hover:border-blue-500 hover:bg-gray-100 hover:text-blue-500"></mat-icon>               
+            <mat-icon class=" col-span-1 border border-gray-300 rounded-md cursor-pointer hover:border-red-500 hover:bg-red-100 hover:text-red-500"  style="font-size: 1.25rem; height: 30px !important; width: 29px !important;" [svgIcon]="'heroicons_outline:refresh'" title="Refresh Image" (click)="resetImage()"></mat-icon>          
+            <mat-icon *ngIf="isShowDeleteButton" [svgIcon]="'heroicons_outline:trash'" title="Delete Image" class="col-span-1 border border-gray-300 rounded-md  cursor-pointer hover:border-red-500 hover:bg-red-100 hover:text-red-500"  (click)="removeImage()" style="font-size: 1.25rem;height: 30px !important; width: 29px !important;"></mat-icon>        
+            
+        </div>
+        <!-- <button class="me-2 mt-2 btn btn-outline-primary" (click)="rotateLeft()">Rotate left</button>
+        <button class="me-2 mt-2 btn btn-outline-secondary" (click)="rotateRight()">Rotate right</button> -->
+        <!-- <button class="me-2 mt-2 btn btn-outline-success" (click)="flipHorizontal()">Flip horizontal</button>
+        <button class="me-2 mt-2 btn btn-outline-warning" (click)="flipVertical()">Flip vertical</button> -->
+
+        <!-- <button class="me-2 mt-2 btn btn-outline-info" (click)="toggleContainWithinAspectRatio()">{{containWithinAspectRatio?'Fill Aspect Ratio':'Contain Within Aspect Ratio'}}</button> -->
+        <!-- <input class="form-control" [(ngModel)]="rotation" placeholder="Rotation" type="number" (keyup)="updateRotation()" /> -->
+
+        <div class="row" style="justify-content: space-evenly;">
+            <div class="col-md-6 col-12" style="width: 130px; height: 140px;">
+                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false"
+                    [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="4 / 3" [resizeToWidth]="imageWidth"
+                    [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false"
+                    [canvasRotation]="canvasRotation" [transform]="transform" [alignImage]="'left'"
+                    [style.display]="showCropper ? null : 'none'" format="png" (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady($event)"
+                    (loadImageFailed)="loadImageFailed()" style="max-width: 100%; max-height: 100%; display: block;"></image-cropper>
+            </div>
+            <div class="col-md-6 col-12" style="width: 130px; height: 140px;">
+                <img [src]="croppedImage" class="default-height" [style.border]="croppedImage ? '1px solid black' : 'none'" style="max-width: 100%; max-height: 100%; display: block;"/>
+            </div>
+        </div>
+
+    </div>
+</div>

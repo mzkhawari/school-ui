@@ -1,0 +1,28 @@
+﻿<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm">
+    <div class="w-full">
+      <app-page-header 
+          [title]='model.id>0 ? editstring :  addstring '
+          [isSaveButton]="isSaveButton"
+          isCloseButton="true"  (OnClose)="dialogRef.close()" >
+      </app-page-header>
+      <div style="width: 100%;" class="max-h-fit" >
+        <div class="grid grid-cols-12">
+          <div class="md:col-span-6 col-span-12">
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{ 'title' | translate }} </mat-label>
+              <input matInput name="Title" [(ngModel)]="model.title" [formControl]="titleFormControl" required   >
+              <mat-error *ngIf="titleFormControl.hasError('required')">{{ 'this-field-is-required' | translate }}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="p-2 md:col-span-6 col-span-12 self-center">
+              <mat-checkbox name="IsActive" [(ngModel)]="model.isActive" color="primary" [disabled]="model.id==0">
+                  {{ 'active/inactive' | translate }}
+              </mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>

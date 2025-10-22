@@ -1,0 +1,18 @@
+<mat-form-field [class]="class"  [appearance]="mode" *ngIf="isRequired" >
+    <mat-label>{{titleFiled}}</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="date" required [formControl]="dateFormControl" >
+    <mat-error *ngIf="dateFormControl.hasError('required') && isRequired">{{'please-select-a-date'|translate}}</mat-error>
+    <!-- <mat-hint>YYYY/MM/DD</mat-hint> -->
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+
+<mat-form-field [class]="class"  [appearance]="mode" *ngIf="!isRequired" >
+    <mat-label>{{titleFiled}}</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="date" >
+    <!-- <mat-hint>YYYY/MM/DD</mat-hint> -->
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+

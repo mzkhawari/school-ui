@@ -1,0 +1,5 @@
+
+    <mat-form-field appearance="outline" [class]="class"  >
+        <mat-label>{{titleFiled}} </mat-label>
+        <input type="text" maxlength="5"  matInput appTimeMask [(ngModel)]="time" name="time" [disabled]="isDisabled" >
+    </mat-form-field>

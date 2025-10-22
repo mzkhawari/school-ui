@@ -1,0 +1,33 @@
+<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm" class="w-full">
+    <div class=" mx-1 md:mx-8" >
+      <app-page-header title="انتخاب نقش کاربری"
+                       [isSaveButton]="true"
+                       [isCloseButton]="true"  (OnClose)="dialogRef.close()">
+       </app-page-header>
+      <div class=" bg-white">
+        <div class="grid grid-cols-4 md:grid-cols-12">           
+          <div class="col-span-4 grid grid-cols-2 ">
+            
+              <div class="col-span-2">
+                <mat-form-field appearance="outline" class="w-11/12">
+                  <mat-label> انتخاب نقش کاربری </mat-label>
+                  <mat-select name="UserRoleId" [(ngModel)]="model.userTypeId"                     >
+                    <ng-container *ngFor="let type of userTypes">
+                      <mat-option [value]="type.id">
+                        {{type.title}}
+                      </mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-form-field>
+              </div>             
+          </div>
+          <div class="col-span-3 md:col-span-8">
+            <app-user-type-list  [userId]="userId" >              
+            </app-user-type-list>
+          </div>          
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>

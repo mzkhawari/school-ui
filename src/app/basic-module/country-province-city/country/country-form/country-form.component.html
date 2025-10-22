@@ -1,0 +1,64 @@
+
+<div class="flex flex-col flex-auto md:w-160 md:min-w-160 max-h-160 -m-6 overflow-y-auto">
+  <!-- Card form -->
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm">
+    <!-- Header -->
+    <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+      <div class="text-lg font-medium"> {{((model.id==0 || model.id==undefined) ? 'افزودن کشور' :'ویرایش کشور') }} </div>
+      <button mat-icon-button (click)="dialogRef.close()" type="button"  [tabIndex]="-1">
+        <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 pt-5">
+      <div class="pr-3">
+        <mat-form-field appearance="outline">
+          <mat-label for="Title">{{'title'|translate}}</mat-label>
+          <input matInput required name="Title" [(ngModel)]="model.title">
+        </mat-form-field>
+      </div>
+
+      <div class="pr-3">
+        <mat-form-field appearance="outline">
+          <mat-label>{{'priority'|translate}}</mat-label>
+          <input matInput required [(ngModel)]="model.priority" name="Priority">
+        </mat-form-field>
+      </div>
+
+      <div class="pr-3 pt-5">
+        <mat-slide-toggle [(ngModel)]="model.isActive" name="IsActive" [color]="'primary'">
+          {{ model.isActive === true ? 'فعال' : 'غیرفعال'}}
+        </mat-slide-toggle>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-5 gap-4">
+      <div class="col-span-3 pr-3">
+        <mat-form-field appearance="outline" class="w-full" >
+          <mat-label>{{'description'|translate}}</mat-label>
+          <textarea matInput name="Description" [(ngModel)]="model.description"></textarea>
+        </mat-form-field>
+      </div>
+
+      <!-- <div class="col-span-2">
+        <mat-form-field appearance="outline" >
+          <mat-label>کشور</mat-label>
+          <mat-select name="CountryProvinceCityParentId" [(ngModel)]="model.CountryProvinceCityParentId">
+            <ng-container *ngFor="let country of countryProvinceCitis">
+              <mat-option [value]="country.Id">
+                {{country.Title}}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </div> -->
+    </div>
+
+    <mat-divider></mat-divider>
+    <div class="grid grid-cols-6 pl-3 pb-3 content-center ">
+      <button mat-raised-button class="col-start-5 mr-1 " (click)="closeModal()">{{'restart'|translate}}</button>
+      <button mat-raised-button class="col-start-6 mr-1" color="primary" type="submit">{{'registration'|translate}}</button>
+    </div>
+  </form>
+</div>
+

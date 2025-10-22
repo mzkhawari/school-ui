@@ -1,0 +1,32 @@
+    <header >
+        <div class="w-full">
+            <div class="grid grid-cols-12">
+                <div class="col-span-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">
+                            <img src="../../../../assets/images/Akramzada/newlogo/logo.png"> <p class="title">Sarika Dress</p>
+                        </a>
+                        <!-- <languages></languages> -->
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li *ngFor="let page of webpageInfos; let step=index;" [ngClass]="page.subpages.length==0 ? 'scroll-to-section' : 'submenu'" >
+                                <a href="{{page.subpages.length>0 ? '/' : page.linkPage}}" alt="{{page.title}}" [ngClass]="step==0 ? 'active' :'' " >{{page.title}}</a>
+                                <ul *ngIf="page.subpages.length>0">
+                                    <li *ngFor="let sub of page.subpages" >
+                                        <a href="{{sub.linkPage}}" target="_blank"  >{{sub.title}}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>        
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->

@@ -1,0 +1,7 @@
+<ng-container>
+  <div class=" mx-8" id="print-section">
+    <app-page-header title="{{'shift-balance-report'|translate}}" [isSaveButton]="false" [isCloseButton]="true" txtCustomButton="{{'print'|translate}}"
+      (OnSaveCustom)="printReport()" (OnClose)="dialogRef.close()">
+    </app-page-header>
+  </div>
+</ng-container>

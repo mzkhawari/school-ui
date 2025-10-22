@@ -1,0 +1,65 @@
+<form>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
+        <!-- Features -->
+        <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+            <div class="flex items-start justify-between">
+                <div class="text-lg font-medium tracking-tight leading-6 truncate">تعداد آموزشیارها</div>
+            </div>
+            <div class="flex flex-col items-center mt-2">
+                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none">
+                    {{allStudent}}
+                </div>
+                <div class="text-lg font-medium ">{{ 'person' | translate }}</div>
+            </div>
+        </div>
+        <!-- Overdue -->
+        <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+            <div class="flex items-start justify-between">
+                <div class="text-lg font-medium tracking-tight leading-6 truncate">تعداد حاضرین</div>
+            </div>
+            <div class="flex flex-col items-center mt-2">
+                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-amber-500">
+                    {{presentStudent}}
+                </div>
+                <div class="text-lg font-medium text-amber-600 dark:text-amber-500">{{ 'number' | translate }} </div>
+            </div>
+        </div>
+        <!-- Issues -->
+        <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+            <div class="flex items-start justify-between">
+                <div class="text-lg font-medium tracking-tight leading-6 truncate">تعداد غایبین</div>
+            </div>
+            <div class="flex flex-col items-center mt-2">
+                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
+                    {{ absentStudent }}
+                </div>
+                <div class="text-lg font-medium text-blue-600 dark:text-blue-500">{{ 'number' | translate }} </div>
+            </div>
+        </div>
+        <!-- Summary -->
+        <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+            <div class="flex items-start justify-between">
+                <div class="text-lg font-medium tracking-tight leading-6 truncate">غایبین موجه</div>
+            </div>
+            <div class="flex flex-col items-center mt-2">
+                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-green-500">
+                    {{absentAllowStudent}}
+                </div>
+                <div class="text-lg font-medium text-green-600 dark:text-green-500">{{ 'number' | translate }} </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <!-- <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+            <div class="flex items-start justify-between">
+                <div class="text-lg font-medium tracking-tight leading-6 truncate">{{ 'home-page.counter.pre-day-transaction' | translate }}</div>
+            </div>
+            <div class="flex flex-col items-center mt-2">
+                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-indigo-800 dark:text-indigo-400">
+                    {{trnPervDays}}
+                </div>
+                <div class="text-lg font-medium text-indigo-800 dark:text-indigo-400"> {{ 'home-page.counter.title' | translate }} </div>
+            </div>
+        </div> -->
+    </div>
+</form>

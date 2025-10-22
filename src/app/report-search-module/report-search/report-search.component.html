@@ -1,0 +1,351 @@
+<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm" class="w-full">
+    <div class="">
+      <app-page-header [title]="title"
+        txtCustomButton="{{'search'|translate}}" (OnSaveCustom)="onSearch()"
+        txtCustomButton2="{{(isShowPrintButton ? 'print' : '')|translate}}" (OnSaveCustom2)="onPrint()"
+        [returnUrl]="returnUrlAddress">
+      </app-page-header>
+      <div class=" bg-white p-1 overflow-x-auto overflow-y-hidden">
+        <div class="grid grid-cols-8 md:w-full w-400">
+
+          <div class="col-span-1" *ngIf="config.isFinanceYear">
+            <mat-form-field appearance="outline" class="w-11/12"  >
+              <mat-label>{{'choose-the-year'|translate}}</mat-label>
+              <mat-select name="financeYearId" [(ngModel)]="model.financeYearId" >
+                <ng-container *ngFor="let type of years">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-span-1" *ngIf="config.isDateFrom || config.isDateTo ">
+            <date-persian-picker titleFiled="{{'from-history'|translate}}" [(date)]="dateFrom"
+              *ngIf="config.isDateFrom">
+            </date-persian-picker>
+
+            <date-persian-picker titleFiled="{{'to-date'|translate}}" [(date)]="dateTo"
+              *ngIf="config.isDateTo">
+            </date-persian-picker>
+          </div>
+
+          <div class="col-span-1"
+            *ngIf="config.isTransactionNo || config.isTransactionStatus || config.isTransactionType">
+            <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isTransactionNo">
+              <mat-label> {{'transaction-number'|translate}} </mat-label>
+              <input type="text" matInput name="transactionCode" [(ngModel)]="model.transactionCode">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isTransactionStatus">
+              <mat-label> {{'transaction-status'|translate}} </mat-label>
+              <mat-select name="transferCashStatus" [(ngModel)]="model.transferCashStatus">
+                <ng-container *ngFor="let type of transactionStatuses">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isTransactionType">
+              <mat-label> {{'transaction-purpose'|translate}} </mat-label>
+              <mat-select name="transferCashTypeId" [(ngModel)]="model.transferCashTypeId">
+                <ng-container *ngFor="let type of transactionTypes">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-span-1" *ngIf="config.isAccountFrom || config.isAccountTo">
+
+            <mat-form-field appearance="outline" class="w-11/12" >
+              <mat-label >{{'customer-choice'|translate}} </mat-label>
+              <mat-select name="AccountFromId" [(ngModel)]="model.accountFromId" 
+                (selectionChange)="setAccountFrom($event)"  [formControl]="accountFromFormControl">
+                <mat-option>
+                  <ngx-mat-select-search [formControl]="accountFilterApiCtrl"
+                    placeholderLabel="{{'search-for-the-account-you-want'|translate}}" noEntriesFoundLabel="{{'no-items-found'|translate}}">
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let item of filteredAccountApi | async" [value]="item.id">
+                  {{item.fullName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+            <!--             <app-select-search [dataSource]="accounts" [(selectedId)]="model.accountFromId" titleField="انتخاب مشتری"
+              [fieldId]="'id'" [fieldTitle]="'fullName'">
+            </app-select-search> -->
+            
+
+            <mat-form-field appearance="outline" class="w-11/12"  *ngIf="model.transferCashTypeId !== 1 && config.isAccountTo" >
+              <mat-label >  {{ 'receiver' | translate }}  </mat-label>
+              <mat-select name="accountToId" [(ngModel)]="model.accountToId" 
+                (selectionChange)="setAccountTo($event)"  [formControl]="accountToControl">
+                <mat-option value="0">{{ 'all-receivers' | translate }} </mat-option>
+                <mat-option>
+                  <ngx-mat-select-search [formControl]="accountFilterApiToCtrl"
+                    placeholderLabel="{{ 'search-for-the-account-you-want' | translate }}" noEntriesFoundLabel="{{ 'no-items-found' | translate }}">
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let item of filteredAccountApiTo | async" [value]="item.id">
+                  {{item.fullName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+            <!-- <mat-form-field appearance="outline" class="w-11/12"
+              *ngIf="model.transferCashTypeId !== 1 && config.isAccountTo">
+              <mat-label> {{'receiver'|translate}} </mat-label>
+              <mat-select name="accountToId" [(ngModel)]="model.accountToId">
+                <mat-option value="0">{{'all-receivers'|translate}}</mat-option>
+                <ng-container *ngFor="let type of accounts">
+                  <mat-option [value]="type.id">
+                    {{type.fullName}} - {{type.accountNo}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field> -->
+          </div>
+
+          <div class="col-span-1" *ngIf="!config.isBranchesConnected || isSuperAdmin" >
+            <!-- <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isBranchFrom"> -->
+              <!-- <mat-label>{{'from-the-branch'|translate}}</mat-label>
+              {{ 'report.input.from-branch' | translate }} -->
+              <!-- <mat-select name="branchId" [(ngModel)]="model.branchId"> -->
+                <!-- <mat-option value="0" *ngIf="isSuperAdmin || branches.length > 1">{{'all-branches'|translate}}</mat-option> -->
+                <!-- <mat-option value="-1" *ngIf="!isSuperAdmin || branches.length == 1">{{'none'|translate}}</mat-option> -->
+                <!-- <ng-container *ngFor="let type of branches">
+                  <mat-option [value]="type.id">
+                    {{type.title}} - {{type.provinceTitle}} - {{type.cityTitle}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field> -->
+
+            <mat-form-field appearance="outline" class="w-11/12"*ngIf="config.isBranchFrom">
+              <mat-label> {{ 'from-the-branch' | translate }} </mat-label>              
+              <mat-select name="branchId" [(ngModel)]="model.branchId" [formControl]="branchFormControl"
+                required placeholder="{{'branches'|translate}}" #singleSelect>
+                <mat-option>
+                  <ngx-mat-select-search [formControl]="branchFilterCtrl"
+                    placeholderLabel="{{'search-for-your-desired-branch'|translate}}" noEntriesFoundLabel="{{'no-items-found'|translate}}">
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option value="0" *ngIf="isSuperAdmin">{{'all-branches'|translate}}</mat-option>
+                <mat-option *ngFor="let item of filteredBranchs | async" [value]="item.id">
+                  {{item.title}} - {{item.provinceTitle}} - {{item.cityTitle}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12"*ngIf="config.isBranchTo">
+              <mat-label>{{'transaction-payment-branch'|translate}} </mat-label>            
+              <mat-select name="reciverBranchId" [(ngModel)]="model.reciverBranchId" [formControl]="branchFormControl"
+                required placeholder="{{'branches'|translate}}" #singleSelect>                
+                <mat-option>
+                  <ngx-mat-select-search [formControl]="branchFilterCtrl"
+                  placeholderLabel="{{'search-for-your-desired-branch'|translate}}" noEntriesFoundLabel="{{'no-items-found'|translate}}">
+                </ngx-mat-select-search>
+                </mat-option>
+                <mat-option value="0" *ngIf="isSuperAdmin || branches.length > 1">{{'all-branches'|translate}}</mat-option>
+                <mat-option value="-1" *ngIf="!isSuperAdmin || branches.length == 1">{{'none'|translate}}</mat-option>
+                <mat-option *ngFor="let item of filteredBranchs | async" [value]="item.id">
+                  {{item.title}} - {{item.provinceTitle}} - {{item.cityTitle}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!-- <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isBranchTo"> -->
+              <!-- <mat-label>{{'transaction-payment-branch'|translate}} </mat-label> -->
+              <!-- <mat-select name="reciverBranchId" [(ngModel)]="model.reciverBranchId"> -->
+                <!-- <mat-option value="0">{{'all-branches'|translate}}</mat-option> -->
+                <!-- <ng-container *ngFor="let type of branches">
+                  <mat-option [value]="type.id">
+                    {{type.title}} - {{type.provinceTitle}} - {{type.cityTitle}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field> -->
+           </div> 
+
+          <div class="col-span-1" *ngIf="config.isBranchesConnected && !isSuperAdmin"  >  
+            <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isBranchFrom">
+              <mat-label>{{'from-the-branch'|translate}}</mat-label>
+              <!-- {{ 'report.input.from-branch' | translate }} -->
+              <mat-select name="branchId" [(ngModel)]="model.branchId" (selectionChange)="selectBranchFrom($event)"  >
+                <mat-option value="0" >{{'all-branches'|translate}}</mat-option>
+                <ng-container *ngFor="let type of branchAllFrom">
+                  <mat-option [value]="type.id">
+                    {{type.title}} - {{type.provinceTitle}} - {{type.cityTitle}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isBranchTo">
+              <mat-label>{{'transaction-payment-branch'|translate}} </mat-label>
+              <mat-select name="reciverBranchId" [(ngModel)]="model.reciverBranchId" (selectionChange)="selectBranchTo($event)" >
+                <mat-option value="0" >{{'all-branches'|translate}}</mat-option>
+                <ng-container *ngFor="let type of branchAllTo">
+                  <mat-option [value]="type.id">
+                    {{type.title}} - {{type.provinceTitle}} - {{type.cityTitle}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-span-1" *ngIf="config.isAccountingSubAccount">
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{'account'|translate}}</mat-label>
+              <mat-select name="accountings" [(ngModel)]="model.accountingId" (selectionChange)="selectSubAcc($event)">
+                <mat-option value="0">{{'all-accounts'|translate}}</mat-option>
+                <ng-container *ngFor="let type of accountings">
+                  <mat-option [value]="type.id">
+                    {{type.title}} {{type.code}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{'sub-account'|translate}}</mat-label>
+              <mat-select name="subAccountingId" [(ngModel)]="model.subAccountingId">
+                <mat-option value="0">{{'all-accounts'|translate}}</mat-option>
+                <ng-container *ngFor="let type of accCodeSubAcc">
+                  <mat-option [value]="type.id">
+                    {{type.title}} {{type.code}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-span-1">
+            <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isCurrencyFrom">
+              <mat-label> {{'currency2'|translate}} </mat-label>
+              <mat-select name="currencyFromId" [(ngModel)]="model.currencyFromId">
+                <mat-option value="0">{{'all-currencies'|translate}} </mat-option>
+                <ng-container *ngFor="let type of currencies">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isCurrencyTo">
+              <mat-label>{{'sales-currency'|translate}}</mat-label>
+              <mat-select name="currencyToId" [(ngModel)]="model.currencyToId">
+                <mat-option value="0">{{'all-currencies'|translate}}</mat-option>
+                <ng-container *ngFor="let type of currencies">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-span-1" *ngIf="config.isProvinceCity  && isSuperAdmin ">
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label>{{'province'|translate}}</mat-label>
+              <mat-select name="provinceId" [(ngModel)]="model.provinceId" (selectionChange)="selectCity($event)">
+                <ng-container *ngFor="let type of provinces">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12">
+              <mat-label> {{'county'|translate}}</mat-label>
+              <mat-select name="cityId" [(ngModel)]="model.cityId">
+                <ng-container *ngFor="let type of cityOnProvince">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+
+          <div class="col-span-1" *ngIf="config.isDangerLevel || config.isTIN || config.isAmount" >
+            <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isDangerLevel">
+              <mat-label>{{'danger-level'|translate}}</mat-label>
+              <mat-select name="currencyFromId" [(ngModel)]="model.dangerLevel">
+                <ng-container *ngFor="let type of dangerLevels">
+                  <mat-option [value]="type.id">
+                    {{type.title}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isTIN">
+              <mat-label> #TIN </mat-label>
+              <input type="text" matInput name="tIN" [(ngModel)]="model.tIN">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isAmount">
+              <mat-label *ngIf="config.reportCode==0" >{{'transaction-amount'|translate}}</mat-label>
+              <mat-label *ngIf="config.reportCode==41 || config.reportCode==42 " >{{'transaction-criteria-(afghani)'|translate}}</mat-label>
+              <input type="text" matInput name="amount" [(ngModel)]="model.amount">
+            </mat-form-field>
+          </div>
+
+          <div class="col-span-1" *ngIf="config.isMountlyIncome">
+            <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isMountlyIncome">
+              <mat-label>{{'monthly-income-from'|translate}}</mat-label>
+              <input type="text" matInput name="mountlyIncomeFrom" [(ngModel)]="model.mountlyIncomeFrom">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isMountlyIncome">
+              <mat-label>{{'monthly-income-up-to'|translate}}</mat-label>
+              <input type="text" matInput name="mountlyIncomeTo" [(ngModel)]="model.mountlyIncomeTo">
+            </mat-form-field>
+
+            <!-- <mat-form-field appearance="outline" class="w-11/12" *ngIf="config.isTargetAccount" >
+              <mat-label> هدف معامله  </mat-label>
+              <input type="text" matInput name="targetAccount" [(ngModel)]="model.targetAccount"  >
+            </mat-form-field> -->
+          </div>
+
+          <div class="col-span-1 w-12/12" *ngIf="config.isPEP || config.isCheckPunishment">
+            <mat-slide-toggle [(ngModel)]="model.isPEP" name="isPEP" [color]="'primary'" *ngIf="config.isPEP">
+              <b>{{'includes-PEP'|translate}}</b>
+            </mat-slide-toggle>
+
+            <mat-slide-toggle [(ngModel)]="model.isCheckPunishment" name="isCheckPunishment"
+              *ngIf="config.isCheckPunishment" [color]="'primary'">
+              <b>{{'the-sanctions-were-checked'|translate}}</b>
+            </mat-slide-toggle>
+          </div>
+
+          <div class="col-span-2" *ngIf="config.isAccCodeTypeId">
+            <mat-radio-group [(ngModel)]="model.accCodeTypeId" [ngModelOptions]="{standalone: true}"
+              aria-label="{{'type-of-vault'|translate}}">
+              <mat-radio-button value="0">{{'all'|translate}}</mat-radio-button>
+              <mat-radio-button value="1">{{'cash-in-the-treasury'|translate}}</mat-radio-button>
+              <mat-radio-button value="2">{{'cash-in-the-bank'|translate}}</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </form>
+</ng-container>

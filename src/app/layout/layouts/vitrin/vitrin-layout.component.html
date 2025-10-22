@@ -1,0 +1,129 @@
+<!-- Wrapper -->
+<div class="flex flex-col flex-auto w-full">
+    <!-- Header -->
+    <header class="background-header header-area header-sticky ">
+        <nav class="main-nav lg:mx-40 ">
+            <!-- ***** Logo Start ***** -->
+            <a href="/" class="logo">
+                <img src="../../../../assets/images/Akramzada/newlogo/logo.png">
+                <p class="title"> {{ 'akramzadeh' | translate }}</p>                
+            </a>
+            <!-- ***** Logo End ***** -->
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav md:visible sm:invisible">
+                <li class="scroll-to-section" >
+                    <!-- <languages></languages> -->
+                </li>
+                <li *ngFor="let page of webpageInfos; let step=index;"
+                    [ngClass]="page.subpages.length==0 ? 'scroll-to-section' : 'submenu'">
+                    <a href="{{page.subpages.length>0 ? '/' : page.linkPage}}" alt="{{page.title}}"
+                        [ngClass]="currentUrl==page.linkPage && 'active'">{{page.title}}</a>
+                    <ul *ngIf="page.subpages.length>0">
+                        <li *ngFor="let sub of page.subpages">
+                            <a href="{{sub.linkPage}}"  
+                               [ngClass]="currentUrl==sub.linkPage && 'active'" 
+                               target="_blank">{{sub.title}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+
+            <ul id="menu" [ngClass]="status ? 'h-screen w-full' : 'hidden'"  class=" fixed top-0 right-0 px-10 py-16 bg-gray-800 z-50
+                    md:invisible md:relative md:flex md:p-0 md:bg-transparent md:flex-row md:space-x-6">
+                <li class="md:hidden z-90 fixed top-4 right-6">
+                    <a href="javascript:void(0)" class="text-right text-white text-4xl"
+                        (click)="toggleMenu()">&times;</a>
+                </li>
+
+                <li *ngFor="let page of webpageInfos; let step=index;"
+                    [ngClass]="page.subpages.length==0 ? 'scroll-to-section' : 'submenu'">
+                    <a target="_self" href="{{page.subpages.length>0 ? '/' : page.linkPage}}" alt="{{page.title}}" class="text-white opacity-70 hover:opacity-100 duration-300"
+                        [ngClass]="step==0 ? 'active' :'' ">{{page.title}}</a>
+                    <ul class="pl-10" *ngIf="page.subpages.length>0">
+                        <li *ngFor="let sub of page.subpages">
+                            <a href="{{sub.linkPage}}" target="_self"  class="text-white opacity-70 hover:opacity-100 duration-300" >{{sub.title}}</a>
+                        </li>
+                    </ul>
+                </li>                
+            </ul>
+
+            <div class=" fixed top-4 right-4 md:hidden">
+                <languages class="pr-5"  ></languages>
+                <button class="text-black text-4xl font-bold opacity-70 hover:opacity-100 duration-300"
+                    (click)="toggleMenu()">
+                    &#9776;
+                </button>
+            </div>
+        </nav>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+
+
+
+    <!-- Content -->
+    <div class="flex flex-col flex-auto w-full">
+        <router-outlet class="w-full" *ngIf="true"></router-outlet>
+    </div>
+
+
+
+    <!-- ***** Footer Start ***** -->
+    <footer>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-4  mx-10">
+            <div class="lg:col-start-3 lg:col-span-3">
+                <div class="first-item">
+                    <div class="logo">
+                        <img style="height:80px; max-width: 50% !important;" src="../../../../assets/images/Akramzada/newlogo/logo-white.png"
+                            alt="{{footerAddress?.title}}">
+                    </div>
+                    <ul>
+                        <li><a href="#">{{footerAddress?.address}}</a></li>
+                        <li><a href="#">{{footerAddress?.email}}</a></li>
+                        <li><a href="#">{{footerAddress?.phoneNumber}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="lg:col-span-2">
+                <h4>{{ 'home-page.footer.new-dress' | translate }}</h4>
+                <ul>
+                    <li *ngFor="let news of footerCatNews">
+                        <a href="/news/{{news.id}}">{{news.title}}</a>
+                    </li>
+                    <!-- <li><a href="#">Wedding Dress</a></li>
+                    <li><a href="#">Women’s Shopping</a></li>
+                    <li><a href="#">Kid's Shopping</a></li> -->
+                </ul>
+            </div>
+            <div class="lg:col-span-2">
+                <h4>{{ 'home-page.footer.sarika-dress' | translate }}</h4>
+                <ul>
+                    <li><a href="/">{{ 'home-page.footer.home-page' | translate }}</a></li>
+                    <li><a href="/about-us">{{ 'home-page.footer.about-us' | translate }}</a></li>
+                    <li><a href="/contact-us">{{ 'home-page.footer.contact-us' | translate }}</a></li>
+                    <li><a href="/find-us">{{ 'home-page.footer.find-us' | translate }}</a></li>
+                </ul>
+            </div>
+            <div class="lg:col-span-3">
+                <h4>{{ 'home-page.footer.last-news' | translate }} </h4>
+                <ul>
+                    <li *ngFor="let news of footerLastNews">
+                        <a href="/news-info/{{news.id}}">{{news.title}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="lg:col-span-12 sm:col-span-2 md:col-span-4">
+                <div class="under-footer">
+                    <p>{{ 'home-page.footer.copyright' | translate }} © 2022 Mzkhawari.
+                    <ul>
+                        <li><a href="{{footerAddress?.faceBook}}"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="{{footerAddress?.instagram}}"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="{{footerAddress?.wathsApp}}"><i class="fa fa-whatsapp"></i></a></li>
+                        <li><a href="{{footerAddress?.telegram}}"><i class="fa fa-comment"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

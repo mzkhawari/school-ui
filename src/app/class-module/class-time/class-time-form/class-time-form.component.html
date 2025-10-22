@@ -1,0 +1,40 @@
+<ng-container>
+  <form (ngSubmit)="OnSubmit(f)" #f="ngForm" class="w-full">
+    <div class=" mx-1 md:mx-8" >
+      <app-page-header title="ساعت های کلاس"
+                       [isSaveButton]="true"
+                       [isCloseButton]="true"  (OnClose)="dialogRef.close()">
+       </app-page-header>
+      <div class=" bg-white">
+        <div class="grid grid-cols-4 md:grid-cols-12">           
+          <div class="col-span-4 ">
+            
+              <div class="col-span-4">
+                <mat-form-field appearance="outline" class="md:w-11/12 w-full">
+                    <mat-label  > عنوان </mat-label>
+                  <input type="text" matInput name="title" [(ngModel)]="model.title"  [formControl]="titleFormControl" required>
+                  <mat-error *ngIf="titleFormControl.hasError('required')"> این فیلد ضروری می باشد</mat-error> 
+                </mat-form-field>
+              </div>              
+              <div class="col-span-4">
+                <app-select-search [dataSource]="userList" [(selectedId)]="model.userId" titleField="استاد کلاس" class="md:w-11/12 w-full"
+                    [fieldId]="'id'" [fieldTitle]="'fullName'">
+                </app-select-search>
+              </div>
+
+              <div class="col-span-4">
+                <mat-form-field appearance="outline" class="md:w-11/12 w-full">
+                    <mat-label  > توضیحات </mat-label>
+                  <input type="text" matInput name="description" [(ngModel)]="model.description"> 
+                </mat-form-field>
+              </div>
+          </div>
+          <div class="col-span-3 md:col-span-8">
+            <app-class-time-list  [classInfoId]="classInfoId" (OnEditModel)="setEditModel($event)" >              
+            </app-class-time-list>
+          </div>          
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>
