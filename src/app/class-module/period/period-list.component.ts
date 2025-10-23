@@ -211,6 +211,7 @@ export class PeriodListComponent implements OnInit {
           this.crudService.deleteById(Globals.UrlPeriod, id).subscribe(res=>{
             if(res){
               this.toastMessageService.showToast(NbToastStatus.SUCCESS,this.translate.instant('success-message'),this.translate.instant('deleted-is-successfully'))
+              this.getData();
             }
             else{
               this.toastMessageService.showToast(NbToastStatus.DANGER, this.translate.instant('error-message'), this.translate.instant('encountered-an-error'))
