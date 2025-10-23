@@ -71,6 +71,7 @@ export class PeriodFormComponent implements OnInit {
       this.crudService.postAdd(Globals.UrlPeriod, model).subscribe(res => {
         if (res) {
         this.toastMessageService.showToast(NbToastStatus.SUCCESS, "Success", "SuccessFully is Saved")
+        this.dialogRef.close();
         } else {
           this.toastMessageService.showToast(NbToastStatus.DANGER, "Warning ", res)
         }
@@ -79,6 +80,8 @@ export class PeriodFormComponent implements OnInit {
           this.toastMessageService.showToast(NbToastStatus.DANGER, "Server Error", error.Message);
         },
         () => {
+          this.dialogRef.close();
+
           this.splashScreenService.hide();
           
         })
@@ -86,6 +89,8 @@ export class PeriodFormComponent implements OnInit {
         this.crudService.putData(Globals.UrlPeriod, model, model.id).subscribe(res => {
           if (res) {
           this.toastMessageService.showToast(NbToastStatus.SUCCESS, "Success", "SuccessFully is Saved")
+          this.dialogRef.close();
+
           } else {
             this.toastMessageService.showToast(NbToastStatus.DANGER, "Warning ", res)
           }
@@ -95,6 +100,8 @@ export class PeriodFormComponent implements OnInit {
         },
         () => {
           this.splashScreenService.hide();          
+          this.dialogRef.close();
+
         })
       }    
     }
