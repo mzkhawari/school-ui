@@ -21,7 +21,8 @@ export class ClassStudentListComponent implements OnInit, OnChanges {
   @Input()
   classInfoId:number =0;
 
-
+  @Input()
+  isupdatemodel:boolean | undefined;
   
   _isRefresh: boolean;
   get isRefresh():any {
@@ -34,11 +35,11 @@ export class ClassStudentListComponent implements OnInit, OnChanges {
   @Output() isRefreshChange :EventEmitter<boolean> = new EventEmitter<any>();
   
 
+
   ngOnChanges(changes: SimpleChanges): void {
-    this.getData();
-      
-    if(changes['isRefresh']){
-      this.isRefresh = false;
+    if (changes['isupdatemodel']) {
+      this.getData();
+      this.isupdatemodel=false
     }
   }
   

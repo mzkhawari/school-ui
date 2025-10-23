@@ -78,6 +78,15 @@ export class ClassStudentFormComponent implements OnInit {
         });
   }
 
+  isRefresh2:boolean=false;
+  backBoolean(){
+    if (this.isRefresh2 == false) {    
+      this.isRefresh2 = true
+    }else if (this.isRefresh2 == true) {
+      this.isRefresh2 = false      
+    }
+    // this.getOption();
+  }
 
   isRefresh:boolean = false;
   OnSave(model: StudentClassInfoDto) {
@@ -95,6 +104,8 @@ export class ClassStudentFormComponent implements OnInit {
           this.isRefresh = !this.isRefresh;
           this.OnRefreshList.next(true);
           this.modelStudent ={};
+          this.model = new StudentClassInfoDto ()
+          this.backBoolean()
         } else {
           this.toastMessageService.showToast(NbToastStatus.DANGER, "Warning ", res)
         }
