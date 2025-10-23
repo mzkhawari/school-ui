@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, Validators, NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastMessageService, NbToastStatus, MyErrorStateMatcher } from 'app/common-service/service/toast-message.service';
@@ -19,10 +19,15 @@ export class StudentFormComponent implements OnInit {
   isViewForm = false;
   isSaveButton = true;
   ishomepage = false;
+  brithDat: any = new Date('2015/03/21');
+  // brithDat: Date = new Date('2000/01/01');
   returnUrlAddress = '';
 
   imageURL: string = "../../../../assets/images/Akramzada/avatar-pic.png";
   selectedFileAvatar?: File;
+
+  @Output() refrsh = new EventEmitter<boolean>();
+
 
   constructor(
     public dialogRef: MatDialogRef<StudentFormComponent>,
@@ -32,11 +37,14 @@ export class StudentFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.addstring = this.translate.instant('add-student');
-    this.editstring = this.translate.instant('edit-student');
+    this.addstring = this.translate.instant('اضافه کردن دانش آموز');
+    this.editstring = this.translate.instant('ویرایش دانش آموز');
+
+
 
     if (!this.model) this.model = new StudentDto();
     if (!this.model.id) this.model.id = 0;
+    this.model.brithDate = this.getCurrentDate(new Date());
   }
 
   // Image upload
@@ -81,6 +89,17 @@ export class StudentFormComponent implements OnInit {
         model.id = 0;
       }
 
+
+      if (this.brithDat !== undefined) {
+        if (this.brithDat._d !== undefined) {
+          let date: Date = this.brithDat._d;
+          this.model.brithDate = this.getCurrentDate(date);
+        } else {
+          let date: Date = new Date(this.brithDat);
+          this.model.brithDate = this.getCurrentDate(date);
+        }
+      }
+
       model.userId =0;
       const formData: FormData = new FormData();
       let modelData: any = model;
@@ -94,12 +113,16 @@ export class StudentFormComponent implements OnInit {
         //let ext = name !== '' ? name.split('.')[1] : '';
         formData.append('file', this.selectedFileAvatar, `avatar-${name}`);
       }
+
+
+      
   
   
       
       this.crudService.postFormData(`${Globals.UrlStudent}postStudentAvatar`, formData).subscribe(res => {
         if (res) {
           this.toastService.showToast(NbToastStatus.SUCCESS,this.translate.instant('success-message'),this.translate.instant('added-successfully'))
+          this.refrsh.emit(true)
           this.dialogRef.close();
         } else {
           this.toastService.showToast(NbToastStatus.DANGER,this.translate.instant('error-message'),this.translate.instant('unknown-error'))
@@ -112,4 +135,20 @@ export class StudentFormComponent implements OnInit {
           this.dialogRef.close();
         })
     }
+
+    private getCurrentDate(date:any){
+      const year = date.getFullYear(); // سال (مثلاً 2023)
+      const month = date.getMonth() + 1; // ماه (۰ تا ۱۱، پس +۱ لازم است)
+      const day = date.getDate(); // روز ماه
+      if (month < 10 && day < 10) {       
+        return `${year}-${0}${month}-${0}${day}`;
+      }else if (month > 10 && day > 10) {
+        return `${year}-${month}-${day}`;
+      }else if (month < 10 && day > 10) {
+        return `${year}-${0}${month}-${day}`; 
+      }else if (month < 10 && day < 10) {
+        return `${year}-${month}-${0}${day}`;   
+      }
+    }
+
 }

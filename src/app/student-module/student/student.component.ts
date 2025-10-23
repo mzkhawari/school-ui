@@ -140,8 +140,22 @@ export class StudentComponent implements OnInit {
 
   onAdd(dataModel?:any){
     const activeModal = this.modalService.open(StudentFormComponent);
-    activeModal.componentInstance.model = Object.assign({},dataModel);        
+    activeModal.componentInstance.model = Object.assign({},dataModel);  
+    activeModal.componentInstance.refrsh.subscribe((value: boolean) => {
+      this.refresh(value); // این تابع رو اجرا می‌کنی تا لیست به‌روزرسانی بشه
+      // console.log('Refresh value received:', value);
+      // if (value) {
+      // }
+    });
   }
+
+  refresh(item:any){
+    debugger;
+    if(item == true){
+      this.getData();
+    }
+  }
+  
   
   onAddView(dataModel?:any){
     const activeModal = this.modalService.open(StudentFormComponent);
