@@ -73,6 +73,17 @@ export class ClassTimeFormComponent implements OnInit {
     }
   }
 
+  isRefresh:boolean=false;
+  backBoolean(){
+    if (this.isRefresh == false) {    
+      this.isRefresh = true
+    }else if (this.isRefresh == true) {
+      this.isRefresh = false      
+    }
+    this.getOption();
+
+  }
+
   OnSave(model: ClassTimeDto) {
      
     model.classInfoId = this.classInfoId;
@@ -86,8 +97,10 @@ export class ClassTimeFormComponent implements OnInit {
       this.crudService.postAdd(Globals.UrlClassTime, model).subscribe(res => {
         if (res) {
           this.toastMessageService.showToast(NbToastStatus.SUCCESS, "Success", "SuccessFully is Saved")
-          this.dialogRef.close();     
+          // this.dialogRef.close();     
           this.OnRefreshList.next(true);
+          this.model = new ClassTimeDto ()
+          this.backBoolean()
         } else {
           this.toastMessageService.showToast(NbToastStatus.DANGER, "Warning ", res)
         }
@@ -103,8 +116,10 @@ export class ClassTimeFormComponent implements OnInit {
         this.crudService.putData(Globals.UrlClassTime, model, model.id).subscribe(res => {
           if (res) {
             this.toastMessageService.showToast(NbToastStatus.SUCCESS, "Success", "SuccessFully is Saved")
-            this.dialogRef.close();     
-            this.OnRefreshList.next(true);     
+            // this.dialogRef.close();     
+            this.OnRefreshList.next(true);
+            this.model = new ClassTimeDto ()
+            this.backBoolean()     
           } else {
             this.toastMessageService.showToast(NbToastStatus.DANGER, "Warning ", res)
           }

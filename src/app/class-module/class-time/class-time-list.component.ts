@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NbToastStatus, ToastMessageService } from '../../common-service/service/toast-message.service';
 import { BaseCrudService } from '../../common-service/service/base-crud.service';
 import { AccessItemDto } from 'app/common-service/models/access-item.dto';
@@ -17,13 +17,15 @@ import { ActionTypes } from 'app/common-module/common-component-grid-material/mo
   selector: 'app-class-time-list',
   templateUrl: './class-time-list.component.html',
 })
-export class ClassTimeListComponent implements OnInit {
+export class ClassTimeListComponent implements OnInit,  OnChanges  {
 
 
   @Input()
   classInfoId:number =0;
 
-  
+  @Input()
+  isupdatemodel:boolean | undefined;
+
   @Output()  
   OnEditModel: EventEmitter<ClassTimeDto> =  new EventEmitter();
 
@@ -53,6 +55,13 @@ export class ClassTimeListComponent implements OnInit {
     this.getData()
     this.isBorderButton=res;   
   }
+
+    ngOnChanges(changes: SimpleChanges): void {
+      if (changes['isupdatemodel']) {
+        this.getData();
+        this.isupdatemodel=false
+      }
+    }
 
 
   columns = [

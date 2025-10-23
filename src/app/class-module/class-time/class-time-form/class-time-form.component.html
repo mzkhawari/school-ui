@@ -30,7 +30,7 @@
               </div>
           </div>
           <div class="col-span-3 md:col-span-8">
-            <app-class-time-list  [classInfoId]="classInfoId" (OnEditModel)="setEditModel($event)" >              
+            <app-class-time-list  [classInfoId]="classInfoId" (OnEditModel)="setEditModel($event)" [isupdatemodel]="isRefresh">              
             </app-class-time-list>
           </div>          
         </div>
