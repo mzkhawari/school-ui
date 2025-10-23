@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NbToastStatus, ToastMessageService } from '../../common-service/service/toast-message.service';
 import { BaseCrudService } from '../../common-service/service/base-crud.service';
 import { AccessItemDto } from 'app/common-service/models/access-item.dto';
@@ -17,7 +17,7 @@ import { PeriodDayDto } from '../models/priod-day.dto';
   selector: 'app-period-day-list',
   templateUrl: './period-day-list.component.html',
 })
-export class PeriodDayListComponent implements OnInit {
+export class PeriodDayListComponent implements OnInit ,  OnChanges {
 
 
   @Input()
@@ -25,6 +25,9 @@ export class PeriodDayListComponent implements OnInit {
 
   @Output()  
   OnEditModel: EventEmitter<PeriodDayDto> =  new EventEmitter();
+
+  @Input()
+  isupdatemodel:boolean | undefined;
 
 
   datasource: ClassTimeDto[] = [];
@@ -96,6 +99,12 @@ export class PeriodDayListComponent implements OnInit {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['isupdatemodel']) {
+      this.getData();
+      this.isupdatemodel=false
+    }
+  }
   onPrint(modelItem) {
   }
 

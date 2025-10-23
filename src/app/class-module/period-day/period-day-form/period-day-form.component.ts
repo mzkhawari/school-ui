@@ -48,6 +48,16 @@ export class PeriodDayFormComponent implements OnInit {
     this.getOption();
     this.dateFrom = this.getCurrentDate(new Date());
   }
+  isRefresh:boolean=false;
+  backBoolean(){
+    if (this.isRefresh == false) {    
+      this.isRefresh = true
+    }else if (this.isRefresh == true) {
+      this.isRefresh = false      
+    }
+    this.getOption();
+
+  }
 
 
     getOption() {
@@ -114,6 +124,8 @@ export class PeriodDayFormComponent implements OnInit {
         if (res) {
           this.toastMessageService.showToast(NbToastStatus.SUCCESS, "Success", "SuccessFully is Saved")
           this.OnRefreshList.next(true);
+          this.model = new PeriodDayDto ()
+          this.backBoolean()
         } else {
           this.toastMessageService.showToast(NbToastStatus.DANGER, "Warning ", res)
         }
@@ -128,7 +140,10 @@ export class PeriodDayFormComponent implements OnInit {
         this.crudService.putDataUrl(Globals.UrlPeriodDay, "putValue", model).subscribe(res => {
           if (res) {
             this.toastMessageService.showToast(NbToastStatus.SUCCESS, "Success", "SuccessFully is Saved")
-            this.OnRefreshList.next(true);     
+            this.OnRefreshList.next(true); 
+            this.model = new PeriodDayDto () 
+            this.backBoolean()
+   
           } else {
             this.toastMessageService.showToast(NbToastStatus.DANGER, "Warning ", res)
           }
