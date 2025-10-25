@@ -13,8 +13,14 @@ export class FormatService {
    * @param colMeta اطلاعات ستون (اختیاری)
    */
   formatValue(value: any, colMeta?: any): string {
-    if (value === null || value === undefined || value === '') return '-';
 
+    console.log(value)
+    if (value === null || value === undefined || value === '') return '-';
+    
+        if (colMeta?.isStiker === true) {
+          return this.formatAsStiker(value);
+        }
+    
     // ✅ اگر ستون از نوع بولین (چک‌باکسی) باشد
     if (colMeta?.isBoolean === true) {
       return this.formatBoolean(value);
@@ -50,6 +56,12 @@ export class FormatService {
       : `<i class="feather-x-circle text-muted" style="font-size:16px; opacity:0.5;"></i>`;
   }
 
+  private formatAsStiker(value: any): string {
+    const num = Number(value); // تبدیل string به عدد
+    if (num === 1) return `<span>✔</span>`;
+    if (num === 2) return `<span>⏰✔</span>`;
+    return `<span>✖</span>`;
+  }
   /**
    * 🔹 بررسی عددی بودن مقدار
    */
