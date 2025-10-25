@@ -1,0 +1,25 @@
+<ng-container >
+    <div class="w-full mx-8" >
+      <div style="width: 100%;" class="max-h-fit" >
+        
+        <app-grid-new 
+          isHeader="true"
+          [isAdding]="false"
+          [title]="titlelist"
+          [isCloseButton]="false"
+          [datasource]="datasource"
+          [isAddItem]="true"
+          titleButton2="پرینت" 
+          (OnAddItem2)="print()"
+          [issearch]="true"
+          (OnSearch)="OnSearch()"
+          [columns]="columns"                  
+          [actionList]="actionList" 
+          (OnActionItem)="onActionResult($event)">
+        </app-grid-new>
+      </div>
+    </div>
+  </ng-container>
+  
+  
+  

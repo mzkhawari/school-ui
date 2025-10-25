@@ -30,7 +30,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon: 'feather:plus-circle',
                 link: 'student/student/add'
             },
-                       
+                                   
         ]
     },
     {
@@ -76,6 +76,14 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: ' گزارش حضور دانش آموز ',
                 type: 'basic',
                 link: 'report/report-transfer-info',
+                icon: 'feather:report',
+            },
+
+            {
+                id: 'report.presence-absence',
+                title: ' گزارش حضور و غیاب ',
+                type: 'basic',
+                link: 'report/presence-absence',
                 icon: 'feather:report',
             },
    
