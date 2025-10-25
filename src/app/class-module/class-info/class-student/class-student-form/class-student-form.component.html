@@ -7,19 +7,19 @@
        </app-page-header>
       <div class=" bg-white">
         <div class="grid grid-cols-6 ">           
-          <div class="col-span-1 ">            
+          <div class="md:col-span-1 col-span-3">            
             <mat-form-field appearance="outline" class="md:w-11/12 w-full">
               <mat-label  > کد دانش آموز </mat-label>
               <input type="text" matInput name="code" [(ngModel)]="code"  > 
             </mat-form-field>
           </div>   
-          <div class="col-span-1">
+          <div class="md:col-span-1 col-span-3">
             <button class="mr-4" type="button" mat-flat-button [color]="'primary'" (click)="onSearch()" >
               <mat-icon [svgIcon]="'heroicons_outline:search'"></mat-icon>
               <span class="ml-2 mr-1"> جستجو </span>
             </button>              
           </div>
-          <div class="col-span-4 flex flex-row"  *ngIf="modelStudent.id !=undefined" >
+          <div class="md:col-span-4 col-span-6 flex-row"  *ngIf="modelStudent.id !=undefined" >
               <div>     <img [src]="modelStudent.picAvatarThumb" style="width: 80px;" />
               </div>
               <div>  {{modelStudent.fullName}}
