@@ -24,6 +24,11 @@ import { ReportPresenceAbsenceComponent } from './report-presence-absence/report
 export class PresenceAbsenceComponent implements OnInit {
 
   datasource : any[]=[];
+  classList:any[]=[];
+  yearList:any[]=[];
+  yearId:number;
+  classId:number;
+  returnUrlAddress:string;
   private baseUrlApi : string = "";
   accessItem :AccessItemDto;
     constructor(
@@ -40,74 +45,50 @@ export class PresenceAbsenceComponent implements OnInit {
       this.baseUrlApi = Globals.UrlPresenceAbsence ;        
    }
 
+  //  res:any[]=[
+  //   {id:"1",code:2,day701:1,day702:1,day703:1,day704:1,day705:1,day706:1,day707:1,day708:1,day709:1,day7010:1,day7011:1,day7012:1,day7013:1,day7014:1}
+  //  ]
+
+   res:any[]=[
+    {id:"1",fullName:'رضا فدایی',code:34234,day:[{title:"7/01",status:1},{title:"7/02",status:0},{title:"7/03",status:1},{title:"7/04",status:1},{title:"7/04",status:0},{title:"7/05",status:1},{title:"7/06",status:1},{title:"7/07",status:0},{title:"7/08",status:1},{title:" 7/09",status:1},{title:" 7/10",status:1},{title:" 7/11",status:1},{title:" 7/12",status:1},{title:" 7/13",status:0},{title:" 7/14",status:1},{title:" 7/15",status:1},{title:" 7/16",status:1},{title:" 7/17",status:0},]},
+    {id:"2",fullName:'احمد رضایی',code:234234,day:[{title:" 7/01",status:1},{title:" 7/02",status:1},{title:" 7/03",status:1},{title:" 7/04",status:1},{title:" 7/04",status:1},{title:" 7/05",status:1},{title:" 7/06",status:1},{title:" 7/07",status:1},{title:" 7/08",status:1},{title:" 7/09",status:1},{title:" 7/10",status:1},{title:" 7/11",status:1},{title:" 7/12",status:1},{title:" 7/13",status:1},{title:" 7/14",status:1},{title:" 7/15",status:1},{title:" 7/16",status:1},{title:" 7/17",status:1},]},
+    {id:"3",fullName:'محسن کریمی',code:23123,day:[{title:" 7/01",status:1},{title:" 7/02",status:2},{title:" 7/03",status:1},{title:" 7/04",status:0},{title:" 7/04",status:0},{title:" 7/05",status:1},{title:" 7/06",status:1},{title:" 7/07",status:1},{title:" 7/08",status:0},{title:" 7/09",status:1},{title:" 7/10",status:1},{title:" 7/11",status:1},{title:" 7/12",status:1},{title:" 7/13",status:1},{title:" 7/14",status:1},{title:" 7/15",status:1},{title:" 7/16",status:1},{title:" 7/17",status:1},]},
+    {id:"4",fullName:'علی اخلاقی',code:432323,day:[{title:" 7/01",status:2},{title:" 7/02",status:2},{title:" 7/03",status:1},{title:" 7/04",status:1},{title:" 7/04",status:0},{title:" 7/05",status:1},{title:" 7/06",status:1},{title:" 7/07",status:1},{title:" 7/08",status:1},{title:" 7/09",status:1},{title:" 7/10",status:1},{title:" 7/11",status:1},{title:" 7/12",status:0},{title:" 7/13",status:1},{title:" 7/14",status:1},{title:" 7/15",status:1},{title:" 7/16",status:1},{title:" 7/17",status:1},]},
+    {id:"5",fullName:'محمد زکی خاوری',code:344343,day:[{title:" 7/01",status:1},{title:" 7/02",status:1},{title:" 7/03",status:1},{title:" 7/04",status:1},{title:" 7/04",status:1},{title:" 7/05",status:1},{title:" 7/06",status:1},{title:" 7/07",status:2},{title:" 7/08",status:2},{title:" 7/09",status:1},{title:" 7/10",status:1},{title:" 7/11",status:1},{title:" 7/12",status:2},{title:" 7/13",status:1},{title:" 7/14",status:1},{title:" 7/15",status:1},{title:" 7/16",status:0},{title:" 7/17",status:1},]},
+    {id:"6",fullName:'حسن انصاری',code:5445,day:[{title:" 7/01",status:2},{title:" 7/02",status:1},{title:" 7/03",status:1},{title:" 7/04",status:0},{title:" 7/04",status:2},{title:" 7/05",status:1},{title:" 7/06",status:1},{title:" 7/07",status:0},{title:" 7/08",status:0},{title:" 7/09",status:1},{title:" 7/10",status:0},{title:" 7/11",status:2},{title:" 7/12",status:0},{title:" 7/13",status:0},{title:" 7/14",status:1},{title:" 7/15",status:0},{title:" 7/16",status:1},{title:" 7/17",status:2},]},
+    {id:"7",fullName:'مصطفی میرزایی',code:3434,day:[{title:" 7/01",status:1},{title:" 7/02",status:1},{title:" 7/03",status:1},{title:" 7/04",status:1},{title:" 7/04",status:2},{title:" 7/05",status:1},{title:" 7/06",status:1},{title:" 7/07",status:1},{title:" 7/08",status:1},{title:" 7/09",status:1},{title:" 7/10",status:0},{title:" 7/11",status:1},{title:" 7/12",status:1},{title:" 7/13",status:1},{title:" 7/14",status:1},{title:" 7/15",status:1},{title:" 7/16",status:1},{title:" 7/17",status:1},]},
+    {id:"8",fullName:'رضا غلامی',code:312123,day:[{title:" 7/01",status:1},{title:" 7/02",status:1},{title:" 7/03",status:1},{title:" 7/04",status:0},{title:" 7/04",status:2},{title:" 7/05",status:1},{title:" 7/06",status:1},{title:" 7/07",status:1},{title:" 7/08",status:1},{title:" 7/09",status:1},{title:" 7/10",status:1},{title:" 7/11",status:1},{title:" 7/12",status:1},{title:" 7/13",status:1},{title:" 7/14",status:1},{title:" 7/15",status:1},{title:" 7/16",status:1},{title:" 7/17",status:1},]},
+    {id:"9",fullName:'قاسم قاسمی',code:678456,day:[{title:" 7/01",status:1},{title:" 7/02",status:2},{title:" 7/03",status:1},{title:" 7/04",status:1},{title:" 7/04",status:2},{title:" 7/05",status:1},{title:" 7/06",status:1},{title:" 7/07",status:1},{title:" 7/08",status:2},{title:" 7/09",status:1},{title:" 7/10",status:1},{title:" 7/11",status:0},{title:" 7/12",status:2},{title:" 7/13",status:0},{title:" 7/14",status:1},{title:" 7/15",status:1},{title:" 7/16",status:1},{title:" 7/17",status:1},]}
+   ]
+
    routeSub: Subscription;
    routerEventsSub: Subscription;
    columns:any[]=[];
    title:string="";
    isBillMaterial:boolean = true;
-   checkShowColumn(){
+   checkShowColumn() {
+    this.columns = [
+      { dataField: "id", alignment: "right", caption: this.translate.instant('id'), width: 80, visible: false },
+      { dataField: "code", alignment: "center", caption: 'کد' },
+      { dataField: "fullName", alignment: "center", caption: 'نام و نام خانوداگی' }
+    ];
+  
 
-    this.columns = [    
-        {
-          dataField:"id", 
-          alignment:"right", 
-          caption:this.translate.instant('id'),
-          sortOrder:"desc",
-          width:80,
-          visible: false,
-        },        
-        {
-          dataField:"designShoesTitle",
-          alignment:"center",
-          caption: 'مدل',
-        },   
-        {
-          dataField:"colorTitle",
-          alignment:"center",
-          caption: 'رنگ',
-        },   
-        { 
-          dataField:"preFactorCount",
-          alignment:"center",
-          caption: 'پیش فاکتور',
-        },   
-        {
-          dataField:"warehouseCount",
-          alignment:"center",
-          caption: 'موجود در انبار',
-        }, 
-        {
-          dataField:"stationCutCount",
-          alignment:"center",
-          caption: 'بخش برش',
-        }, 
-        {
-          dataField:"stationPastiCount",
-          alignment:"center",
-          caption: 'بخش پستی',
-        },      
-        {
-          dataField:"stationPishkariCount",
-          alignment:"center",
-          caption: 'بخش پیشکاری',
-        },   
-        {
-          dataField:"stationKarJamCount",
-          alignment:"center",
-          caption: 'بخش کارجمع کنی',
-        },   
-        {
-          dataField:"totalCount",
-          alignment:"center",
-          caption: ' جمع کل',
-        }, 
-         {
-          dataField:"totalNetCount",
-          alignment:"center",
-          caption: ' جمع خالص',
-        },   
-      ];
+    if (this.datasource.length > 0) {
+      const days = this.datasource[0].day;
+      days.forEach((d, index) => {
+        this.columns.push({
+          caption: d.title,
+          dataField: `day${index}`, // یک فیلد موقت برای اتصال به rowData
+          alignment: "center",
+          calculateCellValue: (rowData: any) => rowData.day[index]?.status,
+          cellTemplate: 'stickerCell',
+          isStiker: true,
+        });
+      });
     }
+  }
+  
 
 
     titlelist:string=''
@@ -121,6 +102,7 @@ export class PresenceAbsenceComponent implements OnInit {
         this.get();
         this.checkShowColumn() // مطمئن شوید که get بعد از تنظیم isBillMaterial فراخوانی شود.
       });
+      this.returnUrlAddress = '/index-info';
     }
 
     updateWarehouseType(type: string) {
@@ -131,7 +113,7 @@ export class PresenceAbsenceComponent implements OnInit {
         this.titlelist = 'لیست موجودی محصولات';
         this.isBillMaterial = false;
       } else {
-        this.titlelist = 'وضعیت موجودی با پیش فاکتور و تولید';
+        this.titlelist = 'وضعیت حضور و غیاب';
         this.isBillMaterial = false;
       }
     }
@@ -181,18 +163,26 @@ export class PresenceAbsenceComponent implements OnInit {
 
 
   isLoading:Boolean=false;
-  private get(){
-    // if(!this.accessKeywordService.checkAccessShow(AccessKeyword.ACCKEY_Warehouse_Detail)){
-    //   return ;
-    // }
-    this.crudService.getDataUrl(this.baseUrlApi, `GetWarehouseByFactor`).subscribe(res=>{
-      this.datasource = res ;     
-    },
-    error =>{
-      this.toastMessageService.showToast(NbToastStatus.DANGER,this.translate.instant('server-error'), error.Message);
-    });
-  }  
+  // private get(){
+  //   // if(!this.accessKeywordService.checkAccessShow(AccessKeyword.ACCKEY_Warehouse_Detail)){
+  //   //   return ;
+  //   // }
+  //   this.crudService.getDataUrl(this.baseUrlApi, `GetWarehouseByFactor`).subscribe(res=>{
+  //     this.datasource = res ;     
 
+      
+  //   },
+  //   error =>{
+  //     this.toastMessageService.showToast(NbToastStatus.DANGER,this.translate.instant('server-error'), error.Message);
+  //   });
+  // }  
+  private get() {
+    this.datasource = this.res; // دیتا بدون تغییر
+  }
+  
+  
+  
+  
     actionList: ActionType[] = [
       // { isShow: true, title:this.translate.instant('edit'), icon: ActionIcon.Edit, level: ActionColor.Primary },
       // { isShow: true, title:this.translate.instant('delete'), icon: ActionIcon.Delete, level: ActionColor.Danger },

@@ -1,85 +1,50 @@
-<!-- <app-report-search 
-    [title]="titlelist" 
-    [config]="configSearch" 
-    (OnSearch)="onSearchReport($event)"
-    (OnPrint)="Print()"
-    (onXlsx)="exportToExcel()"
-    [isShowPrintButton]="true"
-    [isShowxlsxButton]="true">
-</app-report-search> -->
-
+<div class="w-full mx-1">
+  <app-page-header 
+    title="گزارش حضور و غیاب"
+    [isSaveButton]="false"
+    [isCloseButton]="true"
+    txtCustomButton2="پرینت"
+    (OnSaveCustom2)="Print()"
+    (OnClose)="closeModal()">
+  </app-page-header>
+</div>
 <ng-container>
   <div class="w-full mx-1">
-    <div style="width: 100%;" class="max-h-fit" style="height: 440px !important; overflow: hidden;">
-      <app-page-header 
-      [title]="titlelist"
-      [isSaveButton]="false"            
-      [isCloseButton]="true"
-      txtCustomButton2="پرینت"  
-      (OnSaveCustom2)="Print()"
-      (OnClose)="dialogRef.close()" >
-    </app-page-header>
-      <div id="print-section" style="height:353px; overflow-y: auto;">
-        <table class="table" #myTable  style="border:1px solid #000; text-align: center; width: 100%;"  >
-          <thead >
-            <tr>
-              <td colspan="2" style="font-size: 18px;"> 
-                <div class="logo2">
-                  <p class="sub"  style="width: 100%;">حضور غیاب</p>
-                </div>
-              </td>
-              <td colspan="9" >
-                <grid-header-print #topHeader [dataSource]="dataHeader">
-                </grid-header-print>
-              </td>
-            </tr>
-            <tr style="font-size: 14px;" > 
-              <td >{{'number2'|translate}}</td>
-              <td style="width: 100px;">مدل</td>
-              <td >رنگ</td>
-              <td >پیش فاکتور</td>
-              <td >موجود درانبار</td>
-              <td >بخش برش</td>
-              <td >بخش پستی</td>           
-              <td >بخش پیشکاری</td>           
-              <td >بخش کار جمع کنی</td>           
-              <td >جمع کل </td>           
-              <td >جمع خالص</td>           
-            </tr>
-          </thead>
-          <tbody>
-            <tr  *ngFor="let item of datasource; let i = index" >
-              <td>{{i+1}}</td>
-              <td *ngIf="isFirstItemInZone(i)" class="color_bg" [attr.rowspan]="getZoneCount(item.designShoesTitle)">
-                <div class="flexx"><p class="rotated-text">{{ item.designShoesTitle }}</p></div>
-              </td>
-              <td>{{item.colorTitle}}</td>
-              <td>{{item.preFactorCount}}</td>
-              <td>{{item.warehouseCount}}</td>
-              <td>{{item.stationCutCount}}</td>
-              <td>{{item.stationPastiCount }}</td>
-              <td>{{item.stationPishkariCount }}</td>            
-              <td>{{item.stationKarJamCount }}</td>            
-              <td>{{item.totalCount }}</td>            
-              <td>{{item.totalNetCount }}</td>            
-            </tr>
-            <tr *ngIf="datasource.length ==0" ><td style="text-align: center;" colspan="6" >{{'no-data'|translate}}</td></tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="3" >{{'summary-total'|translate}}</td>
-              <td>{{calculateSum(datasource, 'preFactorCount')  }}</td>
-              <td>{{calculateSum(datasource, 'warehouseCount')  }}</td>
-              <td>{{calculateSum(datasource, 'stationCutCount')  }}</td>
-              <td>{{calculateSum(datasource, 'stationPastiCount')  }}</td>
-              <td>{{calculateSum(datasource, 'stationPishkariCount')  }}</td>
-              <td>{{calculateSum(datasource, 'stationKarJamCount')  }}</td>
-              <td>{{calculateSum(datasource, 'totalCount')  }}</td>
-              <td>{{calculateSum(datasource, 'totalNetCount')  }}</td>
-            </tr>  
-          </tfoot>
-        </table>
-      </div>
+
+    <div id="print-section" style="margin-top: 10px;">
+      <table #myTable>
+        <thead>
+          <tr>
+            <th>ردیف</th>
+            <th>نام و نام خانوادگی</th>
+            <th>کد</th>
+            <th *ngFor="let d of days">
+              <span style="display: inline-block; transform: rotate(-90deg); white-space: nowrap;">
+                {{ d }}
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of datasource; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.fullName }}</td>
+            <td>{{ item.code }}</td>
+            <td *ngFor="let d of item.day">
+              <span 
+                [ngClass]="
+                  d.status === 1 ? 'present' : 
+                  d.status === 2 ? 'late' : 'absent'
+                ">
+                {{ d.status === 1 ? '✔' : (d.status === 2 ? '⏰✔' : '✖') }}
+              </span>
+            </td>
+          </tr>
+          <tr *ngIf="datasource.length === 0">
+            <td colspan="100%">داده‌ای یافت نشد</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </ng-container>

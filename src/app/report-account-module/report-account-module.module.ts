@@ -12,6 +12,8 @@ import { ReportPresenceAbsenceComponent } from './presence-absence/report-presen
 import { PresenceAbsenceComponent } from './presence-absence/presence-absence.component';
 import { CommonComponentGridMaterialModule } from 'app/common-module/common-component-grid-material/common-component-grid-material.module';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { CommonComponentPageHeaderMaterialModule } from 'app/common-module/common-component-page-header-material/common-component-page-header-material.module';
+import { CommonComponentSelectMaterialModule } from 'app/common-module/common-component-select-material/common-component-select-material.module';
 
 @NgModule({
     declarations: [
@@ -27,7 +29,9 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
         CommonModule,
         TranslateModule,
         CommonComponentGridDevexpressModule,
-        CommonComponentGridMaterialModule
+        CommonComponentGridMaterialModule,
+        CommonComponentPageHeaderMaterialModule,
+        CommonComponentSelectMaterialModule
         //ReportSearchModule,
     ],    
     providers: [

@@ -1,0 +1,81 @@
+body {
+    font-family: "Tahoma", "IranSans", sans-serif;
+    margin: 16px;
+    direction: rtl;
+    background-color: #fff;
+    color: #000;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse !important;
+    border: 2px solid #000 !important;
+  }
+
+  th, td {
+    border: 1px solid #000 !important;
+    padding: 6px 4px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  thead th {
+    background-color: #e0e0e0 !important;
+    font-weight: bold;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f8f8f8 !important;
+  }
+
+  tfoot td {
+    background-color: #eaeaea !important;
+    font-weight: bold;
+  }
+
+  /* 👇 تضمین نمایش رنگ‌ها و خطوط در preview پاپ‌آپ */
+  /* * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  } */
+
+  /* 👇 برای مرورگرهای قدیمی‌تر */
+  table, th, td {
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-color: black !important;
+  }
+
+  /* ✅ تضمین اینکه قبل از پرینت هم خطوط دیده بشن */
+  html, body {
+    zoom: 1;
+    transform: scale(1);
+  }
+
+  @media print {
+    th, td {
+      font-size: 9px !important;
+    }
+  
+    th.rotate > div, 
+    th span {
+      font-size: 8px !important;
+    }
+  }
+
+  .present {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .absent {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .late {
+    color: orange;  /* رنگ تاخیر */
+    font-weight: bold;
+  }
+  

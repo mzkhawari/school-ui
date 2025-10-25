@@ -1,20 +1,48 @@
 <ng-container >
     <div class="w-full mx-8" >
       <div style="width: 100%;" class="max-h-fit" >
+
+        <app-page-header 
+          [title]="titlelist"
+          txtCustomButton="جستجو"
+          (OnSaveCustom)="OnSearch()"
+          [isSaveButton]="false"
+          [isCloseButton]="false"
+          [returnUrl]="returnUrlAddress">
+        </app-page-header>
+
+        <div class="grid grid-cols-12">
+          <div class="md:col-span-2 col-span-6">
+            <app-select-search 
+              [dataSource]="yearList" 
+              [(selectedId)]="yearId" 
+              titleField="سال" 
+              [fieldId]="'id'" 
+              [fieldTitle]="'title'">
+            </app-select-search>
+          </div>
+
+          <div class="md:col-span-2 col-span-6">
+            <app-select-search 
+            [dataSource]="classList" 
+            [(selectedId)]="classId" 
+            titleField="کلاس" 
+            [fieldId]="'id'" 
+            [fieldTitle]="'title'">
+            </app-select-search>
+          </div>
+        </div>
         
         <app-grid-new 
-          isHeader="true"
+          [isHeader]="false"
           [isAdding]="false"
           [title]="titlelist"
           [isCloseButton]="false"
           [datasource]="datasource"
-          [isAddItem]="true"
-          titleButton2="پرینت" 
-          (OnAddItem2)="print()"
-          [issearch]="true"
-          (OnSearch)="OnSearch()"
           [columns]="columns"                  
           [actionList]="actionList" 
+          [isShowPrint]="true"
+          (OnPrintItem)="print()"
           (OnActionItem)="onActionResult($event)">
         </app-grid-new>
       </div>
