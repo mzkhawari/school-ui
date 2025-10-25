@@ -24,6 +24,16 @@
 
           <div class="md:col-span-2 col-span-6">
             <app-select-search 
+              [dataSource]="monthList" 
+              [(selectedId)]="monthId" 
+              titleField="ماه" 
+              [fieldId]="'id'" 
+              [fieldTitle]="'title'">
+            </app-select-search>
+          </div>
+
+          <div class="md:col-span-2 col-span-6">
+            <app-select-search 
             [dataSource]="classList" 
             [(selectedId)]="classId" 
             titleField="کلاس" 

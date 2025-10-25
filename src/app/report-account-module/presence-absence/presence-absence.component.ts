@@ -16,6 +16,7 @@ import { FormServerErrorMessageService } from 'app/common-service/validator-serv
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ReportPresenceAbsenceComponent } from './report-presence-absence/report-presence-absence.component';
+import { monthApi } from 'app/enum-api/month-api';
 
 @Component({
   selector: 'app-presence-absence',
@@ -26,6 +27,8 @@ export class PresenceAbsenceComponent implements OnInit {
   datasource : any[]=[];
   classList:any[]=[];
   yearList:any[]=[];
+  monthList:any[]=monthApi;
+  monthId:number;
   yearId:number;
   classId:number;
   returnUrlAddress:string;
