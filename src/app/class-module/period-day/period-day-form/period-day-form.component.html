@@ -10,7 +10,7 @@
           <div class="col-span-4 grid grid-cols-2 ">
             
               <div class="col-span-2">
-                <mat-form-field appearance="outline" class="md:w-11/12 w-full">
+                <mat-form-field appearance="outline" class="md:w-11/12 w-11/12">
                     <mat-label  > عنوان </mat-label>
                   <input type="text" matInput name="title" [(ngModel)]="model.title"  [formControl]="titleFormControl" required>
                   <mat-error *ngIf="titleFormControl.hasError('required')"> این فیلد ضروری می باشد</mat-error> 
@@ -26,14 +26,14 @@
                 <time-picker [titleFiled]="'ساعت شروع'"  [(time)]="model.hourFrom" ></time-picker>
               </div>
               <div class="col-span-1">
-                <time-picker [titleFiled]="'ساعت پایان'" [(time)]="model.hourTo" ></time-picker>
+                <time-picker [titleFiled]="'ساعت پایان'"  class="md:w-11/12 w-10/12" [(time)]="model.hourTo" ></time-picker>
               </div>
 
               <!-- <div class="col-span-4">
                 <mat-checkbox name="IsActive" [(ngModel)]="model.isActive" color="primary" >{{'active/inactive' | translate }}</mat-checkbox>
               </div> -->
           </div>
-          <div class="col-span-3 md:col-span-8">
+          <div class="col-span-4 md:col-span-8">
             <app-period-day-list  [periodId]="periodId" (OnEditModel)="setEditValue($event)" [isupdatemodel]="isRefresh" >              
             </app-period-day-list>
           </div>          
