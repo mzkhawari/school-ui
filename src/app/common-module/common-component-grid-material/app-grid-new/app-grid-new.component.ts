@@ -229,6 +229,17 @@ export class AppGridNewComponent {
             //options.cellElement.style.overflow = 'visible';       
             //options.cellElement.style.whiteSpace = 'nowrap';
         }
+
+        if (options.rowType === 'data') {
+            const col = options.column;
+            const value = options.value;
+        
+            // اگر ستون استیکر باشد
+            if (col.isStiker) {
+                options.cellElement.innerHTML = this.formatService.formatValue(value, col);
+                options.cellElement.style.textAlign = 'center';
+            }
+          }
     }
 
     // OnRowPrepared(e:any) {  
