@@ -17,6 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppGridGroupComponent } from './app-grid-group/app-grid-group.component';
 import { AppGridSimpleComponent } from './app-grid-simple/app-grid-simple.component';
 import { AppGridSimplePrintComponent } from './app-grid-simple-print/app-grid-simple-print.component';
+import { AppGridNewComponent } from './app-grid-new/app-grid-new.component';
 const MODULES = [
 ];
 
@@ -74,6 +75,7 @@ const MODULES = [
     AppGridSimpleComponent,
 
     AppGridSimplePrintComponent,
+    AppGridNewComponent
   ],
   exports: [
     AppGridComponent,
@@ -83,6 +85,7 @@ const MODULES = [
     AppGridSimpleComponent,
 
     AppGridSimplePrintComponent,
+    AppGridNewComponent
   ],
   entryComponents: [
 

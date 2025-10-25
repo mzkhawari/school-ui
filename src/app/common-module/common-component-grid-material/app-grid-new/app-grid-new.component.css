@@ -1,0 +1,393 @@
+@import '../../../../assets/dev-grid/dx.common.css';
+@import '../../../../assets/dev-grid/dx.light.css';
+@import '../../../../assets/font-icon/feather/feather.css';
+
+.mat-grid-tile .mat-figure {
+  justify-content: flex-start !important ;
+  align-items: flex-start !important;
+}
+
+table{
+  border-radius: 10px;
+}
+
+table , table >td , table > th {
+  font-family: "iran-iran-sans-serif", ui-iran-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",iran-sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  line-height: 1.5;
+}
+
+
+
+.dx-datagrid .dx-datagrid-header-panel .dx-toolbar .dx-toolbar-items-container , .dx-datagrid .dx-datagrid-headers {
+  font-family: "iran-iran-sans-serif", ui-iran-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",iran-sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-weight: bold;
+}
+
+.dx-gridbase-container{
+  font-family: "iran-iran-sans-serif", ui-iran-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",iran-sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+}
+
+.dx-datagrid-table, .dx-datagrid-table-fixed, .dx-header-row
+{
+  font-weight: bold !important;
+  color: black;
+}
+
+.dx-widget {
+  font-family: "iran-iran-sans-serif", ui-iran-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",iran-sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+}
+.dx-datagrid-headers {
+  color: #000 !important;
+  font-weight: bold !important ;
+  font-family: "iran-iran-sans-serif", ui-iran-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",iran-sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+}
+
+.dx-datagrid-text-content .dx-text-content-alignment-right{
+overflow: visible;
+}
+.dx-datagrid-nowrap .dx-header-row > td > .dx-datagrid-text-content{
+white-space: break-spaces!important;  
+}
+/* ✅ ساختار کلی و هماهنگی با DevExtreme */
+.responsive-grid {
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  direction: rtl;
+}
+
+/* ✅ در دسکتاپ – ظاهر تمیز و خوانا */
+.dx-datagrid {
+  font-family: "iran-iran-sans-serif", "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.dx-datagrid-headers {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #222;
+}
+
+.dx-datagrid .dx-row-alt {
+  background-color: #fafafa;
+}
+
+/* ✅ دکمه‌های اکشن */
+.action-buttons,
+.action-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: #f1f1f1;
+}
+
+.icon-btn.delete i {
+  color: #dc3545;
+}
+
+.icon-btn.edit i {
+  color: #007bff;
+}
+
+.thumb-img {
+  width: 48px;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* ✅ در حالت بدون داده */
+.no-data-text {
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #777;
+}
+
+/* ✅ واکنش‌گرایی برای موبایل */
+@media (max-width: 768px) {
+  /* فعال کردن اسکرول افقی */
+  .responsive-grid {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dx-datagrid {
+    min-width: 950px; /* برای اسکرول کامل جدول */
+    font-size: 12.5px;
+  }
+
+  .dx-datagrid .dx-header-row > td,
+  .dx-datagrid .dx-data-row > td {
+    white-space: nowrap !important;
+    padding: 6px 8px !important;
+  }
+
+  /* کنترل بهتر دکمه‌ها در موبایل */
+  .icon-btn {
+    padding: 4px;
+    font-size: 15px;
+  }
+
+  /* بهبود بخش‌بندی کارت مانند (اختیاری) */
+  .dx-datagrid-rowsview .dx-row {
+    border-bottom: 1px solid #eee;
+  }
+
+  /* در موبایل، فضاهای خالی کمتر */
+  .dx-datagrid-headers {
+    font-size: 13px;
+  }
+}
+
+
+
+
+/* ====== Wrapper ====== */
+.responsive-grid {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  overflow: hidden;
+  padding-bottom: 10px;
+}
+
+/* ====== Toolbar ====== */
+.mobile-toolbar {
+  display: none;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.switch-view {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.switch-view:hover {
+  background: linear-gradient(135deg, #0056b3, #003f88);
+}
+
+/* ====== Card View ====== */
+.card-view {
+  display: grid;
+  gap: 14px;
+  padding: 10px;
+}
+
+.card-item {
+  background: #fdfdfd;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eef1f5;
+  transition: all 0.25s ease;
+}
+
+.card-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ====== Header inside card ====== */
+.card-header {
+  border-bottom: 1px dashed #dce1e7;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 15px;
+  color: #212529;
+}
+
+.card-subtitle {
+  font-size: 13px;
+  color: #6c757d;
+}
+
+/* ====== Content fields ====== */
+.card-content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* دو ستون در هر ردیف */
+  gap: 10px 14px;
+}
+
+.card-field {
+  display: flex;
+  flex-direction: column;
+  background: #f9fafc;
+  border-radius: 8px;
+  padding: 6px 8px;
+  border: 1px solid #e6e9ef;
+  min-height: 55px;
+}
+
+.card-label {
+  font-weight: 600;
+  color: #666;
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.card-value {
+  font-size: 13px;
+  color: #222;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* ====== Actions ====== */
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 6px;
+  border-top: 1px dashed #dee2e6;
+}
+
+/* ====== Dynamic button styles ====== */
+.btn.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn.btn-icon:hover {
+  transform: scale(1.08);
+}
+
+.btn.success { background: #28a745; }
+.btn.danger  { background: #dc3545; }
+.btn.warning { background: #ffc107; color: #000; }
+.btn.info    { background: #17a2b8; }
+
+/* ====== Responsive Rules ====== */
+@media (max-width: 768px) {
+  .mobile-toolbar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .grid-wrapper {
+    overflow-x: auto;
+  }
+
+  /* جدول عادی اگر فعال باشد */
+  .dx-datagrid {
+    min-width: 900px;
+  }
+
+  /* ساختار کارت در موبایل */
+  .card-view {
+    grid-template-columns: 1fr; /* کارت‌ها در یک ستون */
+  }
+
+  /* محتوا در هر کارت به صورت دو ستون */
+  .card-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 10px;
+  }
+
+  .card-field {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .card-title {
+    font-size: 15px;
+  }
+
+  /* ستون عملیات در موبایل نمایش داده نشود */
+  /* .card-actions {
+    display: none !important;
+  } */
+}
+
+/* 🔍 نوار جستجو در موبایل */
+.mobile-search-box {
+  display: flex;
+  justify-content: center;
+  padding: 8px 12px;
+}
+
+.mobile-search-box input {
+  width: 100%;
+  max-width: 320px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.mobile-search-box input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.3);
+}
+
+/* 📄 پیج‌بندی موبایل */
+.mobile-pager {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+  font-size: 13px;
+  color: #333;
+}
+
+.mobile-pager button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-pager button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+

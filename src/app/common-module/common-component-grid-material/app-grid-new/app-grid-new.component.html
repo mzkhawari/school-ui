@@ -1,0 +1,153 @@
+<ng-container>
+    <div class="grid">
+      <grid-header *ngIf="isHeader" 
+        [title]="title" 
+        [isAddButton]="isAdding" 
+        [isExportButton]="isExporting" 
+        [isSearchBox]="isSearching"
+        [isCloseButton]="isCloseButton"
+        [isBackButton]="isBackButton"
+        [isImportButton]="isImporting"
+        [returnUrlAddress]="returnUrlAddress"
+
+        [titleButton2]="titleButton2"
+        (OnAddItem)="OnAdd()"
+        [isAddItem]="isAddItem" 
+        [titleButton]="titleButton"
+        (OnAddItem2)="OnAdd2()"
+
+        (OnSearch)="Search()"  
+        [issearch]="issearch"
+        
+        (OnExportItem)="OnExport()" 
+        (OnImportItem)="OnImport($event)" 
+        (OnTextFilter)="applyFilter($event)">
+      </grid-header>
+
+      <ng-content></ng-content>
+      <div class="grid-section mt-5 rounded-lg responsive-grid">
+
+        <!-- دکمه تغییر حالت فقط در موبایل -->
+        <div class="mt-3 grid grid-cols-12" style="margin-right: 10px;margin-bottom: 8px;" *ngIf="isShowPrint">
+          <button (click)="OnPrint()" type="button" class="switch-view col-span-1" style="justify-content: center;">
+            <i class="fa fa-print" aria-hidden="true"></i>
+            پرینت
+          </button>
+          <div class="col-span-10 mr-3">
+            <ng-content ></ng-content>
+          </div>
+        </div>
+
+        
+
+        <div class="mobile-toolbar mt-3">
+          <button (click)="isCardView = !isCardView" type="button" class="switch-view">
+            <i class="feather-layers"></i>
+            {{ isCardView ? 'نمایش جدولی' : 'نمایش موبایلی' }}
+          </button>
+        </div>
+      
+        <!-- 📊 حالت جدول -->
+        <div class="grid-wrapper" *ngIf="!isCardView">
+          <dx-data-grid id="gridContainer"
+            [dataSource]="datasource"
+            [rowAlternationEnabled]="rowAlternation"
+            [showColumnLines]="true"
+            [showRowLines]="true"
+            [allowColumnResizing]="true"
+            [columnAutoWidth]="true"
+            [rtlEnabled]="true"
+            [allowColumnReordering]="true"
+            keyExpr="id"
+            (onContentReady)="OnContentReady($event)"
+            (onRowPrepared)="OnRowPrepared($event)"
+            (onCellPrepared)="OnCellPrepared($event)"
+            [(columns)]="columns"
+            [showBorders]="true">
+      
+            <dxo-paging [pageSize]="pageSize"></dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true"
+                       [allowedPageSizes]="[5, 10, 20, 50, 100, 200, 500, 1000]"
+                       [showInfo]="true">
+            </dxo-pager>
+            <dxo-scrolling mode="both"></dxo-scrolling>
+            <dxo-selection [selectAllMode]="allPages"
+                           [showCheckBoxesMode]="checkBoxesMode"
+                           mode="multiple"></dxo-selection>
+            <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+      
+            <!-- Template دکمه‌های اکشن -->
+            <div *dxTemplate="let data of 'actionCellTemplate'">
+              <div class="action-list">
+                <ng-container *ngFor="let act of actionList; let actindex = index">
+                  <a *ngIf="act.isShow"
+                    [ngModelOptions]="{ standalone: true }"
+                    (click)="OnActionEmitter(data, actindex)"
+                    class="btn btn-icon btn-sm {{ act.level }}"
+                    ngbTooltip="{{ act.title }}">
+                    <i class="{{ act.icon }}"></i>
+                  </a>
+                </ng-container>
+              </div>
+            </div>
+      
+          </dx-data-grid>
+        </div>
+      
+        <!-- 🗂 حالت کارت -->
+<!-- 🗂 حالت کارت -->
+<div class="card-view" *ngIf="isCardView">
+
+  <!-- 🔍 نوار جستجو -->
+  <div class="mobile-search-box">
+    <input 
+      type="text" 
+      [(ngModel)]="searchText"
+      placeholder="جستجو..." />
+  </div>
+
+  <!-- 🧮 کارت‌ها -->
+  <div class="card-item" *ngFor="let item of filteredData">
+    <div class="card-content">
+      <div 
+        class="card-field" 
+        *ngFor="let col of columns" 
+        [hidden]="col.dataField === 'id'">
+        <div class="card-label">{{ col.caption }}</div>
+        <div class="card-value" [innerHTML]="formatService.formatValue(item[col.dataField], col)"></div>              
+      </div>
+    </div>
+
+    <!-- دکمه‌های دینامیک -->
+    <div class="card-actions">
+      <ng-container *ngFor="let act of actionList; let actindex = index">
+        <a *ngIf="act.isShow"
+          [ngModelOptions]="{ standalone: true }"
+          (click)="OnActionEmitter(item, actindex)"
+          class="btn btn-icon btn-sm {{ act.level }}"
+          ngbTooltip="{{ act.title }}">
+          <i class="{{ act.icon }}"></i>
+        </a>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- 📄 پیج‌بندی -->
+  <div class="mobile-pager">
+    <button (click)="currentPage = currentPage - 1" type="button" [disabled]="currentPage === 1">قبلی</button>
+    <span>صفحه {{ currentPage }} از {{ totalPages }}</span>
+    <button (click)="currentPage = currentPage + 1" type="button" [disabled]="currentPage === totalPages">بعدی</button>
+  </div>
+</div>
+
+      
+      </div>
+      
+      <ng-template #noData>
+        <div class="no-data-text">
+          {{ 'there-is-no-data' | translate }}
+        </div>
+      </ng-template>
+      
