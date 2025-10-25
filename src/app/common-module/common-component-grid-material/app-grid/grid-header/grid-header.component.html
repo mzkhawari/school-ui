@@ -26,6 +26,16 @@
       <span class="ml-2 mr-1"> {{ 'add2' | translate }} </span>
     </button>
 
+    <button mat-flat-button color="primary" (click)="OnAdd2()" *ngIf="isAddItem">
+      <mat-icon svgIcon="heroicons_outline:plus"></mat-icon>
+      <span>{{ titleButton2 }}</span>
+    </button>
+
+    <button mat-flat-button color="primary" (click)="search()" *ngIf="issearch">
+      <mat-icon svgIcon="heroicons_outline:plus"></mat-icon>
+      <span>جستجو</span>
+    </button>
+
 
       <button class="ml-4" mat-flat-button type="button"  (click)="OnBack()" *ngIf="isBackButton" >
         <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>

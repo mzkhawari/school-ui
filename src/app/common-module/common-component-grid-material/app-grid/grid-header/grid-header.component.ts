@@ -19,12 +19,17 @@ export class GridHeaderComponent {
     @Input() isImportButton:boolean =false ;
     @Input() isSearchBox:boolean =false;
     @Input() isCloseButton:boolean =false ;
+    @Input() isAddItem:boolean =false ;
+    @Input() issearch:boolean =false;
+    @Input() titleButton2:string ="" ;
     @Input() returnUrlAddress:string ="/index-info" ;
 
     @Output() OnAddItem : EventEmitter<any> = new EventEmitter(); 
     @Output() OnTextFilter : EventEmitter<any> = new EventEmitter(); 
     @Output() OnExportItem : EventEmitter<any> = new EventEmitter(); 
     @Output() OnImportItem : EventEmitter<any> = new EventEmitter(); 
+    @Output() OnAddItem2 : EventEmitter<any> = new EventEmitter();
+    @Output() OnSearch : EventEmitter<any> = new EventEmitter();
     
     isLoading:boolean=false;
     constructor(public translate: TranslateService, public dialogRef: MatDialog, private router: Router ) {         
@@ -36,6 +41,14 @@ export class GridHeaderComponent {
 
     OnBack(){
         this.router.navigateByUrl(this.returnUrlAddress)
+    }
+
+    OnAdd2(){
+        this.OnAddItem2.next();
+    }
+
+    search(){
+        this.OnSearch.next();
     }
 
     OnExport(){
