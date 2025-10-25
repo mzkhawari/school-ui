@@ -101,7 +101,9 @@ export default class Globals {
     }
 
 
-
+    static get UrlPresenceAbsence() {
+        return "api/presenceAbsence/";
+    }
 
     static get UrlAboutUs() {
         return "api/aboutUs/";
